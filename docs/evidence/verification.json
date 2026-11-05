@@ -1,0 +1,76 @@
+{
+  "scope": "M0 tooling verification; simulated checks are not V01-V11 acceptance",
+  "checks": [
+    {
+      "check": "Python AST syntax",
+      "passed": true
+    },
+    {
+      "check": "successful preflight never accepts M0",
+      "passed": true
+    },
+    {
+      "check": "window title omitted",
+      "passed": true
+    },
+    {
+      "check": "configuration errors block",
+      "passed": true
+    },
+    {
+      "check": "unidentified target blocks",
+      "passed": true
+    },
+    {
+      "check": "shortcut conflict blocks",
+      "passed": true
+    },
+    {
+      "check": "unusable toolchain blocks",
+      "passed": true
+    },
+    {
+      "check": "large JSON output allowance retained",
+      "passed": true
+    },
+    {
+      "check": "excess output explicit",
+      "passed": true
+    },
+    {
+      "check": "timeout explicit",
+      "passed": true
+    },
+    {
+      "check": "installed Lua helper simulation",
+      "passed": true
+    },
+    {
+      "check": "refuse evidence overwrite",
+      "passed": true
+    },
+    {
+      "check": "real preflight blocked",
+      "passed": true
+    },
+    {
+      "check": "five real sockets denied",
+      "passed": true
+    },
+    {
+      "check": "both real upstream queries fail DNS",
+      "passed": true
+    },
+    {
+      "check": "all twelve numbered specification sections preserved",
+      "passed": true
+    },
+    {
+      "check": "tracked whitespace",
+      "passed": true
+    }
+  ],
+  "spec_sha256": "9e94d36a4e27fbc8d38edbebfcbcbd516f4068768ce2a1170cc86c6ab10b2f4e",
+  "final_probe_sha256": "9bc92cd57a20aa5a9ec391df388c878864f8658fa018937b07b7ee300f304db7",
+  "earlier_verification_issue": "Initial section-count assertion also matched shell comments in the specification; corrected to numbered section headings, no source requirement changed."
+}

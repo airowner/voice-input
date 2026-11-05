@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-11-05T18:17:37.865533+00:00",
+  "scope": "M0 preflight only; not desktop or product acceptance",
+  "side_effects": "read-only; no recording/clipboard writes/keys/config changes",
+  "host": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "kernel": "7.2.15-1-omarchy",
+    "os_release": "NAME=\"Omarchy\"\nPRETTY_NAME=\"Omarchy\"\nID=omarchy\nID_LIKE=arch\nBUILD_ID=\"4.0.6\"\nVERSION_ID=\"4.0.6\"\nANSI_COLOR=\"38;2;158;206;106\"\nHOME_URL=\"https://omarchy.org/\"\nDOCUMENTATION_URL=\"https://learn.omacom.io/2/the-omarchy-manual\"\nSUPPORT_URL=\"https://discord.gg/tXFUdasqhY\"\nBUG_REPORT_URL=\"https://github.com/basecamp/omarchy/issues\"\nLOGO=omarchy\n",
+    "logical_cpus": 8,
+    "memory": {
+      "argv": [
+        "free",
+        "-b"
+      ],
+      "returncode": 0,
+      "stdout": "total        used        free      shared  buff/cache   available\nMem:     16659124224 12147556352   656207872   803577856  5636681728  4511567872\nSwap:    33322102784  2310545408 31011557376",
+      "stderr": ""
+    },
+    "cpu": {
+      "argv": [
+        "lscpu"
+      ],
+      "returncode": 0,
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           39 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  8\nOn-line CPU(s) list:                     0-7\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz\nCPU family:                              6\nModel:                                   70\nThread(s) per core:                      2\nCore(s) per socket:                      4\nSocket(s):                               1\nStepping:                                1\nMicrocode version:                       0x1c\nCPU(s) scaling MHz:                      77%\nCPU max MHz:                             2200.0000\nCPU min MHz:                             800.0000\nBogoMIPS:                                4390.14\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm cpuid_fault epb pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts vnmi md_clear flush_l1d\nVirtualization:                          VT-x\nL1d cache:                               128 KiB (4 instances)\nL1i cache:                               128 KiB (4 instances)\nL2 cache:                                1 MiB (4 instances)\nL3 cache:                                6 MiB (1 instance)\nL4 cache:                                128 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-7\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             KVM: Mitigation: Split huge pages\nVulnerability L1tf:                      Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable\nVulnerability Mds:                       Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Meltdown:                  Mitigation; PTI\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; IBRS_FW; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Mitigation; Microcode\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace",
+      "stderr": ""
+    },
+    "disk_free_bytes": 165397032960,
+    "sound_device_directory_present": false,
+    "gpu_render_nodes": []
+  },
+  "session": {
+    "type": "wayland",
+    "runtime_directory_present": true,
+    "wayland_display_set": true,
+    "hyprland_signature_set": true
+  },
+  "tools": {
+    "hyprctl": "/usr/bin/hyprctl",
+    "wl-copy": "/usr/bin/wl-copy",
+    "wl-paste": "/usr/bin/wl-paste",
+    "wtype": "/usr/bin/wtype",
+    "cmake": "/usr/bin/cmake",
+    "clang": "/usr/bin/clang",
+    "node": "/home/airowner/.local/share/mise/installs/node/26.12.0/bin/node",
+    "npm": "/home/airowner/.local/share/mise/installs/node/26.12.0/bin/npm",
+    "cargo": "/usr/bin/cargo",
+    "rustc": "/usr/bin/rustc",
+    "ninja": "/usr/bin/ninja",
+    "pkg-config": "/usr/bin/pkg-config",
+    "wpctl": "/usr/bin/wpctl",
+    "git": "/usr/bin/git",
+    "lua": "/usr/bin/lua",
+    "luac": "/usr/bin/luac"
+  },
+  "versions": {
+    "node": {
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "v26.12.0",
+      "stderr": ""
+    },
+    "npm": {
+      "argv": [
+        "npm",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "11.20.0",
+      "stderr": ""
+    },
+    "cargo": {
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "cargo 1.99.1 (5f94df478 2026-08-27)",
+      "stderr": ""
+    },
+    "rustc": {
+      "argv": [
+        "rustc",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "stderr": ""
+    },
+    "cmake": {
+      "argv": [
+        "cmake",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "cmake version 4.4.5\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).",
+      "stderr": ""
+    },
+    "clang": {
+      "argv": [
+        "clang",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "clang version 23.1.4\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin",
+      "stderr": ""
+    },
+    "ninja": {
+      "argv": [
+        "ninja",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "1.13.2",
+      "stderr": ""
+    },
+    "git": {
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "git version 2.56.0",
+      "stderr": ""
+    },
+    "lua": {
+      "argv": [
+        "lua",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout": "Lua 5.5.1  Copyright (C) 1994-2026 Lua.org, PUC-Rio",
+      "stderr": ""
+    }
+  },
+  "sockets": {
+    "wayland": {
+      "status": "blocked",
+      "path": "/run/user/1000/wayland-1",
+      "errno": 1,
+      "reason": "[Errno 1] Operation not permitted"
+    },
+    "hyprland": {
+      "status": "blocked",
+      "path": "/run/user/1000/hypr/0aa6745f705f2c4b0a5004eb019ef76e5bbdb426_1793634784_1311690763/.socket.sock",
+      "errno": 1,
+      "reason": "[Errno 1] Operation not permitted"
+    },
+    "hyprland_events": {
+      "status": "blocked",
+      "path": "/run/user/1000/hypr/0aa6745f705f2c4b0a5004eb019ef76e5bbdb426_1793634784_1311690763/.socket2.sock",
+      "errno": 1,
+      "reason": "[Errno 1] Operation not permitted"
+    },
+    "pipewire": {
+      "status": "blocked",
+      "path": "/run/user/1000/pipewire-0",
+      "errno": 1,
+      "reason": "[Errno 1] Operation not permitted"
+    },
+    "session_bus": {
+      "status": "blocked",
+      "path": "/run/user/1000/bus",
+      "errno": 1,
+      "reason": "[Errno 1] Operation not permitted"
+    }
+  },
+  "packages": {
+    "argv": [
+      "pacman",
+      "-Q",
+      "hyprland",
+      "omarchy",
+      "wl-clipboard",
+      "wtype",
+      "pipewire",
+      "alsa-lib",
+      "webkit2gtk-4.1",
+      "base-devel",
+      "clang",
+      "cmake",
+      "ninja"
+    ],
+    "returncode": 0,
+    "stdout": "hyprland 0.57.0-1\nomarchy 4.0.6-1\nwl-clipboard 1:2.3.0-1\nwtype 0.4-2\npipewire 1:1.6.10-1\nalsa-lib 1.2.16.1-1\nwebkit2gtk-4.1 2.54.2-1\nbase-devel 1-2\nclang 23.1.4-1\ncmake 4.4.5-1\nninja 1.13.2-3",
+    "stderr": ""
+  },
+  "build_libraries": {
+    "argv": [
+      "pkg-config",
+      "--modversion",
+      "webkit2gtk-4.1",
+      "alsa"
+    ],
+    "returncode": 0,
+    "stdout": "2.54.2\n1.2.16.1",
+    "stderr": ""
+  },
+  "desktop": {
+    "hyprland_version": {
+      "argv": [
+        "hyprctl",
+        "version"
+      ],
+      "returncode": 2,
+      "stdout": "Couldn't set socket timeout (2)",
+      "stderr": ""
+    },
+    "config_errors": {
+      "argv": [
+        "hyprctl",
+        "configerrors"
+      ],
+      "returncode": 2,
+      "stdout": "Couldn't set socket timeout (2)",
+      "stderr": ""
+    },
+    "active_window": {
+      "argv": [
+        "hyprctl",
+        "-j",
+        "activewindow"
+      ],
+      "returncode": 2,
+      "stderr": ""
+    },
+    "bindings": {
+      "argv": [
+        "hyprctl",
+        "-j",
+        "binds"
+      ],
+      "returncode": 2,
+      "stderr": ""
+    },
+    "audio_devices": {
+      "argv": [
+        "wpctl",
+        "status"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "E 02:17:38.315587             mod.rt ../pipewire/src/modules/module-rt.c:295:pw_rtkit_bus_get: Failed to connect to session bus: Failed to connect to socket /run/user/1000/bus: Operation not permitted\nE 02:17:38.315655             mod.rt ../pipewire/src/modules/module-rt.c:295:pw_rtkit_bus_get: Failed to connect to system bus: Failed to connect to socket /run/dbus/system_bus_socket: Operation not permitted\nW 02:17:38.315662             mod.rt ../pipewire/src/modules/module-rt.c:975:rtkit_get_bus: Realtime scheduling disabled: insufficient realtime privileges, Portal not found on session bus, and no system bus for RTKit: Connection refused\nCould not connect to PipeWire"
+    },
+    "clipboard_mime_types": {
+      "argv": [
+        "wl-paste",
+        "--list-types"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Failed to connect to a Wayland server: Operation not permitted\nNote: WAYLAND_DISPLAY is set to wayland-1\nNote: XDG_RUNTIME_DIR is set to /run/user/1000\nPlease check whether /run/user/1000/wayland-1 socket exists and is accessible."
+    }
+  },
+  "upstream_access": {
+    "whisper.cpp": {
+      "argv": [
+        "git",
+        "ls-remote",
+        "https://github.com/ggml-org/whisper.cpp.git",
+        "HEAD"
+      ],
+      "returncode": 128,
+      "stdout": "",
+      "stderr": "fatal: unable to access 'https://github.com/ggml-org/whisper.cpp.git/': Could not resolve host: github.com"
+    },
+    "llama.cpp": {
+      "argv": [
+        "git",
+        "ls-remote",
+        "https://github.com/ggml-org/llama.cpp.git",
+        "HEAD"
+      ],
+      "returncode": 128,
+      "stdout": "",
+      "stderr": "fatal: unable to access 'https://github.com/ggml-org/llama.cpp.git/': Could not resolve host: github.com"
+    }
+  },
+  "preflight": {
+    "status": "blocked",
+    "blockers": [
+      "socket:wayland",
+      "socket:hyprland",
+      "socket:hyprland_events",
+      "socket:pipewire",
+      "socket:session_bus",
+      "desktop:hyprland_version",
+      "desktop:config_errors",
+      "desktop:active_window",
+      "desktop:bindings",
+      "desktop:audio_devices",
+      "desktop:clipboard_mime_types",
+      "desktop:configuration_errors_present",
+      "desktop:target_not_identifiable",
+      "source:whisper.cpp",
+      "source:llama.cpp"
+    ]
+  },
+  "m0": {
+    "status": "not_passed",
+    "remaining": [
+      "real key release and Wayland/XWayland controlled paste round-trip",
+      "clipboard owner lifecycle and actual microphone capture",
+      "two pinned engine CPU builds and local model loading",
+      "verified model hashes, licenses and dependency locks"
+    ]
+  }
+}

@@ -1,0 +1,2 @@
+PASS (simulation): installed Omarchy helper forwards release=true and command
+NOT VERIFIED: live registration, shortcut conflicts, physical key release
