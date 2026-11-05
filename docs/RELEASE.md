@@ -22,6 +22,15 @@ src-tauri/binaries/voice-asr-worker-avx2-x86_64-unknown-linux-gnu（仅 --with-a
 src-tauri/binaries/voice-llm-worker-avx2-x86_64-unknown-linux-gnu（仅 --with-avx2）
 ```
 
+分发构建使用 Tauri CLI，以确保生产资源协议特性启用；普通 `cargo build --release` 只能作为依赖/程序预编译，不单凭其输出认定分发配置。当前 Tauri CLI 的 [build_options 实现](https://github.com/tauri-apps/tauri/blob/tauri-cli-v2.12.4/crates/tauri-cli/src/interface/rust.rs#L445)明确为构建添加 `tauri/custom-protocol`。本机优化开发包先执行：
+
+```bash
+CARGO_BUILD_JOBS=1 npm run tauri build -- --no-bundle \
+  --config src-tauri/tauri.avx2.conf.json -- --locked
+```
+
+此命令产生生产资源配置的二进制；后续由本文 Arch 流程制作明确标记的开发包。portable-only 构建省略 `--config` 优化覆盖文件。`--no-bundle` 只跳过 Tauri 自带的 deb/rpm/appimage，不能代替下面的实际 Arch 构建及归档验证。
+
 不要把 debug 程序重命名为 release 程序来满足文件检查，也不要仅因存在文件就填写 verified。实际 workspace 测试、静态检查、worker 模型链路、应用启动及 CLI 等记录应由执行者确认。已知 portable 推理过慢、部分人工桌面测试未做等限制必须保留；开发包不能声称 V1 发行通过。
 
 ## 验证 JSON

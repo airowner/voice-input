@@ -1,0 +1,10 @@
+
+> voice-input@0.1.0 tauri
+> tauri build --no-bundle --config src-tauri/tauri.avx2.conf.json -- --locked
+
+        Info Looking up installed tauri packages to check mismatched versions...
+   Compiling tauri v2.12.5
+   Compiling tauri-macros v2.7.4
+   Compiling voice-input v0.1.0 (/home/airowner/Projects/voice-input/src-tauri)
+    Finished `release` profile [optimized] target(s) in 5m 03s
+       Built application at: /home/airowner/Projects/voice-input/target/release/voice-input

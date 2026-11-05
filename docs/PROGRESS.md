@@ -108,3 +108,12 @@
 Git 审查说明：源码 Cargo.toml 的多余尾部空行已清理。原样捕获的测试日志保留末尾空行，上游 FLEURS dataset card 保留原始行尾空格，因为文件身份/来源及证据 SHA 绑定原字节；`git diff --check` 对这些原始证据的空白提示已逐项复核，未改写原始材料或降低编译/测试断言。
 
 下一步仍为完成 release 构建、实际 Linux 开发包与隔离安装/卸载检查；真实桌面锁定、目标原生系统、真实远程配置与人工判分的限制保持不变。
+
+
+## 2026-11-06：Linux 生产资源构建
+
+普通 release 依赖预编译成功后，实际执行 `CARGO_BUILD_JOBS=1 npm run tauri build -- --no-bundle --config src-tauri/tauri.avx2.conf.json -- --locked` 成功，主应用的 Tauri 构建输出为 `cargo:dev=false`，源码资源走生产配置。Tauri CLI 将 tauri-build 依赖等价规范化为显式空 features，Cargo.lock 未改；锁定离线 metadata 和格式检查通过。最终二进制 SHA 见 `production-build-verification.json`，不把此前无该特性的预编译产物当最终分发版本。
+
+真实 release 程序启动及十项 CLI/单实例检查通过：status、两次空闲 stop、cancel、未配置时拒绝 start、仍 Ready、第二实例退出、窗口进程存活、受控结束及退出后 CLI 报未运行。数据目录隔离，未录音、未加载模型、未注入。GTK 当前使用软件渲染，有 GL 初始化与 appindicator 弃用警告，未观察到崩溃；不将进程存活等同生产界面逐项视觉验收。见 `linux-release-startup.json`。
+
+四个 release 同目录 worker 与冻结资源哈希一致。下一步生成实际 Arch 开发包，再核对归档及隔离 ALPM 安装/卸载；稳定发布仍不满足。隔离 ALPM 工具 fixture 已通过，但尚未作为产品安装证据。

@@ -1,0 +1,38 @@
+{
+  "captured_at_utc": "2026-11-05T20:48:56.428053+00:00",
+  "fixture_only": true,
+  "status": "failed",
+  "namespace_runner": {
+    "argv": [
+      "unshare",
+      "--user",
+      "--map-root-user",
+      "--net",
+      "/usr/bin/python3",
+      "/home/airowner/Projects/voice-input/docs/evidence/verify-alpm-isolated.py",
+      "--inside",
+      "--work",
+      "/tmp/voice-alpm-isolated-1ld_pzj0",
+      "--inner-result",
+      "/tmp/voice-alpm-isolated-1ld_pzj0/result.json",
+      "--outer-uid",
+      "1000",
+      "--parent-userns",
+      "user:[4026531837]",
+      "--parent-netns",
+      "net:[4026531833]",
+      "--package",
+      "/tmp/voice-alpm-isolated-1ld_pzj0/owned-fixture-0.0.0-1-x86_64.pkg.tar.gz",
+      "--archive-manifest",
+      "/tmp/voice-alpm-isolated-1ld_pzj0/fixture-archive.json",
+      "--release-manifest",
+      "/tmp/voice-alpm-isolated-1ld_pzj0/fixture-release.json",
+      "--fixture-selftest"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/home/airowner/Projects/voice-input/docs/evidence/verify-alpm-isolated.py\", line 218, in <module>\n    main()\n    ~~~~^^\n  File \"/home/airowner/Projects/voice-input/docs/evidence/verify-alpm-isolated.py\", line 179, in main\n    inside(args)\n    ~~~~~~^^^^^^\n  File \"/home/airowner/Projects/voice-input/docs/evidence/verify-alpm-isolated.py\", line 135, in inside\n    empty = pacman([\"-Qq\"])\n  File \"/home/airowner/Projects/voice-input/docs/evidence/verify-alpm-isolated.py\", line 133, in pacman\n    require(result[\"returncode\"] == expected_return, \"isolated pacman command failed: \" + json.dumps(result))\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/airowner/Projects/voice-input/docs/evidence/verify-alpm-isolated.py\", line 43, in require\n    raise AssertionError(reason)\nAssertionError: isolated pacman command failed: {\"argv\": [\"/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace\", \"-qq\", \"-f\", \"-e\", \"trace=execve\", \"-o\", \"/tmp/voice-alpm-isolated-1ld_pzj0/log/exec-0.strace\", \"/usr/bin/pacman\", \"--config\", \"/tmp/voice-alpm-isolated-1ld_pzj0/pacman.conf\", \"--root\", \"/tmp/voice-alpm-isolated-1ld_pzj0/root\", \"--dbpath\", \"/tmp/voice-alpm-isolated-1ld_pzj0/db\", \"--cachedir\", \"/tmp/voice-alpm-isolated-1ld_pzj0/cache\", \"--hookdir\", \"/tmp/voice-alpm-isolated-1ld_pzj0/hooks\", \"--gpgdir\", \"/tmp/voice-alpm-isolated-1ld_pzj0/gpg\", \"--logfile\", \"/tmp/voice-alpm-isolated-1ld_pzj0/log/pacman.log\", \"--noconfirm\", \"-Qq\"], \"returncode\": 1, \"stdout\": \"\", \"stderr\": \"\", \"executed_programs\": [\"/usr/bin/pacman\"]}\n"
+  },
+  "error_type": "AssertionError",
+  "error": "namespace ALPM verification failed"
+}

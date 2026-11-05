@@ -1,0 +1,16 @@
+{
+  "scope": "Linux production-resource executable build and startup, development delivery only; not V1 release acceptance",
+  "captured_at_utc": "2026-11-05T20:54:01.698759+00:00",
+  "command": "CARGO_BUILD_JOBS=1 npm run tauri build -- --no-bundle --config src-tauri/tauri.avx2.conf.json -- --locked",
+  "custom_protocol_enabled": true,
+  "tauri_build_output": "target/release/build/tauri-e5f99484616d4309/output",
+  "tauri_build_output_sha256": "94000ecb9a69da51755c1c5130cc0f04101d315bf0bff3d5c2728a5b08850f9d",
+  "tauri_build_output_text": "cargo:rustc-check-cfg=cfg(custom_protocol)\ncargo:rustc-cfg=custom_protocol\ncargo:rustc-check-cfg=cfg(dev)\ncargo:dev=false\ncargo:rustc-check-cfg=cfg(desktop)\ncargo:rustc-cfg=desktop\ncargo:rustc-check-cfg=cfg(mobile)\ncargo:GLOBAL_API_SCRIPT_PATH=/home/airowner/.cargo/registry/src/rsproxy.cn-e3de039b2554c837/tauri-2.12.5/scripts/bundle.global.js\ncargo:core:path__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-path-permission-files\ncargo:core:event__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-event-permission-files\ncargo:core:window__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-window-permission-files\ncargo:core:webview__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-webview-permission-files\ncargo:core:app__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-app-permission-files\ncargo:core:image__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-image-permission-files\ncargo:core:resources__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-resources-permission-files\ncargo:core:menu__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-menu-permission-files\ncargo:core:tray__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-tray-permission-files\ncargo:core__CORE_PLUGIN___PERMISSION_FILES_PATH=/home/airowner/Projects/voice-input/target/release/build/tauri-e5f99484616d4309/out/tauri-core-permission-files\ncargo:rerun-if-env-changed=REMOVE_UNUSED_COMMANDS\n",
+  "artifacts_sha256": {
+    "target/release/voice-input": "389095e1d51fa1cc50597aab4c1565ff09269d703507578fa3c4e52e6e004479",
+    "target/release/voice-inputctl": "9ae4a52378bbd200d8580126892dbcfb11e4fab2dbb0cdb006951fa4dc894c41"
+  },
+  "startup_evidence": "docs/evidence/linux-release-startup.json",
+  "passed": true,
+  "manifest_rewrite": "Tauri CLI normalized tauri-build dependency to version 2 with explicit empty features; equivalent dependency graph, Cargo.lock unchanged; cargo metadata --locked --offline and format check passed"
+}
