@@ -1,0 +1,10 @@
+    Checking voice-core v0.1.0 (/home/airowner/Projects/voice-input/crates/core)
+    Checking sha2 v0.10.9
+    Checking dbus-secret-service v4.1.0
+    Checking voice-audio v0.1.0 (/home/airowner/Projects/voice-input/crates/audio)
+    Checking keyring v3.6.3
+    Checking voice-platform v0.1.0 (/home/airowner/Projects/voice-input/crates/platform)
+    Checking voice-runtime v0.1.0 (/home/airowner/Projects/voice-input/crates/runtime)
+   Compiling voice-input v0.1.0 (/home/airowner/Projects/voice-input/src-tauri)
+    Checking tauri v2.12.5
+    Finished `dev` profile [unoptimized] target(s) in 16.90s

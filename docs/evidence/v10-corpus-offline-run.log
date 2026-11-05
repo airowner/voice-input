@@ -1,0 +1,15 @@
+{"asr_ms":6167,"error_code":null,"llm_ms":12329,"sample":"zh01","status":"validated_and_saved_preview"}
+{"asr_ms":4452,"error_code":null,"llm_ms":6406,"sample":"zh02","status":"validated_and_saved_preview"}
+{"asr_ms":5032,"error_code":null,"llm_ms":6892,"sample":"zh03","status":"validated_and_saved_preview"}
+{"asr_ms":5357,"error_code":"protected_literal_missing","llm_ms":6640,"sample":"zh04","status":"validation_failed"}
+{"asr_ms":3929,"error_code":null,"llm_ms":6255,"sample":"zh05","status":"validated_and_saved_preview"}
+{"asr_ms":4135,"error_code":null,"llm_ms":4286,"sample":"zh06","status":"validated_and_saved_preview"}
+{"asr_ms":3227,"error_code":null,"llm_ms":6013,"sample":"en01","status":"validated_and_saved_preview"}
+{"asr_ms":3543,"error_code":null,"llm_ms":4968,"sample":"en02","status":"validated_and_saved_preview"}
+{"asr_ms":5652,"error_code":null,"llm_ms":7437,"sample":"en03","status":"validated_and_saved_preview"}
+{"asr_ms":4273,"error_code":null,"llm_ms":3853,"sample":"en04","status":"validated_and_saved_preview"}
+{"asr_ms":4360,"error_code":null,"llm_ms":5188,"sample":"en05","status":"validated_and_saved_preview"}
+{"asr_ms":3650,"error_code":null,"llm_ms":4732,"sample":"en06","status":"validated_and_saved_preview"}
+{"asr_ms":8771,"error_code":null,"llm_ms":4230,"sample":"mixed01","status":"validated_and_saved_preview"}
+{"asr_ms":7883,"error_code":null,"llm_ms":3877,"sample":"mixed02","status":"validated_and_saved_preview"}
+{"asr_ms":null,"error_code":null,"llm_ms":null,"sample":"silence01","status":"skipped_no_speech"}

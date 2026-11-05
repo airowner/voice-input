@@ -1,0 +1,5 @@
+-- Omarchy 4.0.6 / Hyprland 0.57 Lua API: release option confirmed locally.
+-- Check live binds before selecting a key. Do not overwrite Super+Shift+D (Docker).
+-- Physical release + application end-to-end acceptance still requires an unlocked session.
+o.bind("SUPER + CTRL + SHIFT + F12", "Voice input",
+  "/usr/bin/voice-inputctl toggle", { release = true })

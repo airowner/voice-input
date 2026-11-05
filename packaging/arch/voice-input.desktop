@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Voice Input
+Name[zh_CN]=声笺
+Comment=Local voice transcription and text cleanup
+Comment[zh_CN]=本地语音转写与文本整理
+Exec=/usr/bin/voice-input
+Icon=voice-input
+Terminal=false
+Categories=Utility;Accessibility;
+StartupNotify=true

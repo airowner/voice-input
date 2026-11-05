@@ -1,0 +1,13 @@
+    Blocking waiting for file lock on build directory
+    Checking voice-platform v0.1.0 (/home/airowner/Projects/voice-input/crates/platform)
+    Checking voice-runtime v0.1.0 (/home/airowner/Projects/voice-input/crates/runtime)
+warning: field `started` is never read
+  --> crates/runtime/src/service.rs:35:60
+   |
+35 | struct CaptureHandle {control:Sender<bool>,token:WorkToken,started:Instant}
+   |        ------------- field in this struct                  ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `voice-runtime` (lib) generated 1 warning
+    Finished `dev` profile [unoptimized] target(s) in 2m 13s

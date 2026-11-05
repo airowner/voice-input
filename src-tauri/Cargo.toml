@@ -1,0 +1,25 @@
+[package]
+name = "voice-input"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+default-run = "voice-input"
+
+[build-dependencies]
+tauri-build = "2"
+
+[dependencies]
+tauri = { version = "=2.12.5", features = ["tray-icon"] }
+voice-runtime = { path = "../crates/runtime" }
+voice-core = { path = "../crates/core" }
+voice-platform = { path = "../crates/platform" }
+serde_json.workspace = true
+
+[[bin]]
+name = "voice-input"
+path = "src/main.rs"
+
+[[bin]]
+name = "voice-inputctl"
+path = "src/ctl.rs"

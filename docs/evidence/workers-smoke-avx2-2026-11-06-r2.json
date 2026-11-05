@@ -1,0 +1,320 @@
+{
+  "scope": "Actual worker protocol/model smoke. Not UI, recording, V07 or V11 acceptance.",
+  "captured_at_utc": "2026-11-05T19:37:54.778242+00:00",
+  "platform": "Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44",
+  "profile": "avx2",
+  "checks": [
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "zero frame",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0011,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "zero frame exits with protocol error",
+      "passed": true
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "oversized frame",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0011,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "oversized frame exits with protocol error",
+      "passed": true
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "unknown frame type",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0011,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "unknown frame type exits with protocol error",
+      "passed": true
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "invalid JSON",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0011,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "invalid JSON exits with protocol error",
+      "passed": true
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "unknown field rejected",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0011,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "missing job ID rejected",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0012,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "asr: missing model sanitized error",
+      "passed": true
+    },
+    {
+      "check": "asr: actual CPU model ready",
+      "passed": true
+    },
+    {
+      "check": "asr: actual JFK transcription",
+      "passed": true,
+      "text_sha256": "1d3e5d93b8c6643388c494ac08a26d7b4962276f10f95513f11ce2e34e0977b9",
+      "text_bytes": 108,
+      "elapsed_seconds": 4.345,
+      "timing_scope": "smoke only, concurrent development build; not V11"
+    },
+    {
+      "check": "asr: cancellation while job active within 500 ms",
+      "passed": true,
+      "acknowledgement_seconds": 0.3505
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0073,
+      "returncode": 0
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "asr: actual CPU model ready",
+      "passed": true
+    },
+    {
+      "check": "asr: unload acknowledged",
+      "passed": true
+    },
+    {
+      "check": "asr: actual CPU model ready",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0074,
+      "returncode": 0
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "asr: stdin EOF exits cleanly during job",
+      "passed": true
+    },
+    {
+      "check": "llm: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "llm: actual CPU model ready",
+      "passed": true
+    },
+    {
+      "check": "llm: actual CPU JSON generation",
+      "passed": true,
+      "elapsed_seconds": 3.483,
+      "timing_scope": "smoke only, concurrent development build; not V11"
+    },
+    {
+      "check": "llm: grammar preserves JSON escape/Unicode case 0",
+      "passed": true
+    },
+    {
+      "check": "llm: grammar preserves JSON escape/Unicode case 1",
+      "passed": true
+    },
+    {
+      "check": "llm: grammar preserves JSON escape/Unicode case 2",
+      "passed": true
+    },
+    {
+      "check": "llm: grammar rejects fences and extra fields despite conflicting prompt",
+      "passed": true
+    },
+    {
+      "check": "llm: reject context budget before decode",
+      "passed": true
+    },
+    {
+      "check": "llm: truncated generation rejected",
+      "passed": true
+    },
+    {
+      "check": "llm: cancellation while job active within 500 ms",
+      "passed": true,
+      "acknowledgement_seconds": 0.0062
+    },
+    {
+      "check": "llm: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.1148,
+      "returncode": 0
+    },
+    {
+      "check": "llm: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "llm: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "llm: actual CPU model ready",
+      "passed": true
+    },
+    {
+      "check": "llm: recreate worker and recover after cancellation",
+      "passed": true
+    },
+    {
+      "check": "llm: unload acknowledged",
+      "passed": true
+    },
+    {
+      "check": "llm: shutdown bye",
+      "passed": true
+    },
+    {
+      "check": "llm: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0155,
+      "returncode": 0
+    },
+    {
+      "check": "llm: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "llm: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "llm: actual CPU model ready",
+      "passed": true
+    },
+    {
+      "check": "llm: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0637,
+      "returncode": 0
+    },
+    {
+      "check": "llm: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "llm: stdin EOF exits cleanly during job",
+      "passed": true
+    }
+  ],
+  "status": "passed",
+  "binary_sha256": {
+    "voice-asr-worker": "c7f24f2ee839557ba18c147a0aab358a9aa39bf8b958e8fbfe611abd48eb62ed",
+    "voice-llm-worker": "656b78607cd7646a553bc4d2e37cc6c2d90a3d2efc9c0201ffda2f11012dc5ea"
+  },
+  "models_lock_sha256": "c9757960de5461ba8d13656c20634c5830dd17618d07313e94333cc77e360715",
+  "cache_state": "First inference follows process-cold model load; OS page cache unspecified; repeated resident jobs for cancellation checks; not V11 warm benchmark"
+}

@@ -1,0 +1,28 @@
+{
+  "scope": "strace -f real production WorkerPool public WAV pipeline and descendants, with normal host network available; no microphone/desktop paste; partial V03 only",
+  "command": [
+    "build/audit-tools/usr/bin/strace",
+    "-f",
+    "-e",
+    "trace=network",
+    "-s",
+    "0",
+    "-o",
+    "docs/evidence/local-online-network.strace",
+    "target/debug/examples/pipeline"
+  ],
+  "trace_sha256": "7a157af5e1f26c51637c9b35eec8fd9c06cf099552787bd04822729e384a5f2c",
+  "pipeline_report_sha256": "e6d87a59da14087094a18a717d3a1e19087159d40228e1e5828271b5f80a892b",
+  "binaries_sha256": {
+    "target/debug/examples/pipeline": "f14776a07a90d62f57b2c521459f1d913ef7aa1bed08cd42efd76c478b87f1d0",
+    "build/workers-avx2/voice-asr-worker-avx2": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+    "build/workers-avx2/voice-llm-worker-avx2": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d"
+  },
+  "ipv4_ipv6_network_calls": 0,
+  "pipeline_passed": true,
+  "limitations": [
+    "Only this explicit two-job developer pipeline was traced, not a GUI microphone and paste session",
+    "No idle GUI background audit or arbitrary future-use guarantee",
+    "Concurrent release build affects timing; no formal V11 P95"
+  ]
+}

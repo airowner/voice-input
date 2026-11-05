@@ -1,0 +1,43 @@
+1597930 +++ exited with 0 +++
+1597929 +++ killed by SIGKILL +++
+1597926 +++ killed by SIGKILL +++
+1597928 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_KILLED, si_pid=1597926, si_uid=1000, si_status=SIGKILL, si_utime=7 /* 0.07 s */, si_stime=8 /* 0.08 s */} ---
+1597927 +++ exited with 0 +++
+1597928 +++ exited with 0 +++
+1599009 +++ exited with 0 +++
+1599008 +++ killed by SIGKILL +++
+1599005 +++ killed by SIGKILL +++
+1599007 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_KILLED, si_pid=1599005, si_uid=1000, si_status=SIGKILL, si_utime=67 /* 0.67 s */, si_stime=52 /* 0.52 s */} ---
+1599007 +++ exited with 0 +++
+1599006 +++ exited with 0 +++
+1599315 +++ exited with 0 +++
+1599323 +++ exited with 0 +++
+1599324 +++ exited with 0 +++
+1599325 +++ exited with 0 +++
+1599327 +++ exited with 0 +++
+1599326 +++ exited with 0 +++
+1599405 +++ exited with 0 +++
+1599441 +++ exited with 0 +++
+1599612 +++ exited with 0 +++
+1599613 +++ exited with 0 +++
+1599615 +++ exited with 0 +++
+1599616 +++ exited with 0 +++
+1599614 +++ exited with 0 +++
+1599687 +++ exited with 0 +++
+1599330 +++ killed by SIGKILL +++
+1599329 +++ killed by SIGKILL +++
+1599314 +++ killed by SIGKILL +++
+1599328 +++ killed by SIGKILL +++
+1599311 +++ killed by SIGKILL +++
+1599313 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_KILLED, si_pid=1599311, si_uid=1000, si_status=SIGKILL, si_utime=2526 /* 25.26 s */, si_stime=35 /* 0.35 s */} ---
+1599444 +++ killed by SIGKILL +++
+1599442 +++ killed by SIGKILL +++
+1599404 +++ killed by SIGKILL +++
+1599313 +++ exited with 0 +++
+1599312 +++ exited with 0 +++
+1599443 +++ killed by SIGKILL +++
+1599401 +++ killed by SIGKILL +++
+1599403 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_KILLED, si_pid=1599401, si_uid=1000, si_status=SIGKILL, si_utime=5607 /* 56.07 s */, si_stime=132 /* 1.32 s */} ---
+1599403 +++ exited with 0 +++
+1599402 +++ exited with 0 +++
+1597880 +++ exited with 0 +++

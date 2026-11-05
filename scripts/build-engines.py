@@ -56,10 +56,11 @@ def main():
     lock = json.loads((ROOT / "engines.lock.json").read_text())
     profile = lock["profiles"][args.profile]
     if profile["required_cpu_flags"]:
-        flags = set()
+        flag_sets = []
         for line in Path("/proc/cpuinfo").read_text().splitlines():
             if line.startswith("flags"):
-                flags.update(line.split(":", 1)[1].split())
+                flag_sets.append(set(line.split(":", 1)[1].split()))
+        flags = set.intersection(*flag_sets) if flag_sets else set()
         if not set(profile["required_cpu_flags"]).issubset(flags):
             parser.error("CPU lacks required AVX2/FMA/F16C/BMI2 features")
     report = {

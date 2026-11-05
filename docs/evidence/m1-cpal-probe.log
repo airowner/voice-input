@@ -1,0 +1,6 @@
+    Blocking waiting for file lock on build directory
+   Compiling voice-core v0.1.0 (/home/airowner/Projects/voice-input/crates/core)
+   Compiling voice-audio v0.1.0 (/home/airowner/Projects/voice-input/crates/audio)
+    Finished `dev` profile [unoptimized] target(s) in 6m 01s
+     Running `target/debug/examples/probe`
+{"device_count":18,"finite_samples":true,"pcm_samples_in_memory":7801,"saved_audio_files":0}

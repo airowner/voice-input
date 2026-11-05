@@ -1,0 +1,12 @@
+{
+  "scope": "fixture identity/format/size only; not ASR/LLM usability or V10 acceptance",
+  "files_verified": 15,
+  "original_sources_verified": 12,
+  "sample_rate": 16000,
+  "channels": 1,
+  "pcm_bits": 16,
+  "total_fixture_bytes": 13891370,
+  "maximum_fixture_bytes": 31457280,
+  "audio_inference_performed": false,
+  "human_scoring_performed": false
+}

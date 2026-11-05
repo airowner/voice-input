@@ -1,0 +1,183 @@
+{
+  "captured_at_utc": "2026-11-05T20:09:24.364748+00:00",
+  "scope": "Package tooling: owned synthetic fixture structure tests plus actual cached Cargo metadata inventory; NOT actual package build/install/application acceptance",
+  "checks": [
+    {
+      "check": "synthetic six-artifact shape gate",
+      "passed": true
+    },
+    {
+      "check": "portable-only four-artifact shape gate",
+      "passed": true
+    },
+    {
+      "check": "synthetic complete stable schema accepted structurally only",
+      "passed": true
+    },
+    {
+      "check": "reject unverified binary",
+      "passed": true
+    },
+    {
+      "check": "reject changed binary SHA",
+      "passed": true
+    },
+    {
+      "check": "reject missing artifact",
+      "passed": true
+    },
+    {
+      "check": "development must disclose limitations",
+      "passed": true
+    },
+    {
+      "check": "reject failed verification gate",
+      "passed": true
+    },
+    {
+      "check": "reject empty evidence",
+      "passed": true
+    },
+    {
+      "check": "reject evidence traversal",
+      "passed": true
+    },
+    {
+      "check": "reject extra AVX2 resources without flag",
+      "passed": true
+    },
+    {
+      "check": "development cannot pass stable gate",
+      "passed": true
+    },
+    {
+      "check": "stable requires all V acceptance",
+      "passed": true
+    },
+    {
+      "check": "stable refuses incomplete V09",
+      "passed": true
+    },
+    {
+      "check": "reject artifact symlink",
+      "passed": true
+    },
+    {
+      "check": "prepare-only development marker, not V1 accepted",
+      "passed": true
+    },
+    {
+      "check": "payload excludes all model weights",
+      "passed": true
+    },
+    {
+      "check": "payload confined to usr paths and root archive ownership",
+      "passed": true
+    },
+    {
+      "check": "six synthetic programs have expected installed names",
+      "passed": true
+    },
+    {
+      "check": "local-source checksum and no strip/debug mutation",
+      "passed": true
+    },
+    {
+      "check": "rendered PKGBUILD bash syntax",
+      "passed": true
+    },
+    {
+      "check": "actual cached metadata covers Cargo.lock entries",
+      "passed": true
+    },
+    {
+      "check": "actual metadata admits legal review not performed",
+      "passed": true
+    }
+  ],
+  "actual_cargo_metadata": {
+    "package_count": 601,
+    "incomplete_count": 15,
+    "missing_entries": [
+      {
+        "name": "core-foundation",
+        "version": "0.9.4",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "security-framework",
+        "version": "2.11.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "security-framework",
+        "version": "3.7.0",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "security-framework-sys",
+        "version": "2.17.0",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "window-vibrancy",
+        "version": "0.8.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows-sys",
+        "version": "0.60.2",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows-targets",
+        "version": "0.53.5",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows_aarch64_gnullvm",
+        "version": "0.53.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows_aarch64_msvc",
+        "version": "0.53.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows_i686_gnu",
+        "version": "0.53.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows_i686_gnullvm",
+        "version": "0.53.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows_i686_msvc",
+        "version": "0.53.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows_x86_64_gnu",
+        "version": "0.53.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows_x86_64_gnullvm",
+        "version": "0.53.1",
+        "status": "missing_cached_source"
+      },
+      {
+        "name": "windows_x86_64_msvc",
+        "version": "0.53.1",
+        "status": "missing_cached_source"
+      }
+    ]
+  },
+  "makepkg_executed": false,
+  "cargo_executed": false,
+  "package_installed": false,
+  "status": "passed"
+}

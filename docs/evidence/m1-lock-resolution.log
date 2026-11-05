@@ -1,0 +1,12 @@
+    Updating `rsproxy-sparse` index
+    Blocking waiting for file lock on package cache
+     Locking 378 packages to highest compatible versions
+      Adding cpal v0.17.3 (available: v0.18.2)
+      Adding generic-array v0.14.7 (available: v0.14.9)
+      Adding keyring v3.6.3 (available: v4.2.0)
+      Adding reqwest v0.12.28 (available: v0.13.5)
+      Adding rfd v0.15.4 (available: v0.17.2)
+      Adding rubato v0.16.2 (available: v5.0.1)
+      Adding rusqlite v0.37.0 (available: v0.41.1)
+      Adding sha2 v0.10.9 (available: v0.11.1)
+      Adding toml v0.9.12+spec-1.1.0 (available: v1.2.0+spec-1.1.0)

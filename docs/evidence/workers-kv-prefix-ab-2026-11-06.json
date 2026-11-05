@@ -1,0 +1,183 @@
+{
+  "scope": "Small real-model prefix-cache equivalence comparison, not V11 P95.",
+  "captured_at_utc": "2026-11-05T20:04:34.225625+00:00",
+  "reference": "Full-clear KV and full-vocabulary grammar mask, unchanged fixed source",
+  "candidate": "Safe LCP KV removal and equivalent grammar greedy fast path",
+  "threads": 4,
+  "context_tokens": 4096,
+  "cache_state": "First and resident jobs distinguished; model load excluded; OS cache may be warm; no formal benchmark",
+  "status": "failed",
+  "reference_runs": [
+    {
+      "case": "first",
+      "seconds": 8.435119,
+      "input_sha256": "24421507a5d0602bdd008b0c7ac61dfe0b0621de52dc09159bb92d6c01f3b05b",
+      "output_sha256": "3940a9e01675c68248cdb840ede3c8a50a303b03786456ba448bbb4ba9d603c1",
+      "decoded_text_sha256": "e4e644650803b9dca2d1caaf17fbfa3b5cd835a792b8d53d888c6996f7eb1c5d",
+      "cache": {
+        "prefill_ms": 3972.84345,
+        "prompt_tokens": 182,
+        "retained_prompt_tokens": 0
+      }
+    },
+    {
+      "case": "same_user_warm",
+      "seconds": 8.32097,
+      "input_sha256": "24421507a5d0602bdd008b0c7ac61dfe0b0621de52dc09159bb92d6c01f3b05b",
+      "output_sha256": "3940a9e01675c68248cdb840ede3c8a50a303b03786456ba448bbb4ba9d603c1",
+      "decoded_text_sha256": "e4e644650803b9dca2d1caaf17fbfa3b5cd835a792b8d53d888c6996f7eb1c5d",
+      "cache": {
+        "prefill_ms": 3901.385832,
+        "prompt_tokens": 182,
+        "retained_prompt_tokens": 0
+      }
+    },
+    {
+      "case": "different_user",
+      "seconds": 5.348266,
+      "input_sha256": "265800abdc213860be1b65ecb9a0b4b33e336f6069fc79f68618ee580da6e660",
+      "output_sha256": "33978acf5f4b766807ba4863554514f26979458c60cbbc941eb5f4d6a68313d3",
+      "decoded_text_sha256": "856470ca58e71954aa4b3245ef47dc7528a0d86d1d63f8abfff8962e07a60eb7",
+      "cache": {
+        "prefill_ms": 3702.690665,
+        "prompt_tokens": 163,
+        "retained_prompt_tokens": 0
+      }
+    },
+    {
+      "case": "different_system",
+      "seconds": 5.431109,
+      "input_sha256": "f4ab00736b5bae1110cb98a59a780526442a310351aaed81030bc4234b964d20",
+      "output_sha256": "33978acf5f4b766807ba4863554514f26979458c60cbbc941eb5f4d6a68313d3",
+      "decoded_text_sha256": "856470ca58e71954aa4b3245ef47dc7528a0d86d1d63f8abfff8962e07a60eb7",
+      "cache": {
+        "prefill_ms": 3791.152573,
+        "prompt_tokens": 169,
+        "retained_prompt_tokens": 0
+      }
+    },
+    {
+      "case": "after_error",
+      "seconds": 5.228157,
+      "input_sha256": "265800abdc213860be1b65ecb9a0b4b33e336f6069fc79f68618ee580da6e660",
+      "output_sha256": "33978acf5f4b766807ba4863554514f26979458c60cbbc941eb5f4d6a68313d3",
+      "decoded_text_sha256": "856470ca58e71954aa4b3245ef47dc7528a0d86d1d63f8abfff8962e07a60eb7",
+      "cache": {
+        "prefill_ms": 3581.410998,
+        "prompt_tokens": 163,
+        "retained_prompt_tokens": 0
+      }
+    },
+    {
+      "case": "after_cancel_rebuild",
+      "seconds": 9.429386,
+      "input_sha256": "265800abdc213860be1b65ecb9a0b4b33e336f6069fc79f68618ee580da6e660",
+      "output_sha256": "33978acf5f4b766807ba4863554514f26979458c60cbbc941eb5f4d6a68313d3",
+      "decoded_text_sha256": "856470ca58e71954aa4b3245ef47dc7528a0d86d1d63f8abfff8962e07a60eb7",
+      "cache": {
+        "prefill_ms": 7302.000629,
+        "prompt_tokens": 163,
+        "retained_prompt_tokens": 0
+      }
+    }
+  ],
+  "cached_runs": [
+    {
+      "case": "first",
+      "seconds": 8.804894,
+      "input_sha256": "24421507a5d0602bdd008b0c7ac61dfe0b0621de52dc09159bb92d6c01f3b05b",
+      "output_sha256": "3940a9e01675c68248cdb840ede3c8a50a303b03786456ba448bbb4ba9d603c1",
+      "decoded_text_sha256": "e4e644650803b9dca2d1caaf17fbfa3b5cd835a792b8d53d888c6996f7eb1c5d",
+      "cache": {
+        "prefill_ms": 5239.706695,
+        "prompt_tokens": 182,
+        "retained_prompt_tokens": 0
+      }
+    },
+    {
+      "case": "same_user_warm",
+      "seconds": 3.434588,
+      "input_sha256": "24421507a5d0602bdd008b0c7ac61dfe0b0621de52dc09159bb92d6c01f3b05b",
+      "output_sha256": "3940a9e01675c68248cdb840ede3c8a50a303b03786456ba448bbb4ba9d603c1",
+      "decoded_text_sha256": "e4e644650803b9dca2d1caaf17fbfa3b5cd835a792b8d53d888c6996f7eb1c5d",
+      "cache": {
+        "prefill_ms": 101.13289,
+        "prompt_tokens": 182,
+        "retained_prompt_tokens": 181
+      }
+    },
+    {
+      "case": "different_user",
+      "seconds": 1.122329,
+      "input_sha256": "265800abdc213860be1b65ecb9a0b4b33e336f6069fc79f68618ee580da6e660",
+      "output_sha256": "72931acb574fb4d23afd011196efee8f835339a55ae9802254d9050c527e4cd5",
+      "decoded_text_sha256": "2d8bd7d9bb5f85ba643f0110d50cb506a1fe439e769a22503193ea6046bb87f7",
+      "cache": {
+        "prefill_ms": 500.729339,
+        "prompt_tokens": 163,
+        "retained_prompt_tokens": 151
+      }
+    },
+    {
+      "case": "different_system",
+      "seconds": 5.109242,
+      "input_sha256": "f4ab00736b5bae1110cb98a59a780526442a310351aaed81030bc4234b964d20",
+      "output_sha256": "33978acf5f4b766807ba4863554514f26979458c60cbbc941eb5f4d6a68313d3",
+      "decoded_text_sha256": "856470ca58e71954aa4b3245ef47dc7528a0d86d1d63f8abfff8962e07a60eb7",
+      "cache": {
+        "prefill_ms": 3965.960912,
+        "prompt_tokens": 169,
+        "retained_prompt_tokens": 30
+      }
+    },
+    {
+      "case": "after_error",
+      "seconds": 5.103202,
+      "input_sha256": "265800abdc213860be1b65ecb9a0b4b33e336f6069fc79f68618ee580da6e660",
+      "output_sha256": "33978acf5f4b766807ba4863554514f26979458c60cbbc941eb5f4d6a68313d3",
+      "decoded_text_sha256": "856470ca58e71954aa4b3245ef47dc7528a0d86d1d63f8abfff8962e07a60eb7",
+      "cache": {
+        "prefill_ms": 3953.078257,
+        "prompt_tokens": 163,
+        "retained_prompt_tokens": 0
+      }
+    },
+    {
+      "case": "after_cancel_rebuild",
+      "seconds": 7.189338,
+      "input_sha256": "265800abdc213860be1b65ecb9a0b4b33e336f6069fc79f68618ee580da6e660",
+      "output_sha256": "33978acf5f4b766807ba4863554514f26979458c60cbbc941eb5f4d6a68313d3",
+      "decoded_text_sha256": "856470ca58e71954aa4b3245ef47dc7528a0d86d1d63f8abfff8962e07a60eb7",
+      "cache": {
+        "prefill_ms": 5931.002484,
+        "prompt_tokens": 163,
+        "retained_prompt_tokens": 0
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "case": "first",
+      "input_and_output_sha256_identical": true,
+      "full_clear_seconds": 8.435119,
+      "cached_seconds": 8.804894,
+      "retained_prompt_tokens": 0
+    },
+    {
+      "case": "same_user_warm",
+      "input_and_output_sha256_identical": true,
+      "full_clear_seconds": 8.32097,
+      "cached_seconds": 3.434588,
+      "retained_prompt_tokens": 181
+    },
+    {
+      "case": "different_user",
+      "input_and_output_sha256_identical": false,
+      "full_clear_seconds": 5.348266,
+      "cached_seconds": 1.122329,
+      "retained_prompt_tokens": 151
+    }
+  ],
+  "error_type": "AssertionError",
+  "error": "cache changes output: different_user"
+}

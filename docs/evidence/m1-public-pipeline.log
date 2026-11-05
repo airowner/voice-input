@@ -1,0 +1,7 @@
+   Compiling voice-core v0.1.0 (/home/airowner/Projects/voice-input/crates/core)
+   Compiling voice-platform v0.1.0 (/home/airowner/Projects/voice-input/crates/platform)
+   Compiling voice-audio v0.1.0 (/home/airowner/Projects/voice-input/crates/audio)
+   Compiling voice-runtime v0.1.0 (/home/airowner/Projects/voice-input/crates/runtime)
+    Finished `dev` profile [unoptimized] target(s) in 8.15s
+     Running `target/debug/examples/pipeline`
+Error: AppError { code: "invalid_output", stage: "rewrite", retryable: true, message: "处理结果必须是仅含 text 字符串的 JSON 对象" }

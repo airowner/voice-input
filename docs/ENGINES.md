@@ -25,6 +25,18 @@ python3 scripts/build-engines.py --evidence docs/evidence/engines-next-build.jso
 
 `x86_64_cpu_portable` 配置关闭 `GGML_NATIVE`、SSE4.2、AVX、AVX2、FMA、F16C、BMI2 和 GPU 后端，以 x86-64 的编译器基线生成 CPU 构建；静态链接两个项目各自的 ggml 库，不混合两套符号。此配置侧重可移植性，性能门槛须另行实测，不能假定达到 V11。后续优化档必须独立命名、记录精确 ISA，并与基线分开验收。
 
+portable 实际 worker smoke 已发现速度不足：JFK 转写约 47 秒、短 JSON 生成约 86 秒，随后截断用例超时。这些是有开发负载的 smoke，不能当作 V11 的正式性能基线，但不能通过放大超时把它们当成性能修复。
+
+因此增加独立 `avx2` 档，仍禁 `GGML_NATIVE`，显式启用 AVX2/FMA/F16C/BMI2（及其 SSE4.2/AVX 前置指令）。构建脚本检查本机各逻辑 CPU 的共同特征；运行时 supervisor 也必须检查相应特征且资源存在后才选择优化 worker，否则使用 portable。优化目录为 `build/{whisper,llama}-cpu-avx2`，不覆盖基线。该档只构建核心库，不重复构建 CLI/common；验证依据是后续实际优化 worker 加载与生成 smoke。
+
+该优化档两套核心库已实际构建通过，CPU 编译参数审计通过，后续独立 worker 的 62 项实际 smoke 也已通过。原始记录为 `docs/evidence/engines-avx2-2026-11-06.json`、`engines-avx2-cpu-profile-audit.json` 和 `workers-smoke-avx2-2026-11-06.json`。
+
+```bash
+python3 scripts/build-engines.py --profile avx2 --jobs 1 --evidence docs/evidence/engines-avx2-next.json
+python3 scripts/build-workers.py --profile avx2 --jobs 1
+python3 workers/smoke.py --profile avx2 --output docs/evidence/workers-avx2-next.json
+```
+
 ## 构建产物及接口入口
 
 | 引擎 | 头文件 | 主要静态库 | M0 CLI |

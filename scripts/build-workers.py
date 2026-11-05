@@ -6,22 +6,29 @@ from pathlib import Path
 import shutil
 import subprocess
 import tempfile
+import datetime
 
 root = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--jobs", type=int, choices=(1, 2), default=1)
 parser.add_argument("--profile", choices=("portable", "avx2"), default="portable")
+parser.add_argument("--grammar-reference", action="store_true", help="also build full-clear/full-mask reference and cache probe for development A/B; neither is packaged")
 args = parser.parse_args()
 lock = json.loads((root / "engines.lock.json").read_text())
 profile = lock["profiles"][args.profile]
 suffix = profile["build_suffix"]
 if profile["required_cpu_flags"]:
-    flags = set()
+    flag_sets = []
     for line in Path("/proc/cpuinfo").read_text().splitlines():
         if line.startswith("flags"):
-            flags.update(line.split(":", 1)[1].split())
+            flag_sets.append(set(line.split(":", 1)[1].split()))
+    flags = set.intersection(*flag_sets) if flag_sets else set()
     if not set(profile["required_cpu_flags"]).issubset(flags):
         raise SystemExit("CPU lacks required AVX2/FMA/F16C/BMI2 features")
+if any(not (root / (entry["build"] + suffix) / "src" / ("libwhisper.a" if name == "whisper.cpp" else "libllama.a")).is_file()
+       or not (root / entry["source"] / ".git").exists() for name, entry in lock["engines"].items()):
+    stamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    subprocess.run(["python3", str(root / "scripts/build-engines.py"), "--profile", args.profile, "--jobs", str(args.jobs), "--evidence", str(root / f"docs/evidence/engines-auto-{args.profile}-{stamp}.json")], check=True)
 for name, engine in lock["engines"].items():
     source = root / engine["source"]
     commit = subprocess.check_output(["git", "-C", str(source), "rev-parse", "HEAD"], text=True).strip()
@@ -38,7 +45,7 @@ triple = next(line.split(": ", 1)[1] for line in triple.splitlines() if line.sta
 if triple != "x86_64-unknown-linux-gnu":
     raise SystemExit("Only the measured x86_64-unknown-linux-gnu worker packaging is currently supported")
 build = root / ("build/workers" + suffix)
-subprocess.run(["cmake", "-S", str(root / "workers"), "-B", str(build), "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", f"-DVOICE_CPU_PROFILE={args.profile}"], check=True)
+subprocess.run(["cmake", "-S", str(root / "workers"), "-B", str(build), "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", f"-DVOICE_CPU_PROFILE={args.profile}", f"-DVOICE_BUILD_GRAMMAR_REFERENCE={'ON' if args.grammar_reference else 'OFF'}"], check=True)
 subprocess.run(["cmake", "--build", str(build), "--parallel", str(args.jobs)], check=True)
 destination = root / "src-tauri/binaries"
 destination.mkdir(parents=True, exist_ok=True)

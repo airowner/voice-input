@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>声笺 · 语音输入</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="mark" aria-hidden="true">◖</span><div><strong>声笺</strong><small>把话说完，把文字留下。</small></div></div>
+    <nav aria-label="主导航"><button class="tab active" data-panel="dictate">语音输入</button><button class="tab" data-panel="settings">设置</button><button class="tab" data-panel="diagnostics">诊断</button></nav>
+  </header>
+  <main>
+    <p id="error" class="notice error" role="alert" hidden></p>
+    <section id="dictate" class="panel">
+      <div class="intro"><span class="eyebrow">留住思路，自然表达</span><h1>说出来，再整理。</h1><p>本地转写，先保留原文，再按你的选择整理。</p></div>
+      <div id="preflight" class="checks" aria-label="准备状态"></div>
+      <div class="capture card">
+        <div><span id="status-dot" class="status-dot"></span><strong id="phase" role="status" aria-live="polite">正在连接</strong><p id="phase-detail">检查录音设备和模型配置</p></div>
+        <div class="actions"><button id="start" class="primary">开始录音</button><button id="stop" disabled>停止并处理</button><button id="cancel" class="quiet" disabled>取消</button></div>
+      </div>
+      <p class="hint">设置页开始的录音会先预览。快捷键录音按交付设置处理，最长 60 秒。</p>
+      <div class="section-heading"><h2>近期结果</h2><button id="clear" class="quiet">清空记录</button></div>
+      <p class="hint">最多 5 条，保留不超过 24 小时。音频不写入磁盘。</p>
+      <div id="results"><div class="empty">还没有结果。开始一次录音，让想法落在这里。</div></div>
+    </section>
+    <section id="settings" class="panel" hidden>
+      <div class="intro"><span class="eyebrow">由你决定</span><h1>配置你的输入方式。</h1></div>
+      <form id="config-form">
+        <fieldset class="card"><legend>录音与转写</legend><label>麦克风<select id="device"></select></label><div class="row"><label>语种<select id="language"><option value="auto">自动识别</option><option value="zh">中文</option><option value="en">English</option></select></label><label>转写模型<select id="asr-model"></select></label></div><div class="row"><label>录音上限（1–60 秒）<input id="max-seconds" type="number" min="1" max="60"></label><label>转写线程数（0 为自动）<input id="asr-threads" type="number" min="0" max="256"></label></div><div class="row"><label>转写后端<select id="asr-backend"><option value="auto">自动（CPU）</option><option value="cpu">CPU</option></select></label><label>转写超时（秒）<input id="asr-timeout" type="number" min="1" max="600"></label></div><div class="actions"><button type="button" data-import="whisper">导入 Whisper 模型</button><button type="button" data-download="whisper-base-multilingual">下载 Base 多语模型</button></div><p class="hint">下载前显示来源、体积和许可。导入后校验格式及实际加载。</p></fieldset>
+        <fieldset class="card"><legend>文字整理</legend><label>处理方式<select id="llm-mode"><option value="local">本地模型</option><option value="remote">远程 API</option></select></label><label>整理程度<select id="profile"><option value="cleanup">纠错与整理</option><option value="light">轻量纠错</option></select></label>
+          <div id="local-settings"><label>本地模型<select id="llm-model"></select></label><div class="row"><label>上下文长度（2048–16384）<input id="context-tokens" type="number" min="2048" max="16384" step="1024"></label><label>整理线程数（0 为自动）<input id="llm-threads" type="number" min="0" max="256"></label></div><label>GPU 层数（当前仅支持 0）<input id="gpu-layers" type="number" min="0" max="0" step="1"></label><label>本地整理超时（秒）<input id="local-timeout" type="number" min="1" max="600"></label><div class="actions"><button type="button" data-import="gguf">导入 GGUF 模型</button><button type="button" data-download="qwen2.5-1.5b-instruct-q4_k_m">下载 Qwen 1.5B Q4</button></div><p class="hint">本地模式不发送转写或术语表到网络。当前构建使用已验证的 CPU 后端。</p></div>
+          <div id="remote-settings" hidden><label>HTTPS 基地址<input id="base-url" type="url" placeholder="https://your-provider.example/v1" autocomplete="off"></label><div class="row"><label>模型名称<input id="remote-model" autocomplete="off"></label><label>超时（5–60 秒）<input id="remote-timeout" type="number" min="5" max="60" value="15"></label></div><label>API Key<input id="api-key" type="password" autocomplete="off" placeholder="留空保留已配置的凭据"></label><label class="check"><input id="session-key" type="checkbox">仅在本次会话使用密钥</label><label class="check"><input id="remote-consent" type="checkbox">我确认向此地址发送转写、整理指令和术语表，并了解供应商的数据处理规则。</label><p id="credential-status" class="hint"></p><div class="actions"><button id="test-remote" type="button">用合成文本测试连接</button><button id="delete-key" type="button" class="quiet">删除密钥</button></div></div>
+          <label>术语表（每行一项）<textarea id="glossary" rows="3" placeholder="专有名词、产品名或常用缩写"></textarea></label>
+        </fieldset>
+        <fieldset class="card"><legend>交付与保留</legend><label>快捷键录音结束后<select id="delivery"><option value="auto_paste">目标仍有效时尝试粘贴一次</option><option value="preview">始终预览</option></select></label><p class="hint">自动粘贴会替换剪贴板。切换过窗口、目标不可靠、终端或锁屏时保留结果，由你手动复制。系统无法确认目标控件是否收到了粘贴。</p><button id="open-delivery-probe" type="button">验证本次会话的粘贴能力</button><p id="delivery-capability" class="hint"></p><label class="check"><input id="persist" type="checkbox">允许重启后恢复近期文字</label><div class="row"><label>最多保留条数（1–5）<input id="max-entries" type="number" min="1" max="5"></label><label>保留时间（1–24 小时）<input id="ttl-hours" type="number" min="1" max="24"></label></div><p class="hint">文字保存在本机私有数据库中，可能包含敏感内容。关闭此项会清除已有恢复记录。</p></fieldset>
+        <fieldset class="card"><legend>模型文件</legend><div id="model-guidance" class="hint" aria-live="polite"></div><div id="model-list"></div></fieldset>
+        <div class="save-row"><span id="saved" role="status"></span><button type="submit" class="primary">保存设置</button></div>
+      </form>
+    </section>
+    <section id="diagnostics" class="panel" hidden><div class="intro"><span class="eyebrow">当前电脑</span><h1>能力与运行状态。</h1><p>诊断不包含录音、转写、窗口标题或密钥。</p></div><button id="refresh-diagnostics">刷新诊断</button><pre id="diagnostic-data" class="card"></pre></section>
+  </main>
+  <footer>声笺 <span>·</span> 单次采集，原文可恢复</footer>
+  <dialog id="confirmation"><h2 id="confirmation-title"></h2><p id="confirmation-text" class="result-text"></p><div class="actions"><button id="confirm-no">取消</button><button id="confirm-yes" class="primary">确认</button></div></dialog>
+  <dialog id="delivery-probe"><h2>验证本机粘贴</h2><p class="hint">将合成文本粘贴到下方专用框，会替换剪贴板。保持此窗口有焦点；验证成功仅对本次应用会话生效。</p><textarea id="delivery-probe-input" rows="4" aria-label="合成文本粘贴验证框"></textarea><p id="delivery-probe-status" role="status"></p><div class="actions"><button id="close-delivery-probe">关闭</button><button id="begin-delivery-probe" class="primary">开始验证</button></div></dialog>
+</body>
+</html>

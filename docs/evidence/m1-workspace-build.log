@@ -1,0 +1,23 @@
+   Compiling ring v0.17.14
+   Compiling wayland-backend v0.3.17
+   Compiling rustls-webpki v0.103.16
+   Compiling rustls v0.23.46
+   Compiling wayland-client v0.31.15
+   Compiling rusqlite v0.37.0
+   Compiling sha2 v0.10.9
+   Compiling wayland-protocols v0.32.13
+   Compiling tokio-rustls v0.26.6
+   Compiling voice-core v0.1.0 (/home/airowner/Projects/voice-input/crates/core)
+   Compiling hyper-rustls v0.27.10
+   Compiling ashpd v0.11.1
+   Compiling dbus-secret-service v4.1.0
+   Compiling tauri-codegen v2.7.4
+   Compiling rfd v0.15.4
+   Compiling reqwest v0.12.28
+   Compiling tauri-macros v2.7.4
+   Compiling voice-audio v0.1.0 (/home/airowner/Projects/voice-input/crates/audio)
+   Compiling keyring v3.6.3
+   Compiling tauri v2.12.5
+   Compiling voice-input v0.1.0 (/home/airowner/Projects/voice-input/src-tauri)
+   Compiling voice-runtime v0.1.0 (/home/airowner/Projects/voice-input/crates/runtime)
+    Finished `dev` profile [unoptimized] target(s) in 1m 21s

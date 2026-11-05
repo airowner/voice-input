@@ -1,0 +1,21 @@
+   Compiling voice-core v0.1.0 (/home/airowner/Projects/voice-input/crates/core)
+   Compiling voice-audio v0.1.0 (/home/airowner/Projects/voice-input/crates/audio)
+    Finished `test` profile [unoptimized] target(s) in 1.58s
+     Running unittests src/lib.rs (target/debug/deps/voice_audio-33681ef38a0c9204)
+
+running 2 tests
+test tests::silence_short_nan_and_soft_speech ... ok
+
+thread 'tests::resampling_preserves_duration_and_tone' (1464065) panicked at crates/audio/src/lib.rs:194:9:
+tone MSE 0.07295451, best shift (58, 6.4680415e-7)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test tests::resampling_preserves_duration_and_tone ... FAILED
+
+failures:
+
+failures:
+    tests::resampling_preserves_duration_and_tone
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+
+error: test failed, to rerun pass `-p voice-audio --lib`

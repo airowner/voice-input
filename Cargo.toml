@@ -1,0 +1,31 @@
+[workspace]
+members = ["crates/core", "crates/audio", "crates/platform", "crates/runtime", "src-tauri"]
+default-members = ["crates/core", "crates/audio", "crates/platform", "crates/runtime"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+rust-version = "1.99"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+toml = "0.9"
+rusqlite = { version = "0.37", features = ["bundled"] }
+sha2 = "0.10"
+uuid = { version = "1", features = ["v4", "serde"] }
+tempfile = "3"
+
+[profile.dev]
+debug = 0
+
+[profile.dev.package.sha2]
+opt-level = 3
+
+[profile.release]
+strip = true
+lto = "thin"
+codegen-units = 1

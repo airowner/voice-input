@@ -1,0 +1,145 @@
+{
+  "scope": "Framing only; no model or application acceptance",
+  "captured_at_utc": "2026-11-05T20:34:57.429026+00:00",
+  "platform": "Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44",
+  "profile": "portable",
+  "checks": [
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "zero frame",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0011,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "zero frame exits with protocol error",
+      "passed": true
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "oversized frame",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0002,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "oversized frame exits with protocol error",
+      "passed": true
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "unknown frame type",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0033,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "unknown frame type exits with protocol error",
+      "passed": true
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "invalid JSON",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0011,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "invalid JSON exits with protocol error",
+      "passed": true
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "unknown field rejected",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0012,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    },
+    {
+      "check": "asr: protocol hello",
+      "passed": true
+    },
+    {
+      "check": "missing job ID rejected",
+      "passed": true
+    },
+    {
+      "check": "asr: process exits within five seconds",
+      "passed": true,
+      "seconds": 0.0011,
+      "returncode": 2
+    },
+    {
+      "check": "asr: stderr has no engine/user/model text",
+      "passed": true,
+      "stderr_bytes": 0
+    }
+  ],
+  "status": "passed",
+  "binary_sha256": {
+    "voice-asr-worker": "fbddd22705a92c7fbf09ec252c75bd36c51e7a2b6eb665f40d45b439e6a4d764",
+    "voice-llm-worker": "8a104122f4d2ed9fbc6983fc48d80b23ec00b8c3aca21ac29ddefaaf21c39b68"
+  },
+  "models_lock_sha256": "c9757960de5461ba8d13656c20634c5830dd17618d07313e94333cc77e360715",
+  "cache_state": "First inference follows process-cold model load; OS page cache unspecified; repeated resident jobs for cancellation checks; not V11 warm benchmark"
+}

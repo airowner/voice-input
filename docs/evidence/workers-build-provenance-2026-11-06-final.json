@@ -1,0 +1,98 @@
+{
+  "captured_at_utc": "2026-11-05T20:34:48.273113+00:00",
+  "platform": "Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44",
+  "scope": "Final Linux worker source/artifact/model provenance, not V1 acceptance or installed-package validation",
+  "workers": {
+    "voice-asr-worker": {
+      "sha256": "fbddd22705a92c7fbf09ec252c75bd36c51e7a2b6eb665f40d45b439e6a4d764",
+      "bytes": 2572272,
+      "packaged_resource": "src-tauri/binaries/voice-asr-worker-x86_64-unknown-linux-gnu",
+      "packaged_copy_matches": true,
+      "needed_libraries": [
+        "libgomp.so.1",
+        "libstdc++.so.6",
+        "libm.so.6",
+        "libgcc_s.so.1",
+        "libc.so.6"
+      ],
+      "direct_network_imports": []
+    },
+    "voice-llm-worker": {
+      "sha256": "8a104122f4d2ed9fbc6983fc48d80b23ec00b8c3aca21ac29ddefaaf21c39b68",
+      "bytes": 7122520,
+      "packaged_resource": "src-tauri/binaries/voice-llm-worker-x86_64-unknown-linux-gnu",
+      "packaged_copy_matches": true,
+      "needed_libraries": [
+        "libgomp.so.1",
+        "libstdc++.so.6",
+        "libm.so.6",
+        "libgcc_s.so.1",
+        "libc.so.6"
+      ],
+      "direct_network_imports": []
+    },
+    "voice-asr-worker-avx2": {
+      "sha256": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+      "bytes": 2863856,
+      "packaged_resource": "src-tauri/binaries/voice-asr-worker-avx2-x86_64-unknown-linux-gnu",
+      "packaged_copy_matches": true,
+      "needed_libraries": [
+        "libgomp.so.1",
+        "libstdc++.so.6",
+        "libm.so.6",
+        "libgcc_s.so.1",
+        "libc.so.6"
+      ],
+      "direct_network_imports": []
+    },
+    "voice-llm-worker-avx2": {
+      "sha256": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d",
+      "bytes": 7545704,
+      "packaged_resource": "src-tauri/binaries/voice-llm-worker-avx2-x86_64-unknown-linux-gnu",
+      "packaged_copy_matches": true,
+      "needed_libraries": [
+        "libgomp.so.1",
+        "libstdc++.so.6",
+        "libm.so.6",
+        "libgcc_s.so.1",
+        "libc.so.6"
+      ],
+      "direct_network_imports": []
+    }
+  },
+  "models": [
+    {
+      "id": "whisper-base-multilingual",
+      "sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+      "path": "models/whisper/ggml-base.bin",
+      "bytes": 147951465,
+      "matches_lock": true
+    },
+    {
+      "id": "qwen2.5-1.5b-instruct-q4_k_m",
+      "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+      "path": "models/gguf/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+      "bytes": 1117320736,
+      "matches_lock": true
+    }
+  ],
+  "source_sha256": {
+    "workers/asr.cpp": "1f7862deb8f4d84fd7ac9952594d2f732965b426cba89c73557abffaab3fa16d",
+    "workers/llm.cpp": "c7dec8a5f4df065f73c2a56c6d149de063600029ef89297873a206b21ca17197",
+    "workers/protocol.hpp": "fc2601e6f19987d1d224ce0be8a2cd9c7ab59e11acb063b4c0f714369fc0b12e",
+    "workers/output_grammar.hpp": "64497e277829a58f833262ac51b7e00d44575ca9906fe51c22a228377718968c",
+    "workers/greedy_grammar.hpp": "3ae593dffbddcf1ce3590dc4ae7f51a2f793f5b346db0b8b75483fcf80b4c8f8",
+    "workers/CMakeLists.txt": "665abacccfb96369ced877a5ff8fd0720e27075079129e376ab5b59325d9fae0",
+    "scripts/build-workers.py": "a9735a4d9d52349f8dec932f83514635176041d08541f132b5eb1f16d6e6b166",
+    "scripts/build-engines.py": "29956a04dfa27affd1516a143c545a300aa70f4772ba4b26fd634096115d3751",
+    "engines.lock.json": "cb8d8934f8faf67f5b352be4c23d26167b4c2680e9fac74b9183d9b97fad77cc"
+  },
+  "current_full_smoke": "docs/evidence/workers-smoke-avx2-2026-11-06-final.json",
+  "evidence_sha256": {
+    "docs/evidence/workers-smoke-avx2-2026-11-06-final.json": "b08887f18d1a0c220623cb62433b9d9733e20535df01c78fe41a51ca8d3f439e",
+    "docs/evidence/workers-kv-prefix-ab-2026-11-06-r2.json": "5898e948d72430b0d1707f90c87da842533c92afca7afc23b7262b093a0dfa4a",
+    "docs/evidence/workers-grammar-greedy-ab-2026-11-06.json": "1fe6499f14fec732af11bdacc60e87dae61cb2fc53099f9c369ab76ebb239d64"
+  },
+  "sampling_and_cache": "Fixed JSON GBNF; single-candidate grammar greedy with full-mask fallback; explicit128 prefill and complete128-prefix KV reuse; errors/cancel/unload clear cache",
+  "load_guards": "ASR multilingual required; synthetic LLM template rendering required; successful Base/Qwen positive loads exercised by final smoke"
+}

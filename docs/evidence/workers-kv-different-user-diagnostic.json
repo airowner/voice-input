@@ -1,0 +1,33 @@
+{
+  "captured_at_utc": "2026-11-05T20:13:23.556455+00:00",
+  "rows": [
+    {
+      "mode": "reference",
+      "scope": "public/synthetic fixture diagnostic only; not product logging",
+      "response": {
+        "cache_probe": {
+          "prefill_ms": 3692.082457,
+          "prompt_tokens": 163,
+          "retained_prompt_tokens": 0
+        },
+        "event": "result",
+        "job_id": "public-changed-user",
+        "text": "{\"text\":\"Hello, 456.\"}"
+      }
+    },
+    {
+      "mode": "cached",
+      "scope": "public/synthetic fixture diagnostic only; not product logging",
+      "response": {
+        "cache_probe": {
+          "prefill_ms": 451.50968,
+          "prompt_tokens": 163,
+          "retained_prompt_tokens": 151
+        },
+        "event": "result",
+        "job_id": "public-changed-user",
+        "text": "{\"text\":\"Hello.\"}"
+      }
+    }
+  ]
+}

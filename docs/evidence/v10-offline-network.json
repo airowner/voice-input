@@ -1,0 +1,30 @@
+{
+  "scope": "Linux developer corpus under a kernel isolated network namespace; no microphone or paste; partial V03, not desktop acceptance",
+  "network_namespace": "net:[4026532872]",
+  "interfaces": {
+    "lo": 8
+  },
+  "external_probe_errno": 101,
+  "external_probe_destination": "RFC5737 TEST-NET-2, no route",
+  "before": {
+    "route": "",
+    "ipv6_route": "00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n",
+    "tcp": "  sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode                                                     \n",
+    "tcp6": "  sl  local_address                         remote_address                        st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode\n",
+    "udp": "   sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode ref pointer drops            \n",
+    "udp6": "  sl  local_address                         remote_address                        st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode ref pointer drops\n"
+  },
+  "audit_method": "Inherited network namespace confinement with loopback down and no external interfaces/routes; no syscall tracer or online background-connection audit",
+  "corpus_binary_sha256": "f367459ca90e16708392c482652228feb79a4a565a46f46d486d4b436849daf1",
+  "background_release_build": true,
+  "returncode": 0,
+  "elapsed_seconds": 172.222,
+  "after": {
+    "route": "",
+    "ipv6_route": "00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n",
+    "tcp": "  sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode                                                     \n",
+    "tcp6": "  sl  local_address                         remote_address                        st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode\n",
+    "udp": "   sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode ref pointer drops            \n",
+    "udp6": "  sl  local_address                         remote_address                        st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode ref pointer drops\n"
+  }
+}

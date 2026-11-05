@@ -1,0 +1,36 @@
+{
+  "required_cpu_features": [
+    "avx2",
+    "bmi2",
+    "f16c",
+    "fma"
+  ],
+  "logical_cpus_checked": 8,
+  "all_cpus_support_required_features": true,
+  "engines": {
+    "whisper": {
+      "instruction_flags": [
+        "-mavx",
+        "-mavx2",
+        "-mbmi2",
+        "-mf16c",
+        "-mfma",
+        "-msse4.2"
+      ],
+      "cmake_cache_sha256": "ae521ff5e2e4ed3d007e77f2addf9ed406280f1422713b59ae65646c6e17c3fd",
+      "compile_commands_sha256": "697d7918c78221f651c3a663abda2f865fc02339dc865e1ce40af7334df2349f"
+    },
+    "llama": {
+      "instruction_flags": [
+        "-mavx",
+        "-mavx2",
+        "-mbmi2",
+        "-mf16c",
+        "-mfma",
+        "-msse4.2"
+      ],
+      "cmake_cache_sha256": "ad37c50e890b079e7a33e15cdfb19670bc71e2b26a30615fbd005d3b94b2b4d1",
+      "compile_commands_sha256": "4aa347579448e2fc115081d2cef16e6dc1c99119c89fc01eec63e400d7c96e69"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "scope": "actual isolated Tauri/WebKit startup and CLI developer smoke; no audio/input injection",
+  "returncode": 0,
+  "cli_status": {
+    "code": "accepted",
+    "status": {
+      "state": "ready",
+      "busy": false
+    }
+  },
+  "stdout": "{\"checks\":{\"default_values\":true,\"ipc_snapshot\":true,\"record_disabled_before_setup\":true,\"settings_navigation\":true,\"three_checks\":true},\"passed\":true,\"scope\":\"actual Tauri WebKit DOM/IPC developer smoke; no recording or injection\"}\n",
+  "stderr": "\n** (voice-input:1539942): WARNING **: 03:41:17.802: Disabled hardware acceleration because GTK failed to initialize GL: No available configurations for the given pixel format.\n\n(voice-input:1539942): libayatana-appindicator-WARNING **: 03:41:17.854: libayatana-appindicator is deprecated. Please use libayatana-appindicator-glib in newly written code.\n"
+}

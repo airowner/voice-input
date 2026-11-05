@@ -1,0 +1,52 @@
+cmake_minimum_required(VERSION 3.24)
+project(voice_input_workers LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+find_package(Threads REQUIRED)
+find_package(OpenMP REQUIRED)
+set(VOICE_CPU_PROFILE "portable" CACHE STRING "portable or avx2")
+option(VOICE_BUILD_GRAMMAR_REFERENCE "Build development-only old grammar sampler for A/B" OFF)
+if(VOICE_CPU_PROFILE STREQUAL "portable")
+  set(VOICE_PROFILE_SUFFIX "")
+elseif(VOICE_CPU_PROFILE STREQUAL "avx2")
+  set(VOICE_PROFILE_SUFFIX "-avx2")
+else()
+  message(FATAL_ERROR "Unsupported CPU profile")
+endif()
+get_filename_component(VOICE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
+foreach(ENGINE whisper llama)
+  set(ENGINE_BUILD "${VOICE_ROOT}/build/${ENGINE}-cpu${VOICE_PROFILE_SUFFIX}")
+  set(ENGINE_SOURCE "${VOICE_ROOT}/vendor/${ENGINE}.cpp")
+  if(ENGINE STREQUAL "whisper")
+    set(WORKER voice-asr-worker${VOICE_PROFILE_SUFFIX})
+    set(SOURCE asr.cpp)
+  else()
+    set(WORKER voice-llm-worker${VOICE_PROFILE_SUFFIX})
+    set(SOURCE llm.cpp)
+  endif()
+  set(WORKER_TARGETS ${WORKER})
+  if(ENGINE STREQUAL "llama" AND VOICE_BUILD_GRAMMAR_REFERENCE)
+    list(APPEND WORKER_TARGETS ${WORKER}-grammar-reference ${WORKER}-cache-probe)
+  endif()
+  foreach(WORKER_TARGET IN LISTS WORKER_TARGETS)
+  add_executable(${WORKER_TARGET} ${SOURCE})
+  target_include_directories(${WORKER_TARGET} PRIVATE
+    "${ENGINE_SOURCE}/include" "${ENGINE_SOURCE}/ggml/include"
+    "${VOICE_ROOT}/vendor/llama.cpp/vendor/nlohmann")
+  target_compile_options(${WORKER_TARGET} PRIVATE -Wall -Wextra -Wpedantic)
+  if(WORKER_TARGET MATCHES "-grammar-reference$")
+    target_compile_definitions(${WORKER_TARGET} PRIVATE VOICE_GRAMMAR_REFERENCE=1)
+  endif()
+  if(WORKER_TARGET MATCHES "-cache-probe$")
+    target_compile_definitions(${WORKER_TARGET} PRIVATE VOICE_CACHE_DIAGNOSTIC=1)
+  endif()
+  target_link_libraries(${WORKER_TARGET} PRIVATE
+    "-Wl,--start-group"
+    "${ENGINE_BUILD}/src/lib${ENGINE}.a"
+    "${ENGINE_BUILD}/ggml/src/libggml.a"
+    "${ENGINE_BUILD}/ggml/src/libggml-cpu.a"
+    "${ENGINE_BUILD}/ggml/src/libggml-base.a"
+    "-Wl,--end-group"
+    OpenMP::OpenMP_CXX Threads::Threads ${CMAKE_DL_LIBS})
+  endforeach()
+endforeach()

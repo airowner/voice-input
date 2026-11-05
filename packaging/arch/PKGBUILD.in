@@ -1,0 +1,17 @@
+# Generated from verified local artifacts; no network sources or compilation.
+pkgname=voice-input
+pkgver=@PKGVER@
+pkgrel=1
+pkgdesc=@PKGDESC@
+arch=('x86_64')
+license=('MIT')
+depends=(@DEPENDS@)
+optdepends=('libsecret: optional Secret Service client for persistent API credentials; otherwise session-only keys')
+options=('!strip' '!debug')
+source=('payload.tar')
+noextract=('payload.tar')
+sha256sums=('@PAYLOAD_SHA256@')
+
+package() {
+  bsdtar --no-same-owner -xpf "$srcdir/payload.tar" -C "$pkgdir"
+}

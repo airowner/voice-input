@@ -1,0 +1,36 @@
+[package]
+name = "voice-runtime"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+voice-core = { path = "../core" }
+voice-audio = { path = "../audio" }
+voice-platform = { path = "../platform" }
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+uuid.workspace = true
+crossbeam-channel = "0.5"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+url = "2"
+zeroize = "1"
+keyring = { version = "=3.6.3" }
+rfd = "0.15"
+tempfile.workspace = true
+fs2 = "0.4"
+libc = "0.2"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring = { version = "=3.6.3", features = ["sync-secret-service", "crypto-rust"] }
+[target.'cfg(target_os = "macos")'.dependencies]
+keyring = { version = "=3.6.3", features = ["apple-native"] }
+[target.'cfg(target_os = "windows")'.dependencies]
+keyring = { version = "=3.6.3", features = ["windows-native"] }
+
+[dev-dependencies]
+rustls = "0.23"
+rcgen = "0.14"
+hound = "3.5"

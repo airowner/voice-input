@@ -1,0 +1,5 @@
+{
+  "bundle": {
+    "externalBin": ["binaries/voice-asr-worker", "binaries/voice-llm-worker", "binaries/voice-asr-worker-avx2", "binaries/voice-llm-worker-avx2"]
+  }
+}

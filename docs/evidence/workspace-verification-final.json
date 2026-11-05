@@ -1,0 +1,20 @@
+{
+  "scope": "Linux final source automated workspace and debug compilation; does not establish desktop or cross-platform acceptance",
+  "commands": [
+    "cargo fmt --all -- --check",
+    "cargo clippy --workspace --all-targets --locked -j 1 -- -D warnings",
+    "cargo test --workspace --locked -j 1",
+    "npm test",
+    "cargo build --workspace --locked -j 1"
+  ],
+  "rust_tests": 85,
+  "includes_noop_crash_helper": true,
+  "passed": true,
+  "logs": {
+    "workspace-clippy-final.log": "09fa6d3f23e59a7f71e0029bf6c19814ff84cb33a9e9a6e3282feb6587be8ee7",
+    "workspace-tests-final.log": "b6cba28729717a8f6ba826c42b2caf197753c6c14616517b0db5b64b5a9c9cc1",
+    "ui-syntax-final.log": "2bcf88c224af1db5ef6f204e6abc2fe2d18a46f7c2b5b903aabb88c824026a4b",
+    "linux-debug-build-final.log": "156504d4bd07a6cf6da0d903ef47f281bbb2b03aef6a6af12d326dd12c101243"
+  },
+  "js_test_scope": "node --check only"
+}

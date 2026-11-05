@@ -1,0 +1,8 @@
+{
+  "scope": "locally extracted audit dependency; no system installation or configuration change",
+  "source": "existing configured pacman repository metadata",
+  "url": "https://mirrors.aliyun.com/archlinux/extra/os/x86_64/strace-7.3-1-x86_64.pkg.tar.zst",
+  "package_sha256": "b3c67815289238f99ab6422d0cd562dbbb5becca8b49179fffad72be9f23e1a0",
+  "binary_sha256": "af9b42502ebd9fb4ed27a702fa44ed1e369b3e4a5addae7a9799a698fda591b1",
+  "version": "strace -- version 7.3\nCopyright (c) 1991-2026 The strace developers <https://strace.io>.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\nOptional features enabled: stack-trace=libunwind stack-demangle m32-mpers mx32-mpers\n"
+}

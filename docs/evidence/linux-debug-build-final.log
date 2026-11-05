@@ -1,0 +1,5 @@
+   Compiling voice-core v0.1.0 (/home/airowner/Projects/voice-input/crates/core)
+   Compiling voice-audio v0.1.0 (/home/airowner/Projects/voice-input/crates/audio)
+   Compiling voice-input v0.1.0 (/home/airowner/Projects/voice-input/src-tauri)
+   Compiling voice-runtime v0.1.0 (/home/airowner/Projects/voice-input/crates/runtime)
+    Finished `dev` profile [unoptimized] target(s) in 19.54s

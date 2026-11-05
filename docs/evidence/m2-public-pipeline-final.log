@@ -1,0 +1,31 @@
+{
+  "model_sha256": {
+    "asr": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+    "llm": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e"
+  },
+  "passed": true,
+  "recovery_unknown_preview_records": 2,
+  "runs": [
+    {
+      "asr_ms": 3515,
+      "cache_state": "cold worker; OS cache may be warm",
+      "llm_ms": 10701,
+      "processed_sha256": "e4e644650803b9dca2d1caaf17fbfa3b5cd835a792b8d53d888c6996f7eb1c5d",
+      "public_fixture_processed": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "public_fixture_raw": " And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "raw_sha256": "1d3e5d93b8c6643388c494ac08a26d7b4962276f10f95513f11ce2e34e0977b9",
+      "total_ms": 14221
+    },
+    {
+      "asr_ms": 3670,
+      "cache_state": "warm resident worker",
+      "llm_ms": 6216,
+      "processed_sha256": "e4e644650803b9dca2d1caaf17fbfa3b5cd835a792b8d53d888c6996f7eb1c5d",
+      "public_fixture_processed": "And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "public_fixture_raw": " And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+      "raw_sha256": "1d3e5d93b8c6643388c494ac08a26d7b4962276f10f95513f11ce2e34e0977b9",
+      "total_ms": 9891
+    }
+  ],
+  "scope": "public JFK fixture developer pipeline, no microphone/no paste/no network; not V01/V10/V11 acceptance"
+}
