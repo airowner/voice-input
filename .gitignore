@@ -2,5 +2,8 @@ __pycache__/
 *.pyc
 .worktrees/
 build/
+target/
+node_modules/
+src-tauri/binaries/
 vendor/
 models/

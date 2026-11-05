@@ -1,0 +1,30 @@
+info: syncing channel updates for 1.99.1-x86_64-unknown-linux-gnu
+info: latest update on 2026-10-15 for version 1.99.1 (58cf8f9c3 2026-10-13)
+info: downloading 5 components
+warn: the missing active toolchain `1.99.1-x86_64-unknown-linux-gnu` has been auto-installed
+warn: this might cause rustup commands to take longer time to finish than expected
+info: you may opt out with `RUSTUP_AUTO_INSTALL=0` or `rustup set auto-install disable`
+    Updating `rsproxy-sparse` index
+     Locking 5 packages to highest Rust 1.99.1 compatible versions
+    Updating keyboard-types v0.7.0 -> v0.8.3
+    Updating muda v0.19.3 -> v0.20.0
+    Updating tauri v2.11.1 -> v2.12.5
+    Updating tray-icon v0.23.1 -> v0.25.1
+    Updating window-vibrancy v0.6.0 -> v0.8.1
+ Downloading crates ...
+  Downloaded muda v0.20.0 (registry `rsproxy-sparse`)
+  Downloaded keyboard-types v0.8.3 (registry `rsproxy-sparse`)
+  Downloaded tauri v2.12.5 (registry `rsproxy-sparse`)
+  Downloaded tray-icon v0.25.1 (registry `rsproxy-sparse`)
+   Compiling muda v0.20.0
+    Checking keyboard-types v0.8.3
+   Compiling tray-icon v0.25.1
+   Compiling tauri v2.12.5
+    Checking toml v0.9.12+spec-1.1.0
+    Checking rusqlite v0.37.0
+    Checking cpal v0.17.3
+    Checking rubato v0.16.2
+    Checking keyring v3.6.3
+    Checking fs2 v0.4.3
+    Checking voice-input-dependency-probe v0.0.0 (/tmp/voice-input-dependency-probe)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 26.99s

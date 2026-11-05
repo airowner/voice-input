@@ -1,0 +1,20 @@
+[
+  {
+    "path": "docs/evidence/models-whisper-LICENSE",
+    "source": "https://raw.githubusercontent.com/openai/whisper/86098128c0b4f24f0e2aa2994de830614b474227/LICENSE",
+    "sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d",
+    "bytes": 1063
+  },
+  {
+    "path": "docs/evidence/models-fixture-upstream-LICENSE",
+    "source": "https://raw.githubusercontent.com/ggml-org/whisper.cpp/b1535f5fb163f4443804888f7be980621226cb15/LICENSE",
+    "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+    "bytes": 1078
+  },
+  {
+    "path": "tests/fixtures/jfk.wav",
+    "source": "https://raw.githubusercontent.com/ggml-org/whisper.cpp/b1535f5fb163f4443804888f7be980621226cb15/samples/jfk.wav",
+    "sha256": "59dfb9a4acb36fe2a2affc14bacbee2920ff435cb13cc314a08c13f66ba7860e",
+    "bytes": 352078
+  }
+]

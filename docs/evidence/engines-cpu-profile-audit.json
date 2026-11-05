@@ -1,0 +1,17 @@
+{
+  "scope": "generated compiler flags audit on this x86-64 machine",
+  "engines": {
+    "whisper": {
+      "source_commit": "b1535f5fb163f4443804888f7be980621226cb15",
+      "explicit_instruction_flags": [],
+      "compile_commands_sha256": "62a707b6db51bbfe51d23c1068f6417f435e5d5719252da5ffe65e524b280145",
+      "cmake_cache_sha256": "cad480140b5b7dcf26e4b5264e6c497d9af6e4757682b85f981ab9b5240a1cf2"
+    },
+    "llama": {
+      "source_commit": "45b6604b20f17b7d7638042306c0cd1b6af5999c",
+      "explicit_instruction_flags": [],
+      "compile_commands_sha256": "16e8ae89387d32bb5a206d51a25fc92ac823fb333fdd7335bdcccd160b60ea54",
+      "cmake_cache_sha256": "c3dfb77354ee6710c0fdca3f9eeb41d5c6e928335e2d4b5336ad7007bead861e"
+    }
+  }
+}

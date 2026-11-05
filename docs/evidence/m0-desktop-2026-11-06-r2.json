@@ -1,0 +1,58 @@
+{
+  "captured_at_utc": "2026-11-05T18:32:54.279513+00:00",
+  "scope": "M0 real desktop capabilities; not V01-V11 product acceptance",
+  "synthetic_text_sha256": "887292ef7453dce71f937a0851fe406c9f158ef999b8804a65fe72831972d948",
+  "checks": {
+    "socket2_connect": {
+      "status": "pass"
+    },
+    "config_errors": {
+      "status": "pass",
+      "present": false
+    },
+    "reference_key_conflict": {
+      "status": "observed",
+      "super_shift_d_count": 1
+    },
+    "available_key": {
+      "status": "pass",
+      "key": "SUPER + CTRL + SHIFT + F12"
+    },
+    "clipboard_snapshot": {
+      "status": "pass",
+      "mime_count": 0
+    },
+    "controlled_paste_wayland": {
+      "status": "blocked",
+      "reason": "focus_guard_refused_nonowned_target"
+    },
+    "controlled_paste_x11": {
+      "status": "blocked",
+      "reason": "focus_guard_refused_nonowned_target"
+    },
+    "socket2_events": {
+      "status": "pass",
+      "event_names_only": [
+        "activewindow",
+        "activewindowv2",
+        "openwindow"
+      ]
+    },
+    "microphone_capture": {
+      "status": "pass",
+      "pcm_bytes_in_memory": 16000,
+      "saved_audio_files": 0,
+      "termination": "probe explicitly stops recorder after exact 8000 samples; exit status not used as success",
+      "scope": "default source 0.5 second transport only; no speech quality claim"
+    }
+  },
+  "cleanup": {
+    "owned_targets_closed": true,
+    "original_window_focus_requested": true
+  },
+  "versions": {
+    "hyprland": "Hyprland 0.57.0 built from branch v0.57.0 at commit 0aa6745f705f2c4b0a5004eb019ef76e5bbdb426 clean (VERSION: bump to 0.57.0).\nDate: Wed Oct 28 10:37:05 2026\nTag: v0.57.0, commits: 7978\n\nLibraries:\nHyprgraphics: built against 0.5.1, system has 0.5.1\nHyprutils: built against 0.14.3, system has 0.14.3\nHyprcursor: built against 0.1.13, system has 0.1.13\nHyprlang: built against 0.6.8, system has 0.6.8\nAquamarine: built against 0.15.1, system has 0.15.1\n\nVersion ABI string: 0aa6745f705f2c4b0a5004eb019ef76e5bbdb426_aq_0.15_hu_0.14_hg_0.5_hc_0.1_hlg_0.6\nno flags were set",
+    "packages": "hyprland 0.57.0-1\nomarchy 4.0.6-1\nwl-clipboard 1:2.3.0-1\nwtype 0.4-2\ngtk4 1:4.24.1-1\npipewire 1:1.6.10-1",
+    "python": "Python 3.14.9"
+  }
+}

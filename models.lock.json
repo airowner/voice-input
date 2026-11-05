@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "purpose": "Pinned M0 model baseline; not automatic activation or download consent",
+  "models": [
+    {
+      "id": "whisper-base-multilingual",
+      "engine": "whisper.cpp",
+      "repository": "ggerganov/whisper.cpp",
+      "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+      "filename": "ggml-base.bin",
+      "path": "models/whisper/ggml-base.bin",
+      "bytes": 147951465,
+      "sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+      "license": "MIT",
+      "language": "multilingual",
+      "format": "ggml",
+      "source": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base.bin",
+      "hash_origin": "Hugging Face API LFS SHA-256; compare local full file before activation",
+      "license_evidence": "docs/evidence/models-whisper-LICENSE",
+      "compatibility": "CPU baseline; verify against engines.lock.json and target build before distribution"
+    },
+    {
+      "id": "qwen2.5-1.5b-instruct-q4_k_m",
+      "engine": "llama.cpp",
+      "repository": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+      "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+      "filename": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+      "path": "models/gguf/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+      "bytes": 1117320736,
+      "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+      "license": "Apache-2.0",
+      "language": "multilingual, including zh/en",
+      "format": "GGUF Q4_K_M",
+      "source": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/91cad51170dc346986eccefdc2dd33a9da36ead9/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+      "hash_origin": "Hugging Face API LFS SHA-256; compare local full file before activation",
+      "license_evidence": "docs/evidence/models-qwen-LICENSE",
+      "compatibility": "CPU baseline; verify against engines.lock.json and target build before distribution"
+    }
+  ]
+}

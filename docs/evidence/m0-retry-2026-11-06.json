@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-11-05T18:27:23.757756+00:00",
+  "scope": "M0 preflight only; not desktop or product acceptance",
+  "side_effects": "read-only; no recording/clipboard writes/keys/config changes",
+  "host": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "kernel": "7.2.15-1-omarchy",
+    "os_release": "NAME=\"Omarchy\"\nPRETTY_NAME=\"Omarchy\"\nID=omarchy\nID_LIKE=arch\nBUILD_ID=\"4.0.6\"\nVERSION_ID=\"4.0.6\"\nANSI_COLOR=\"38;2;158;206;106\"\nHOME_URL=\"https://omarchy.org/\"\nDOCUMENTATION_URL=\"https://learn.omacom.io/2/the-omarchy-manual\"\nSUPPORT_URL=\"https://discord.gg/tXFUdasqhY\"\nBUG_REPORT_URL=\"https://github.com/basecamp/omarchy/issues\"\nLOGO=omarchy\n",
+    "logical_cpus": 8,
+    "memory": {
+      "argv": [
+        "free",
+        "-b"
+      ],
+      "returncode": 0,
+      "stdout": "total        used        free      shared  buff/cache   available\nMem:     16659124224 12207484928   806723584   779452416  5400408064  4451639296\nSwap:    33322102784  2378006528 30944096256",
+      "stderr": ""
+    },
+    "cpu": {
+      "argv": [
+        "lscpu"
+      ],
+      "returncode": 0,
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           39 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  8\nOn-line CPU(s) list:                     0-7\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz\nCPU family:                              6\nModel:                                   70\nThread(s) per core:                      2\nCore(s) per socket:                      4\nSocket(s):                               1\nStepping:                                1\nMicrocode version:                       0x1c\nCPU(s) scaling MHz:                      65%\nCPU max MHz:                             3400.0000\nCPU min MHz:                             800.0000\nBogoMIPS:                                4390.14\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm cpuid_fault epb pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts vnmi md_clear flush_l1d\nVirtualization:                          VT-x\nL1d cache:                               128 KiB (4 instances)\nL1i cache:                               128 KiB (4 instances)\nL2 cache:                                1 MiB (4 instances)\nL3 cache:                                6 MiB (1 instance)\nL4 cache:                                128 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-7\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             KVM: Mitigation: Split huge pages\nVulnerability L1tf:                      Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable\nVulnerability Mds:                       Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Meltdown:                  Mitigation; PTI\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; IBRS_FW; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Mitigation; Microcode\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace",
+      "stderr": ""
+    },
+    "disk_free_bytes": 165403099136,
+    "sound_device_directory_present": true,
+    "gpu_render_nodes": [
+      "/dev/dri/renderD128"
+    ]
+  },
+  "session": {
+    "type": "wayland",
+    "runtime_directory_present": true,
+    "wayland_display_set": true,
+    "hyprland_signature_set": true
+  },
+  "tools": {
+    "hyprctl": "/usr/bin/hyprctl",
+    "wl-copy": "/usr/bin/wl-copy",
+    "wl-paste": "/usr/bin/wl-paste",
+    "wtype": "/usr/bin/wtype",
+    "cmake": "/usr/bin/cmake",
+    "clang": "/usr/bin/clang",
+    "node": "/home/airowner/.local/share/mise/installs/node/26.12.0/bin/node",
+    "npm": "/home/airowner/.local/share/mise/installs/node/26.12.0/bin/npm",
+    "cargo": "/usr/bin/cargo",
+    "rustc": "/usr/bin/rustc",
+    "ninja": "/usr/bin/ninja",
+    "pkg-config": "/usr/bin/pkg-config",
+    "wpctl": "/usr/bin/wpctl",
+    "git": "/usr/bin/git",
+    "lua": "/usr/bin/lua",
+    "luac": "/usr/bin/luac"
+  },
+  "versions": {
+    "node": {
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "v26.12.0",
+      "stderr": ""
+    },
+    "npm": {
+      "argv": [
+        "npm",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "11.20.0",
+      "stderr": ""
+    },
+    "cargo": {
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "cargo 1.99.1 (5f94df478 2026-08-27)",
+      "stderr": ""
+    },
+    "rustc": {
+      "argv": [
+        "rustc",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "stderr": ""
+    },
+    "cmake": {
+      "argv": [
+        "cmake",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "cmake version 4.4.5\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).",
+      "stderr": ""
+    },
+    "clang": {
+      "argv": [
+        "clang",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "clang version 23.1.4\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/bin",
+      "stderr": ""
+    },
+    "ninja": {
+      "argv": [
+        "ninja",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "1.13.2",
+      "stderr": ""
+    },
+    "git": {
+      "argv": [
+        "git",
+        "--version"
+      ],
+      "returncode": 0,
+      "stdout": "git version 2.56.0",
+      "stderr": ""
+    },
+    "lua": {
+      "argv": [
+        "lua",
+        "-v"
+      ],
+      "returncode": 0,
+      "stdout": "Lua 5.5.1  Copyright (C) 1994-2026 Lua.org, PUC-Rio",
+      "stderr": ""
+    }
+  },
+  "sockets": {
+    "wayland": {
+      "status": "pass",
+      "path": "/run/user/1000/wayland-1"
+    },
+    "hyprland": {
+      "status": "pass",
+      "path": "/run/user/1000/hypr/0aa6745f705f2c4b0a5004eb019ef76e5bbdb426_1793634784_1311690763/.socket.sock"
+    },
+    "hyprland_events": {
+      "status": "pass",
+      "path": "/run/user/1000/hypr/0aa6745f705f2c4b0a5004eb019ef76e5bbdb426_1793634784_1311690763/.socket2.sock"
+    },
+    "pipewire": {
+      "status": "pass",
+      "path": "/run/user/1000/pipewire-0"
+    },
+    "session_bus": {
+      "status": "pass",
+      "path": "/run/user/1000/bus"
+    }
+  },
+  "packages": {
+    "argv": [
+      "pacman",
+      "-Q",
+      "hyprland",
+      "omarchy",
+      "wl-clipboard",
+      "wtype",
+      "pipewire",
+      "alsa-lib",
+      "webkit2gtk-4.1",
+      "base-devel",
+      "clang",
+      "cmake",
+      "ninja"
+    ],
+    "returncode": 0,
+    "stdout": "hyprland 0.57.0-1\nomarchy 4.0.6-1\nwl-clipboard 1:2.3.0-1\nwtype 0.4-2\npipewire 1:1.6.10-1\nalsa-lib 1.2.16.1-1\nwebkit2gtk-4.1 2.54.2-1\nbase-devel 1-2\nclang 23.1.4-1\ncmake 4.4.5-1\nninja 1.13.2-3",
+    "stderr": ""
+  },
+  "build_libraries": {
+    "argv": [
+      "pkg-config",
+      "--modversion",
+      "webkit2gtk-4.1",
+      "alsa"
+    ],
+    "returncode": 0,
+    "stdout": "2.54.2\n1.2.16.1",
+    "stderr": ""
+  },
+  "desktop": {
+    "hyprland_version": {
+      "argv": [
+        "hyprctl",
+        "version"
+      ],
+      "returncode": 0,
+      "stdout": "Hyprland 0.57.0 built from branch v0.57.0 at commit 0aa6745f705f2c4b0a5004eb019ef76e5bbdb426 clean (VERSION: bump to 0.57.0).\nDate: Wed Oct 28 10:37:05 2026\nTag: v0.57.0, commits: 7978\n\nLibraries:\nHyprgraphics: built against 0.5.1, system has 0.5.1\nHyprutils: built against 0.14.3, system has 0.14.3\nHyprcursor: built against 0.1.13, system has 0.1.13\nHyprlang: built against 0.6.8, system has 0.6.8\nAquamarine: built against 0.15.1, system has 0.15.1\n\nVersion ABI string: 0aa6745f705f2c4b0a5004eb019ef76e5bbdb426_aq_0.15_hu_0.14_hg_0.5_hc_0.1_hlg_0.6\nno flags were set",
+      "stderr": ""
+    },
+    "config_errors": {
+      "argv": [
+        "hyprctl",
+        "configerrors"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "active_window": {
+      "argv": [
+        "hyprctl",
+        "-j",
+        "activewindow"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "target_identifiable": true
+    },
+    "bindings": {
+      "argv": [
+        "hyprctl",
+        "-j",
+        "binds"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "binding_count": 227,
+      "super_shift_d_conflicts": [
+        {
+          "key": "D",
+          "modmask": 65,
+          "release": false
+        }
+      ]
+    },
+    "audio_devices": {
+      "argv": [
+        "wpctl",
+        "status"
+      ],
+      "returncode": 0,
+      "stdout": "PipeWire 'pipewire-0' [1.6.10, airowner@omarchy, cookie:3371840019]\n └─ Clients:\n        32. WirePlumber                         [1.6.10, airowner@omarchy, pid:912]\n        33. pipewire                            [1.6.10, airowner@omarchy, pid:914]\n        47. WirePlumber [client]                [1.6.10, airowner@omarchy, pid:912]\n        62. xdg-desktop-portal                  [1.6.10, airowner@omarchy, pid:1132]\n        63. xdg-desktop-portal-hyprland         [1.6.10, airowner@omarchy, pid:1331]\n        64. quickshell                          [1.6.10, airowner@omarchy, pid:1082]\n        65. Chrome input                        [1.6.10, airowner@omarchy, pid:86]\n        70. vinput-daemon                       [1.6.10, airowner@omarchy, pid:1346496]\n        72. Google Chrome input                 [1.6.10, airowner@omarchy, pid:348579]\n        95. pw-loopback                         [1.6.10, airowner@omarchy, pid:353034]\n       100. pw-loopback                         [1.6.10, airowner@omarchy, pid:353442]\n       102. wpctl                               [1.6.10, airowner@omarchy, pid:1423684]\n       117. pw-loopback                         [1.6.10, airowner@omarchy, pid:354187]\n       132. pw-loopback                         [1.6.10, airowner@omarchy, pid:354561]\n       147. pw-loopback                         [1.6.10, airowner@omarchy, pid:354933]\n       162. pw-loopback                         [1.6.10, airowner@omarchy, pid:355321]\n       177. pw-loopback                         [1.6.10, airowner@omarchy, pid:355711]\n       192. pw-loopback                         [1.6.10, airowner@omarchy, pid:356081]\n       207. pw-loopback                         [1.6.10, airowner@omarchy, pid:356457]\n       222. pw-loopback                         [1.6.10, airowner@omarchy, pid:359732]\n\nAudio\n ├─ Devices:\n │      48. Built-in Audio                      [alsa]\n │      49. Built-in Audio                      [alsa]\n │  \n ├─ Sinks:\n │  *   57. Built-in Audio Analog Stereo        [vol: 0.00]\n │      98. NoMachine Output                    [vol: 1.00]\n │     113. NoMachine Output                    [vol: 1.00]\n │     128. NoMachine Output                    [vol: 1.00]\n │     143. NoMachine Output                    [vol: 1.00]\n │     158. NoMachine Output                    [vol: 1.00]\n │     173. NoMachine Output                    [vol: 1.00]\n │     188. NoMachine Output                    [vol: 1.00]\n │     203. NoMachine Output                    [vol: 1.00]\n │     220. NoMachine Output                    [vol: 1.00]\n │     245. NoMachine Output                    [vol: 1.00]\n │  \n ├─ Sources:\n │  *   58. Built-in Audio Analog Stereo        [vol: 1.00]\n │  \n ├─ Filters:\n │    - loopback-353442-20                                          \n │      88. input./bin/pw-loopback-353442                                [Stream/Input/Audio]\n │      89. nx_remapped_out                                              [Audio/Source]\n │    - loopback-353034-20                                          \n │      92. input./bin/pw-loopback-353034                                [Stream/Input/Audio]\n │      93. nx_remapped_out                                              [Audio/Source]\n │    - loopback-354187-20                                          \n │     118. nx_remapped_out                                              [Audio/Source]\n │     119. input./bin/pw-loopback-354187                                [Stream/Input/Audio]\n │    - loopback-354561-20                                          \n │     133. nx_remapped_out                                              [Audio/Source]\n │     134. input./bin/pw-loopback-354561                                [Stream/Input/Audio]\n │    - loopback-354933-20                                          \n │     148. nx_remapped_out                                              [Audio/Source]\n │     149. input./bin/pw-loopback-354933                                [Stream/Input/Audio]\n │    - loopback-355321-20                                          \n │     163. nx_remapped_out                                              [Audio/Source]\n │     164. input./bin/pw-loopback-355321                                [Stream/Input/Audio]\n │    - loopback-355711-20                                          \n │     178. nx_remapped_out                                              [Audio/Source]\n │     179. input./bin/pw-loopback-355711                                [Stream/Input/Audio]\n │    - loopback-356081-20                                          \n │     193. nx_remapped_out                                              [Audio/Source]\n │     194. input./bin/pw-loopback-356081                                [Stream/Input/Audio]\n │    - loopback-356457-20                                          \n │     208. nx_remapped_out                                              [Audio/Source]\n │     209. input./bin/pw-loopback-356457                                [Stream/Input/Audio]\n │    - loopback-359732-20                                          \n │     229. nx_remapped_out                                              [Audio/Source]\n │     230. input./bin/pw-loopback-359732                                [Stream/Input/Audio]\n │  \n └─ Streams:\n       224. vinput-capture                                              \n            107. input_FL        < CS4208 Analog:capture_FL\t[paused]\n            112. monitor_FR     \n            223. input_FR        < CS4208 Analog:capture_FR\t[paused]\n            244. monitor_FL     \n\nVideo\n ├─ Devices:\n │      53. Apple Facetime HD                   [v4l2]\n │  \n ├─ Sinks:\n │  \n ├─ Sources:\n │  *   60. Apple Facetime HD (V4L2)           \n │  \n ├─ Filters:\n │  \n └─ Streams:\n\nSettings\n └─ Default Configured Devices:\n         0. Audio/Sink    alsa_output.pci-0000_00_1b.0.analog-stereo",
+      "stderr": ""
+    },
+    "clipboard_mime_types": {
+      "argv": [
+        "wl-paste",
+        "--list-types"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Nothing is copied"
+    }
+  },
+  "upstream_access": {
+    "whisper.cpp": {
+      "argv": [
+        "git",
+        "ls-remote",
+        "https://github.com/ggml-org/whisper.cpp.git",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stdout": "b1535f5fb163f4443804888f7be980621226cb15\tHEAD",
+      "stderr": ""
+    },
+    "llama.cpp": {
+      "argv": [
+        "git",
+        "ls-remote",
+        "https://github.com/ggml-org/llama.cpp.git",
+        "HEAD"
+      ],
+      "returncode": 128,
+      "stdout": "",
+      "stderr": "fatal: unable to access 'https://github.com/ggml-org/llama.cpp.git/': TLS connect error: error:0A000126:SSL routines::unexpected eof while reading"
+    }
+  },
+  "preflight": {
+    "status": "blocked",
+    "blockers": [
+      "desktop:clipboard_mime_types",
+      "shortcut:super_shift_d_conflict",
+      "source:llama.cpp"
+    ]
+  },
+  "m0": {
+    "status": "not_passed",
+    "remaining": [
+      "real key release and Wayland/XWayland controlled paste round-trip",
+      "clipboard owner lifecycle and actual microphone capture",
+      "two pinned engine CPU builds and local model loading",
+      "verified model hashes, licenses and dependency locks"
+    ]
+  }
+}

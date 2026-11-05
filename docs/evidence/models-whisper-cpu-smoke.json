@@ -1,0 +1,25 @@
+{
+  "captured_at_utc": "2026-11-05T18:33:44.574503+00:00",
+  "argv": [
+    "build/whisper-cpu/bin/whisper-cli",
+    "--model",
+    "models/whisper/ggml-base.bin",
+    "--file",
+    "tests/fixtures/jfk.wav",
+    "--language",
+    "en",
+    "--no-gpu",
+    "--threads",
+    "4",
+    "--no-timestamps"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 45.05930456100032,
+  "cache_state": "first CLI process; weights may already be in OS page cache after hashing; not a warm resident worker",
+  "backend": "CPU portable baseline",
+  "model_sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+  "fixture": "tests/fixtures/jfk.wav",
+  "stdout": "\n And so my fellow Americans, ask not what your country can do for you, ask what you can do for your country.",
+  "stderr": "whisper_init_from_file_with_params_no_state: loading model from 'models/whisper/ggml-base.bin'\nwhisper_init_with_params_no_state: use gpu    = 0\nwhisper_init_with_params_no_state: flash attn = 1\nwhisper_init_with_params_no_state: gpu_device = 0\nwhisper_init_with_params_no_state: dtw        = 0\nwhisper_init_with_params_no_state: devices    = 1\nwhisper_init_with_params_no_state: backends   = 1\nwhisper_model_load: loading model\nwhisper_model_load: n_vocab       = 51865\nwhisper_model_load: n_audio_ctx   = 1500\nwhisper_model_load: n_audio_state = 512\nwhisper_model_load: n_audio_head  = 8\nwhisper_model_load: n_audio_layer = 6\nwhisper_model_load: n_text_ctx    = 448\nwhisper_model_load: n_text_state  = 512\nwhisper_model_load: n_text_head   = 8\nwhisper_model_load: n_text_layer  = 6\nwhisper_model_load: n_mels        = 80\nwhisper_model_load: ftype         = 1\nwhisper_model_load: qntvr         = 0\nwhisper_model_load: type          = 2 (base)\nwhisper_model_load: adding 1608 extra tokens\nwhisper_model_load: n_langs       = 99\nwhisper_model_load:          CPU total size =   147.37 MB\nwhisper_model_load: model size    =  147.37 MB\nwhisper_backend_init_gpu: no GPU found\nwhisper_init_state: kv self size  =    6.29 MB\nwhisper_init_state: kv cross size =   18.87 MB\nwhisper_init_state: kv pad  size  =    3.15 MB\nwhisper_init_state: compute buffer (conv)   =   16.28 MB\nwhisper_init_state: compute buffer (encode) =   23.09 MB\nwhisper_init_state: compute buffer (cross)  =    4.66 MB\nwhisper_init_state: compute buffer (decode) =   96.37 MB\nread_audio_data: reading audio data from 'tests/fixtures/jfk.wav' ...\nread_audio_data: trying to decode with miniaudio\n\nsystem_info: n_threads = 4 / 8 | WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : OPENMP = 1 | REPACK = 1 | \n\nmain: processing 'tests/fixtures/jfk.wav' (176000 samples, 11.0 sec), 4 threads, 1 processors, 5 beams + best of 5, lang = en, task = transcribe, timestamps = 0 ...\n\n\nwhisper_print_timings:     load time =   261.17 ms\nwhisper_print_timings:     fallbacks =   0 p /   0 h\nwhisper_print_timings:      mel time =    43.12 ms\nwhisper_print_timings:   sample time =   171.15 ms /   130 runs (     1.32 ms per run)\nwhisper_print_timings:   encode time = 35573.22 ms /     1 runs ( 35573.22 ms per run)\nwhisper_print_timings:   decode time =     0.00 ms /     1 runs (     0.00 ms per run)\nwhisper_print_timings:   batchd time =  8898.29 ms /   129 runs (    68.98 ms per run)\nwhisper_print_timings:   prompt time =     0.00 ms /     1 runs (     0.00 ms per run)\nwhisper_print_timings:    total time = 44999.45 ms\n",
+  "passed": true
+}

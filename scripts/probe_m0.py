@@ -159,6 +159,9 @@ def probe(network=False):
         "audio_devices": run(["wpctl", "status"]),
         "clipboard_mime_types": run(["wl-paste", "--list-types"]),
     }
+    clipboard = data["desktop"]["clipboard_mime_types"]
+    if clipboard.get("returncode") == 1 and clipboard.get("stderr") == "Nothing is copied":
+        clipboard["clipboard_empty"] = True
     data["upstream_access"] = {}
     for engine in ("whisper.cpp", "llama.cpp"):
         data["upstream_access"][engine] = (
@@ -171,7 +174,8 @@ def probe(network=False):
     if data["build_libraries"].get("returncode") != 0:
         blockers.append("build_libraries")
     blockers.extend(f"desktop:{name}" for name, result in data["desktop"].items()
-                    if result.get("returncode") != 0 or result.get("error"))
+                    if (result.get("returncode") != 0 and not result.get("clipboard_empty"))
+                    or result.get("error"))
     blockers.extend(f"version:{name}" for name, result in data["versions"].items()
                     if result.get("returncode") != 0 or result.get("error"))
     if (data["desktop"]["config_errors"].get("returncode") == 0

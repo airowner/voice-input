@@ -1,0 +1,47 @@
+{
+  "captured_at_utc": "2026-11-05T18:31:05.415510+00:00",
+  "mode": "real download and full local file verification",
+  "models": [
+    {
+      "id": "whisper-base-multilingual",
+      "repository": "ggerganov/whisper.cpp",
+      "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+      "bytes": 147951465,
+      "sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+      "license": "MIT",
+      "source": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base.bin",
+      "path": "models/whisper/ggml-base.bin",
+      "actual_bytes": 147951465,
+      "actual_sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+      "magic_hex": "6c6d6767",
+      "full_hash_matches": true,
+      "size_matches": true
+    },
+    {
+      "id": "qwen2.5-1.5b-instruct-q4_k_m",
+      "repository": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+      "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+      "bytes": 1117320736,
+      "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+      "license": "Apache-2.0",
+      "source": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/91cad51170dc346986eccefdc2dd33a9da36ead9/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+      "path": "models/gguf/qwen2.5-1.5b-instruct-q4_k_m.gguf",
+      "actual_bytes": 1117320736,
+      "actual_sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+      "magic_hex": "47475546",
+      "full_hash_matches": true,
+      "size_matches": true,
+      "gguf_version": 3,
+      "tensor_count": 339,
+      "metadata_count": 26
+    }
+  ],
+  "fixture": {
+    "path": "tests/fixtures/jfk.wav",
+    "rate": 16000,
+    "channels": 1,
+    "duration_seconds": 11.0,
+    "sample_width": 2,
+    "sha256": "59dfb9a4acb36fe2a2affc14bacbee2920ff435cb13cc314a08c13f66ba7860e"
+  }
+}

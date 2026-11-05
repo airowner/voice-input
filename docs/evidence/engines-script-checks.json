@@ -1,0 +1,9 @@
+{
+  "scope": "build script safety checks, not application acceptance",
+  "checks": {
+    "syntax": true,
+    "bounded_timeout_cleans_owned_process_group": true,
+    "reject_jobs_above_two": true,
+    "refuse_overwrite_existing_log": true
+  }
+}

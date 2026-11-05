@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "profile": "x86_64_cpu_portable",
+  "scope": "M0 upstream static libraries and command line smoke tools; not application sidecars",
+  "profiles": {
+    "portable": {
+      "build_suffix": "",
+      "required_cpu_flags": [],
+      "cmake_overrides": [],
+      "build_cli": true
+    },
+    "avx2": {
+      "build_suffix": "-avx2",
+      "required_cpu_flags": ["avx2", "fma", "f16c", "bmi2"],
+      "cmake_overrides": ["-DGGML_SSE42=ON", "-DGGML_AVX=ON", "-DGGML_AVX2=ON", "-DGGML_FMA=ON", "-DGGML_F16C=ON", "-DGGML_BMI2=ON"],
+      "engine_overrides": {
+        "whisper.cpp": ["-DWHISPER_BUILD_EXAMPLES=OFF"],
+        "llama.cpp": ["-DLLAMA_BUILD_COMMON=OFF", "-DLLAMA_BUILD_TOOLS=OFF"]
+      },
+      "build_cli": false
+    }
+  },
+  "cmake_common": [
+    "-G", "Ninja",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DBUILD_SHARED_LIBS=OFF",
+    "-DGGML_NATIVE=OFF",
+    "-DGGML_CPU=ON",
+    "-DGGML_CPU_ALL_VARIANTS=OFF",
+    "-DGGML_BACKEND_DL=OFF",
+    "-DGGML_SSE42=OFF",
+    "-DGGML_AVX=OFF",
+    "-DGGML_AVX2=OFF",
+    "-DGGML_FMA=OFF",
+    "-DGGML_F16C=OFF",
+    "-DGGML_BMI2=OFF",
+    "-DGGML_CUDA=OFF",
+    "-DGGML_VULKAN=OFF",
+    "-DGGML_METAL=OFF",
+    "-DGGML_BLAS=OFF",
+    "-DGGML_RPC=OFF",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+  ],
+  "engines": {
+    "whisper.cpp": {
+      "repository": "https://github.com/ggml-org/whisper.cpp.git",
+      "commit": "b1535f5fb163f4443804888f7be980621226cb15",
+      "license": "MIT",
+      "source": "vendor/whisper.cpp",
+      "build": "build/whisper-cpu",
+      "cmake": ["-DWHISPER_BUILD_TESTS=OFF", "-DWHISPER_BUILD_EXAMPLES=ON", "-DWHISPER_BUILD_SERVER=OFF", "-DWHISPER_CURL=OFF", "-DWHISPER_SDL2=OFF"],
+      "targets": ["whisper", "whisper-cli"],
+      "cli": "bin/whisper-cli",
+      "smoke_args": ["--help"]
+    },
+    "llama.cpp": {
+      "repository": "https://github.com/ggml-org/llama.cpp.git",
+      "commit": "45b6604b20f17b7d7638042306c0cd1b6af5999c",
+      "license": "MIT",
+      "source": "vendor/llama.cpp",
+      "build": "build/llama-cpu",
+      "cmake": ["-DLLAMA_BUILD_TESTS=OFF", "-DLLAMA_BUILD_EXAMPLES=OFF", "-DLLAMA_BUILD_TOOLS=ON", "-DLLAMA_BUILD_SERVER=OFF", "-DLLAMA_BUILD_APP=OFF", "-DLLAMA_BUILD_UI=OFF", "-DLLAMA_OPENSSL=OFF", "-DLLAMA_SUBPROCESS=OFF"],
+      "targets": ["llama", "llama-completion"],
+      "cli": "bin/llama-completion",
+      "smoke_args": ["--version"]
+    }
+  }
+}

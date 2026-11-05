@@ -1,0 +1,41 @@
+{
+  "scope": "development model-preparation helper only, not V06 application acceptance",
+  "checks": [
+    {
+      "check": "syntax",
+      "passed": true
+    },
+    {
+      "check": "valid bounded fixture accepted",
+      "passed": true
+    },
+    {
+      "check": "hash mismatch rejected",
+      "passed": true
+    },
+    {
+      "check": "size mismatch rejected",
+      "passed": true
+    },
+    {
+      "check": "engine magic mismatch rejected",
+      "passed": true
+    },
+    {
+      "check": "corrupt download rejected",
+      "passed": true
+    },
+    {
+      "check": "failure leaves no active model or part",
+      "passed": true
+    },
+    {
+      "check": "unsafe redirect rejected http://huggingface.co/a",
+      "passed": true
+    },
+    {
+      "check": "unsafe redirect rejected https://example.com/a",
+      "passed": true
+    }
+  ]
+}

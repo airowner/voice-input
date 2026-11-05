@@ -1,0 +1,14 @@
+{
+  "source": "https://raw.githubusercontent.com/openai/whisper/86098128c0b4f24f0e2aa2994de830614b474227/README.md",
+  "readme_sha256": "38c180c2a8d8ba628a3e131ad42bf06c8a51bb681efb30fbe28d5a0f4b65f288",
+  "license_scope_lines": [
+    {
+      "line": 158,
+      "text": "## License"
+    },
+    {
+      "line": 160,
+      "text": "Whisper's code and model weights are released under the MIT License. See [LICENSE](https://github.com/openai/whisper/blob/main/LICENSE) for further details."
+    }
+  ]
+}
