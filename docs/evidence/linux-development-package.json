@@ -1,0 +1,56 @@
+{
+  "captured_at_utc": "2026-11-05T20:58:25.373903+00:00",
+  "scope": "Actual Linux development archive, six binary hashes, isolated ALPM install/uninstall and extracted release startup; not host desktop/V1 release acceptance",
+  "artifact": "dist/arch/linux-development/voice-input-0.1.0dev20261105-1-x86_64.pkg.tar.zst",
+  "archive_manifest": {
+    "scope": "Actual archive build and contents verification; not installation/uninstallation or V1 acceptance",
+    "archive": "voice-input-0.1.0dev20261105-1-x86_64.pkg.tar.zst",
+    "sha256": "d30c03b6f362d70f931126175ea9668de3562379473a923367a131f99bc26b31",
+    "bytes": 14454785,
+    "development": true,
+    "package_version": "0.1.0dev20261105",
+    "binary_payload_hashes_match": true,
+    "installed": false,
+    "uninstall_tested": false
+  },
+  "release_manifest_sha256": "cfef57c1a135b7b64501fb47ebfc453a7b650f552591fd97928c1b46a3a372f6",
+  "source_snapshot_revision": "6da13ba32af0da5cd5fc3260222a9f5d52fcc332",
+  "six_binary_sha256": {
+    "usr/bin/voice-asr-worker": "fbddd22705a92c7fbf09ec252c75bd36c51e7a2b6eb665f40d45b439e6a4d764",
+    "usr/bin/voice-asr-worker-avx2": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+    "usr/bin/voice-input": "389095e1d51fa1cc50597aab4c1565ff09269d703507578fa3c4e52e6e004479",
+    "usr/bin/voice-inputctl": "9ae4a52378bbd200d8580126892dbcfb11e4fab2dbb0cdb006951fa4dc894c41",
+    "usr/bin/voice-llm-worker": "8a104122f4d2ed9fbc6983fc48d80b23ec00b8c3aca21ac29ddefaaf21c39b68",
+    "usr/bin/voice-llm-worker-avx2": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d"
+  },
+  "checks": {
+    "archive_bytes_match_verified_binaries": true,
+    "isolated_alpm_install_query_remove": true,
+    "isolated_alpm_host_paths_unchanged": true,
+    "extracted_archive_actual_startup_and_cli": true
+  },
+  "evidence": {
+    "docs/evidence/release-validation.json": "8c2b0194b5227b4701c66a196e371cd82d6f2810c97742a7d8b15158bc560798",
+    "docs/evidence/package-library-audit.json": "c6ac1bd4dce0832ca33a8593d75ed9755cc2361b9139b6cc7568470d4c9494b0",
+    "docs/evidence/alpm-product-install-2026-11-06.json": "7cb3aa6da5cb7cd61d84e566ddbfecf43e3e1503b45f54e7c48cbffb4150579c",
+    "docs/evidence/linux-package-runtime-startup.json": "61057a8d949b6e3ea45fd8892dcb8412006a8e6f47e0deebcdcaea3cec99fd88"
+  },
+  "limitations": [
+    "Only V05 A is fully accepted; full V01–V11 release acceptance is incomplete.",
+    "Hyprland compositor is locked; real positive paste, physical release shortcuts, 20 recordings and end-to-end P95 are unverified; automatic delivery stays disabled until explicit own-window verification.",
+    "Windows, macOS and independent X11 native adapters/installers are not implemented or accepted; other Wayland manual workflow is unverified.",
+    "Real HTTPS compatible provider and system keyring tests, human V10 scoring and complete natural utterance coverage remain pending.",
+    "Of 14 local voiced fixtures, 13 passed structure/literal validation and one was correctly rejected for dropping a year; Raw was retained. Structure pass is not semantic quality.",
+    "Portable CPU inference is slow; no portable or AVX2 formal V11 performance acceptance. GPU backends are unavailable.",
+    "No host installation/uninstallation or installed-package desktop acceptance is claimed. Any isolated ALPM test skips dependency checks and cannot replace it.",
+    "15 non-Linux locked dependency license metadata entries are absent from the local cache; legal review, signing and stable release are not performed.",
+    "GTK uses software rendering on this session and appindicator emits a deprecation warning; no crash observed in startup smoke."
+  ],
+  "full_v1_acceptance": "1/11; only V05 A accepted",
+  "host_installed": false,
+  "externally_published": false,
+  "source_snapshot_sha256": "090204fcad9592db3c5a77b1230fcea5189c9f6a95e8caa167700b018abddf86",
+  "all_manifest_file_hashes_match_extracted_archive": true,
+  "all_selected_source_hashes_still_match": true,
+  "avx2_build_configuration_sha256": "3310a00a9e5a2230e6b356cb94b75db0f0b2bc7eb213e9c5119be7cf8ccfcd6c"
+}

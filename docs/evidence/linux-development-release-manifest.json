@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-11-05T20:55:55.850427+00:00",
+  "package": "voice-input",
+  "package_version": "0.1.0dev20261105",
+  "application_version": "0.1.0",
+  "development": true,
+  "verification_scope": "linux_development_binary_verification",
+  "verification_input_sha256": "8c2b0194b5227b4701c66a196e371cd82d6f2810c97742a7d8b15158bc560798",
+  "v1_release_accepted": false,
+  "limitations": [
+    "Only V05 A is fully accepted; full V01–V11 release acceptance is incomplete.",
+    "Hyprland compositor is locked; real positive paste, physical release shortcuts, 20 recordings and end-to-end P95 are unverified; automatic delivery stays disabled until explicit own-window verification.",
+    "Windows, macOS and independent X11 native adapters/installers are not implemented or accepted; other Wayland manual workflow is unverified.",
+    "Real HTTPS compatible provider and system keyring tests, human V10 scoring and complete natural utterance coverage remain pending.",
+    "Of 14 local voiced fixtures, 13 passed structure/literal validation and one was correctly rejected for dropping a year; Raw was retained. Structure pass is not semantic quality.",
+    "Portable CPU inference is slow; no portable or AVX2 formal V11 performance acceptance. GPU backends are unavailable.",
+    "No host installation/uninstallation or installed-package desktop acceptance is claimed. Any isolated ALPM test skips dependency checks and cannot replace it.",
+    "15 non-Linux locked dependency license metadata entries are absent from the local cache; legal review, signing and stable release are not performed.",
+    "GTK uses software rendering on this session and appindicator emits a deprecation warning; no crash observed in startup smoke."
+  ],
+  "models_bundled": false,
+  "avx2_workers_bundled": true,
+  "binary_sources": {
+    "target/release/voice-input": "voice-input",
+    "target/release/voice-inputctl": "voice-inputctl",
+    "src-tauri/binaries/voice-asr-worker-x86_64-unknown-linux-gnu": "voice-asr-worker",
+    "src-tauri/binaries/voice-llm-worker-x86_64-unknown-linux-gnu": "voice-llm-worker",
+    "src-tauri/binaries/voice-asr-worker-avx2-x86_64-unknown-linux-gnu": "voice-asr-worker-avx2",
+    "src-tauri/binaries/voice-llm-worker-avx2-x86_64-unknown-linux-gnu": "voice-llm-worker-avx2"
+  },
+  "third_party_legal_review": "not_performed; metadata and upstream license copies only",
+  "rust_metadata_complete": false,
+  "depends": [
+    "alsa-lib",
+    "cairo",
+    "dbus",
+    "gcc-libs",
+    "gdk-pixbuf2",
+    "glib2",
+    "glibc",
+    "gtk3",
+    "libappindicator-gtk3",
+    "libgcc",
+    "libgomp",
+    "libnotify",
+    "libsoup3",
+    "libstdc++",
+    "wayland",
+    "webkit2gtk-4.1",
+    "wl-clipboard",
+    "wtype"
+  ],
+  "runtime_library_observations": {
+    "artifacts": {
+      "target/release/voice-input": {
+        "direct_libraries": {
+          "libwayland-client.so.0": "wayland",
+          "libm.so.6": "glibc",
+          "libasound.so.2": "alsa-lib",
+          "libgdk-3.so.0": "gtk3",
+          "libgdk_pixbuf-2.0.so.0": "gdk-pixbuf2",
+          "libcairo.so.2": "cairo",
+          "libgobject-2.0.so.0": "glib2",
+          "libglib-2.0.so.0": "glib2",
+          "libdbus-1.so.3": "dbus",
+          "libwebkit2gtk-4.1.so.0": "webkit2gtk-4.1",
+          "libgtk-3.so.0": "gtk3",
+          "libsoup-3.0.so.0": "libsoup3",
+          "libgio-2.0.so.0": "glib2",
+          "libjavascriptcoregtk-4.1.so.0": "webkit2gtk-4.1",
+          "libgcc_s.so.1": "libgcc",
+          "libc.so.6": "glibc",
+          "ld-linux-x86-64.so.2": "glibc"
+        },
+        "ldd": "linux-vdso.so.1 (0x00007f71c81d9000)\n\tlibwayland-client.so.0 => /usr/lib/libwayland-client.so.0 (0x00007f71c819a000)\n\tlibm.so.6 => /usr/lib/libm.so.6 (0x00007f71c70c9000)\n\tlibasound.so.2 => /usr/lib/libasound.so.2 (0x00007f71c6fd0000)\n\tlibgdk-3.so.0 => /usr/lib/libgdk-3.so.0 (0x00007f71c6edc000)\n\tlibgdk_pixbuf-2.0.so.0 => /usr/lib/libgdk_pixbuf-2.0.so.0 (0x00007f71c815c000)\n\tlibcairo.so.2 => /usr/lib/libcairo.so.2 (0x00007f71c6d93000)\n\tlibgobject-2.0.so.0 => /usr/lib/libgobject-2.0.so.0 (0x00007f71c6d30000)\n\tlibglib-2.0.so.0 => /usr/lib/libglib-2.0.so.0 (0x00007f71c6bcb000)\n\tlibdbus-1.so.3 => /usr/lib/libdbus-1.so.3 (0x00007f71c6b75000)\n\tlibwebkit2gtk-4.1.so.0 => /usr/lib/libwebkit2gtk-4.1.so.0 (0x00007f71c0c00000)\n\tlibgtk-3.so.0 => /usr/lib/libgtk-3.so.0 (0x00007f71c0400000)\n\tlibsoup-3.0.so.0 => /usr/lib/libsoup-3.0.so.0 (0x00007f71c6ad2000)\n\tlibgio-2.0.so.0 => /usr/lib/libgio-2.0.so.0 (0x00007f71c021d000)\n\tlibjavascriptcoregtk-4.1.so.0 => /usr/lib/libjavascriptcoregtk-4.1.so.0 (0x00007f71bda00000)\n\tlibgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007f71c812d000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007f71bd600000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007f71c81db000)\n\tlibffi.so.8 => /usr/lib/libffi.so.8 (0x00007f71c811d000)\n\tlibpango-1.0.so.0 => /usr/lib/libpango-1.0.so.0 (0x00007f71c6a63000)\n\tlibfribidi.so.0 => /usr/lib/libfribidi.so.0 (0x00007f71c6a41000)\n\tlibcairo-gobject.so.2 => /usr/lib/libcairo-gobject.so.2 (0x00007f71c6a38000)\n\tlibepoxy.so.0 => /usr/lib/libepoxy.so.0 (0x00007f71c0110000)\n\tlibfontconfig.so.1 => /usr/lib/libfontconfig.so.1 (0x00007f71c0b85000)\n\tlibpangocairo-1.0.so.0 => /usr/lib/libpangocairo-1.0.so.0 (0x00007f71c0b73000)\n\tlibxkbcommon.so.0 => /usr/lib/libxkbcommon.so.0 (0x00007f71bd9a1000)\n\tlibwayland-cursor.so.0 => /usr/lib/libwayland-cursor.so.0 (0x00007f71c0b6a000)\n\tlibwayland-egl.so.1 => /usr/lib/libwayland-egl.so.1 (0x00007f71c0b65000)\n\tlibX11.so.6 => /usr/lib/libX11.so.6 (0x00007f71bd84f000)\n\tlibXi.so.6 => /usr/lib/libXi.so.6 (0x00007f71c0b50000)\n\tlibXext.so.6 => /usr/lib/libXext.so.6 (0x00007f71c0b3c000)\n\tlibXcursor.so.1 => /usr/lib/libXcursor.so.1 (0x00007f71c0103000)\n\tlibXdamage.so.1 => /usr/lib/libXdamage.so.1 (0x00007f71c00fe000)\n\tlibXfixes.so.3 => /usr/lib/libXfixes.so.3 (0x00007f71c00f6000)\n\tlibXcomposite.so.1 => /usr/lib/libXcomposite.so.1 (0x00007f71c00f1000)\n\tlibXrandr.so.2 => /usr/lib/libXrandr.so.2 (0x00007f71c00e4000)\n\tlibXinerama.so.1 => /usr/lib/libXinerama.so.1 (0x00007f71c00df000)\n\tlibgmodule-2.0.so.0 => /usr/lib/libgmodule-2.0.so.0 (0x00007f71c00d8000)\n\tlibglycin-2.so.0 => /usr/lib/libglycin-2.so.0 (0x00007f71bd000000)\n\tlibz.so.1 => /usr/lib/libz.so.1 (0x00007f71bd834000)\n\tlibpng16.so.16 => /usr/lib/libpng16.so.16 (0x00007f71bd5c3000)\n\tlibfreetype.so.6 => /usr/lib/libfreetype.so.6 (0x00007f71bd4de000)\n\tlibXrender.so.1 => /usr/lib/libXrender.so.1 (0x00007f71c00cc000)\n\tlibxcb.so.1 => /usr/lib/libxcb.so.1 (0x00007f71bd4b3000)\n\tlibxcb-render.so.0 => /usr/lib/libxcb-render.so.0 (0x00007f71bd825000)\n\tlibxcb-shm.so.0 => /usr/lib/libxcb-shm.so.0 (0x00007f71bd4ae000)\n\tlibpixman-1.so.0 => /usr/lib/libpixman-1.so.0 (0x00007f71bcf51000)\n\tlibpcre2-8.so.0 => /usr/lib/libpcre2-8.so.0 (0x00007f71bce9e000)\n\tlibsystemd.so.0 => /usr/lib/libsystemd.so.0 (0x00007f71bcd54000)\n\tlibharfbuzz.so.0 => /usr/lib/libharfbuzz.so.0 (0x00007f71bcbea000)\n\tlibatk-1.0.so.0 => /usr/lib/libatk-1.0.so.0 (0x00007f71bd487000)\n\tlibwebpmux.so.3 => /usr/lib/libwebpmux.so.3 (0x00007f71bd47b000)\n\tlibexpat.so.1 => /usr/lib/libexpat.so.1 (0x00007f71bcbbb000)\n\tlibicui18n.so.78 => /usr/lib/libicui18n.so.78 (0x00007f71bc800000)\n\tlibjpeg.so.8 => /usr/lib/libjpeg.so.8 (0x00007f71bc758000)\n\tlibicuuc.so.78 => /usr/lib/libicuuc.so.78 (0x00007f71bc400000)\n\tlibxml2.so.16 => /usr/lib/libxml2.so.16 (0x00007f71bc613000)\n\tlibsqlite3.so.0 => /usr/lib/libsqlite3.so.0 (0x00007f71bc261000)\n\tlibxslt.so.1 => /usr/lib/libxslt.so.1 (0x00007f71bc224000)\n\tliblcms2.so.2 => /usr/lib/liblcms2.so.2 (0x00007f71bc1b7000)\n\tlibgcrypt.so.20 => /usr/lib/libgcrypt.so.20 (0x00007f71bc006000)\n\tlibgstallocators-1.0.so.0 => /usr/lib/libgstallocators-1.0.so.0 (0x00007f71bd46f000)\n\tlibgstapp-1.0.so.0 => /usr/lib/libgstapp-1.0.so.0 (0x00007f71bcba2000)\n\tlibgstbase-1.0.so.0 => /usr/lib/libgstbase-1.0.so.0 (0x00007f71bbf7e000)\n\tlibgstreamer-1.0.so.0 => /usr/lib/libgstreamer-1.0.so.0 (0x00007f71bbe0b000)\n\tlibgstpbutils-1.0.so.0 => /usr/lib/libgstpbutils-1.0.so.0 (0x00007f71bbdc6000)\n\tlibgstaudio-1.0.so.0 => /usr/lib/libgstaudio-1.0.so.0 (0x00007f71bbd3b000)\n\tlibgsttag-1.0.so.0 => /usr/lib/libgsttag-1.0.so.0 (0x00007f71bbcfc000)\n\tlibgstvideo-1.0.so.0 => /usr/lib/libgstvideo-1.0.so.0 (0x00007f71bbc1d000)\n\tlibgstgl-1.0.so.0 => /usr/lib/libgstgl-1.0.so.0 (0x00007f71bbb87000)\n\tlibgstfft-1.0.so.0 => /usr/lib/libgstfft-1.0.so.0 (0x00007f71bcb95000)\n\tlibwebpdemux.so.2 => /usr/lib/libwebpdemux.so.2 (0x00007f71bbb80000)\n\tlibwebp.so.7 => /usr/lib/libwebp.so.7 (0x00007f71bbaf9000)\n\tlibjxl.so.0.12 => /usr/lib/libjxl.so.0.12 (0x00007f71bb600000)\n\tlibavif.so.16 => /usr/lib/libavif.so.16 (0x00007f71bbab1000)\n\tlibharfbuzz-icu.so.0 => /usr/lib/libharfbuzz-icu.so.0 (0x00007f71bcb8e000)\n\tlibwayland-server.so.0 => /usr/lib/libwayland-server.so.0 (0x00007f71bba9c000)\n\tlibmanette-0.2.so.0 => /usr/lib/libmanette-0.2.so.0 (0x00007f71bba4a000)\n\tlibseccomp.so.2 => /usr/lib/libseccomp.so.2 (0x00007f71bb5d3000)\n\tlibenchant-2.so.2 => /usr/lib/libenchant-2.so.2 (0x00007f71bba38000)\n\tlibgbm.so.1 => /usr/lib/libgbm.so.1 (0x00007f71bb5cd000)\n\tlibdrm.so.2 => /usr/lib/libdrm.so.2 (0x00007f71bb5b6000)\n\tlibtasn1.so.6 => /usr/lib/libtasn1.so.6 (0x00007f71bb5a0000)\n\tlibhyphen.so.0 => /usr/lib/libhyphen.so.0 (0x00007f71bb598000)\n\tlibsecret-1.so.0 => /usr/lib/libsecret-1.so.0 (0x00007f71bb550000)\n\tlibstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007f71bb200000)\n\tlibpangoft2-1.0.so.0 => /usr/lib/libpangoft2-1.0.so.0 (0x00007f71bb531000)\n\tlibatk-bridge-2.0.so.0 => /usr/lib/libatk-bridge-2.0.so.0 (0x00007f71bb4f5000)\n\tlibcloudproviders.so.0 => /usr/lib/libcloudproviders.so.0 (0x00007f71bb4dd000)\n\tlibtinysparql-3.0.so.0 => /usr/lib/libtinysparql-3.0.so.0 (0x00007f71bb129000)\n\tlibpsl.so.5 => /usr/lib/libpsl.so.5 (0x00007f71bb115000)\n\tlibbrotlidec.so.1 => /usr/lib/libbrotlidec.so.1 (0x00007f71bb105000)\n\tlibzstd.so.1 => /usr/lib/libzstd.so.1 (0x00007f71bb01f000)\n\tlibgssapi_krb5.so.2 => /usr/lib/libgssapi_krb5.so.2 (0x00007f71bafc7000)\n\tlibnghttp2.so.14 => /usr/lib/libnghttp2.so.14 (0x00007f71baf9d000)\n\tlibmount.so.1 => /usr/lib/libmount.so.1 (0x00007f71baf40000)\n\tlibatomic.so.1 => /usr/lib/libatomic.so.1 (0x00007f71baf35000)\n\tlibthai.so.0 => /usr/lib/libthai.so.0 (0x00007f71baf2a000)\n\tlibbz2.so.1.0 => /usr/lib/libbz2.so.1.0 (0x00007f71baf17000)\n\tlibXau.so.6 => /usr/lib/libXau.so.6 (0x00007f71bb4d4000)\n\tlibXdmcp.so.6 => /usr/lib/libXdmcp.so.6 (0x00007f71baf0f000)\n\tlibgraphite2.so.3 => /usr/lib/libgraphite2.so.3 (0x00007f71baeec000)\n\tlibicudata.so.78 => /usr/lib/libicudata.so.78 (0x00007f71b8e00000)\n\tlibgpg-error.so.0 => /usr/lib/libgpg-error.so.0 (0x00007f71baebd000)\n\tlibunwind.so.8 => /usr/lib/libunwind.so.8 (0x00007f71baea1000)\n\tlibdw.so.1 => /usr/lib/libdw.so.1 (0x00007f71badff000)\n\tliborc-0.4.so.0 => /usr/lib/liborc-0.4.so.0 (0x00007f71b8cee000)\n\tlibEGL.so.1 => /usr/lib/libEGL.so.1 (0x00007f71badeb000)\n\tlibGLX.so.0 => /usr/lib/libGLX.so.0 (0x00007f71badba000)\n\tlibX11-xcb.so.1 => /usr/lib/libX11-xcb.so.1 (0x00007f71badb5000)\n\tlibgudev-1.0.so.0 => /usr/lib/libgudev-1.0.so.0 (0x00007f71bada8000)\n\tlibsharpyuv.so.0 => /usr/lib/libsharpyuv.so.0 (0x00007f71bad9f000)\n\tlibjxl_cms.so.0.12 => /usr/lib/libjxl_cms.so.0.12 (0x00007f71b8cc5000)\n\tlibhwy.so.1 => /usr/lib/libhwy.so.1 (0x00007f71b8cb6000)\n\tlibbrotlienc.so.1 => /usr/lib/libbrotlienc.so.1 (0x00007f71b8bf1000)\n\tlibyuv.so => /usr/lib/libyuv.so (0x00007f71b8b4a000)\n\tlibdav1d.so.7 => /usr/lib/libdav1d.so.7 (0x00007f71b8969000)\n\tlibrav1e.so.0.8 => /usr/lib/librav1e.so.0.8 (0x00007f71b8600000)\n\tlibSvtAv1Enc.so.4 => /usr/lib/libSvtAv1Enc.so.4 (0x00007f71b0000000)\n\tlibaom.so.3 => /usr/lib/libaom.so.3 (0x00007f71af600000)\n\tlibhidapi-hidraw.so.0 => /usr/lib/libhidapi-hidraw.so.0 (0x00007f71b8961000)\n\tlibevdev.so.2 => /usr/lib/libevdev.so.2 (0x00007f71b894b000)\n\tlibtss2-esys.so.0 => /usr/lib/libtss2-esys.so.0 (0x00007f71b856e000)\n\tlibtss2-mu.so.0 => /usr/lib/libtss2-mu.so.0 (0x00007f71affb6000)\n\tlibtss2-rc.so.0 => /usr/lib/libtss2-rc.so.0 (0x00007f71b8942000)\n\tlibtss2-tctildr.so.0 => /usr/lib/libtss2-tctildr.so.0 (0x00007f71b893a000)\n\tlibatspi.so.0 => /usr/lib/libatspi.so.0 (0x00007f71aff79000)\n\tlibjson-glib-1.0.so.0 => /usr/lib/libjson-glib-1.0.so.0 (0x00007f71aff4f000)\n\tlibunistring.so.5 => /usr/lib/libunistring.so.5 (0x00007f71af419000)\n\tlibidn2.so.0 => /usr/lib/libidn2.so.0 (0x00007f71aff2d000)\n\tlibbrotlicommon.so.1 => /usr/lib/libbrotlicommon.so.1 (0x00007f71aff0a000)\n\tlibkrb5.so.3 => /usr/lib/libkrb5.so.3 (0x00007f71af34a000)\n\tlibk5crypto.so.3 => /usr/lib/libk5crypto.so.3 (0x00007f71af31c000)\n\tlibcom_err.so.2 => /usr/lib/libcom_err.so.2 (0x00007f71b8934000)\n\tlibkrb5support.so.0 => /usr/lib/libkrb5support.so.0 (0x00007f71b8925000)\n\tlibkeyutils.so.1 => /usr/lib/libkeyutils.so.1 (0x00007f71aff03000)\n\tlibresolv.so.2 => /usr/lib/libresolv.so.2 (0x00007f71afef0000)\n\tlibblkid.so.1 => /usr/lib/libblkid.so.1 (0x00007f71af2dc000)\n\tlibdatrie.so.1 => /usr/lib/libdatrie.so.1 (0x00007f71afee7000)\n\tliblzma.so.5 => /usr/lib/liblzma.so.5 (0x00007f71af2a6000)\n\tlibelf.so.1 => /usr/lib/libelf.so.1 (0x00007f71af287000)\n\tlibGLdispatch.so.0 => /usr/lib/libGLdispatch.so.0 (0x00007f71af20e000)\n\tlibudev.so.1 => /usr/lib/libudev.so.1 (0x00007f71af1be000)\n\tlibcrypto.so.3 => /usr/lib/libcrypto.so.3 (0x00007f71aec00000)\n\tlibtss2-sys.so.1 => /usr/lib/libtss2-sys.so.1 (0x00007f71aebde000)"
+      },
+      "target/release/voice-inputctl": {
+        "direct_libraries": {
+          "libgcc_s.so.1": "libgcc",
+          "libc.so.6": "glibc"
+        },
+        "ldd": "linux-vdso.so.1 (0x00007f32eb05c000)\n\tlibgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007f32eaf94000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007f32eac00000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007f32eb05e000)"
+      },
+      "src-tauri/binaries/voice-asr-worker-x86_64-unknown-linux-gnu": {
+        "direct_libraries": {
+          "libgomp.so.1": "libgomp",
+          "libstdc++.so.6": "libstdc++",
+          "libm.so.6": "glibc",
+          "libgcc_s.so.1": "libgcc",
+          "libc.so.6": "glibc"
+        },
+        "ldd": "linux-vdso.so.1 (0x00007fc983304000)\n\tlibgomp.so.1 => /usr/lib/libgomp.so.1 (0x00007fc982fa6000)\n\tlibstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007fc982c00000)\n\tlibm.so.6 => /usr/lib/libm.so.6 (0x00007fc982ac9000)\n\tlibgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007fc982f79000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007fc982800000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007fc983306000)"
+      },
+      "src-tauri/binaries/voice-llm-worker-x86_64-unknown-linux-gnu": {
+        "direct_libraries": {
+          "libgomp.so.1": "libgomp",
+          "libstdc++.so.6": "libstdc++",
+          "libm.so.6": "glibc",
+          "libgcc_s.so.1": "libgcc",
+          "libc.so.6": "glibc"
+        },
+        "ldd": "linux-vdso.so.1 (0x00007f2f9d684000)\n\tlibgomp.so.1 => /usr/lib/libgomp.so.1 (0x00007f2f9d5fb000)\n\tlibstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007f2f9ca00000)\n\tlibm.so.6 => /usr/lib/libm.so.6 (0x00007f2f9d4c4000)\n\tlibgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007f2f9d497000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007f2f9c600000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007f2f9d686000)"
+      },
+      "src-tauri/binaries/voice-asr-worker-avx2-x86_64-unknown-linux-gnu": {
+        "direct_libraries": {
+          "libgomp.so.1": "libgomp",
+          "libstdc++.so.6": "libstdc++",
+          "libm.so.6": "glibc",
+          "libgcc_s.so.1": "libgcc",
+          "libc.so.6": "glibc"
+        },
+        "ldd": "linux-vdso.so.1 (0x00007f86be109000)\n\tlibgomp.so.1 => /usr/lib/libgomp.so.1 (0x00007f86be080000)\n\tlibstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007f86bd800000)\n\tlibm.so.6 => /usr/lib/libm.so.6 (0x00007f86bdf49000)\n\tlibgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007f86bdf1c000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007f86bd400000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007f86be10b000)"
+      },
+      "src-tauri/binaries/voice-llm-worker-avx2-x86_64-unknown-linux-gnu": {
+        "direct_libraries": {
+          "libgomp.so.1": "libgomp",
+          "libstdc++.so.6": "libstdc++",
+          "libm.so.6": "glibc",
+          "libgcc_s.so.1": "libgcc",
+          "libc.so.6": "glibc"
+        },
+        "ldd": "linux-vdso.so.1 (0x00007fb156300000)\n\tlibgomp.so.1 => /usr/lib/libgomp.so.1 (0x00007fb156277000)\n\tlibstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x00007fb155600000)\n\tlibm.so.6 => /usr/lib/libm.so.6 (0x00007fb156140000)\n\tlibgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007fb156113000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007fb155200000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007fb156302000)"
+      }
+    },
+    "pkg_config_versions": {
+      "webkit2gtk-4.1": "2.54.2",
+      "alsa": "1.2.16.1",
+      "gtk+-3.0": "3.24.52",
+      "appindicator3-0.1": "12.10.0"
+    }
+  },
+  "files": {
+    "usr/bin/voice-asr-worker": {
+      "sha256": "fbddd22705a92c7fbf09ec252c75bd36c51e7a2b6eb665f40d45b439e6a4d764",
+      "bytes": 2572272,
+      "mode": "0o755"
+    },
+    "usr/bin/voice-asr-worker-avx2": {
+      "sha256": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+      "bytes": 2863856,
+      "mode": "0o755"
+    },
+    "usr/bin/voice-input": {
+      "sha256": "389095e1d51fa1cc50597aab4c1565ff09269d703507578fa3c4e52e6e004479",
+      "bytes": 15820520,
+      "mode": "0o755"
+    },
+    "usr/bin/voice-inputctl": {
+      "sha256": "9ae4a52378bbd200d8580126892dbcfb11e4fab2dbb0cdb006951fa4dc894c41",
+      "bytes": 430928,
+      "mode": "0o755"
+    },
+    "usr/bin/voice-llm-worker": {
+      "sha256": "8a104122f4d2ed9fbc6983fc48d80b23ec00b8c3aca21ac29ddefaaf21c39b68",
+      "bytes": 7122520,
+      "mode": "0o755"
+    },
+    "usr/bin/voice-llm-worker-avx2": {
+      "sha256": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d",
+      "bytes": 7545704,
+      "mode": "0o755"
+    },
+    "usr/share/applications/voice-input.desktop": {
+      "sha256": "9db1e52375bbf62abd659f84cd41ed4d4977302d9f4eca2f05a46bb53c3a7da9",
+      "bytes": 315,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/Cargo.lock": {
+      "sha256": "4f7bb666316692149c43c9c704c3e97615226f821368e555baaa759f4176cc7b",
+      "bytes": 155362,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/INSTALL.md": {
+      "sha256": "d163415a4f3e7b0932a0aa1d0ab6bce31eb4b4bc79c00319ccfe3c9a8f1d8714",
+      "bytes": 4899,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/RELEASE.md": {
+      "sha256": "3b5d5bb5d1c19f648f866f47e757b2596a66a088a5427f1857ce75e02eac27ba",
+      "bytes": 8223,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/V1-SPECIFICATION.md": {
+      "sha256": "9e94d36a4e27fbc8d38edbebfcbcbd516f4068768ce2a1170cc86c6ab10b2f4e",
+      "bytes": 28524,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/engines.lock.json": {
+      "sha256": "cb8d8934f8faf67f5b352be4c23d26167b4c2680e9fac74b9183d9b97fad77cc",
+      "bytes": 2394,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/model-license-sources.json": {
+      "sha256": "05fdd66f75d0059fd8ad2a520ccdafdc262a1fc0fa436bcdacd370b9353d2078",
+      "bytes": 780,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/models.lock.json": {
+      "sha256": "c9757960de5461ba8d13656c20634c5830dd17618d07313e94333cc77e360715",
+      "bytes": 1964,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/rust-dependency-licenses.json": {
+      "sha256": "503332e4a5c6086fdfa21d9aeb7599bdd6b2e010a6848593854d57e555328ffa",
+      "bytes": 298953,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/source-snapshot.json": {
+      "sha256": "090204fcad9592db3c5a77b1230fcea5189c9f6a95e8caa167700b018abddf86",
+      "bytes": 6071,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/validation.json": {
+      "sha256": "8c2b0194b5227b4701c66a196e371cd82d6f2810c97742a7d8b15158bc560798",
+      "bytes": 6990,
+      "mode": "0o644"
+    },
+    "usr/share/doc/voice-input/voice-input-bindings.lua.example": {
+      "sha256": "ff699a597c1e811bde7d9b7b588dca599bb5aa4ca59f28435c172210ea0683c4",
+      "bytes": 361,
+      "mode": "0o644"
+    },
+    "usr/share/icons/hicolor/128x128/apps/voice-input.png": {
+      "sha256": "674ffb14bc8798d5e77f627fcddc82783c02bb888a16e67471ad48771df28038",
+      "bytes": 2667,
+      "mode": "0o644"
+    },
+    "usr/share/licenses/voice-input/LICENSE": {
+      "sha256": "3f1ef8013b2c4097aa877ffe5a237474fb246d050869a082276d7cca5d7392b8",
+      "bytes": 1081,
+      "mode": "0o644"
+    },
+    "usr/share/licenses/voice-input/llama.cpp-LICENSE": {
+      "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+      "bytes": 1078,
+      "mode": "0o644"
+    },
+    "usr/share/licenses/voice-input/models/qwen2.5-1.5b-instruct-q4_k_m.LICENSE": {
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "bytes": 11343,
+      "mode": "0o644"
+    },
+    "usr/share/licenses/voice-input/models/whisper-base-multilingual.LICENSE": {
+      "sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d",
+      "bytes": 1063,
+      "mode": "0o644"
+    },
+    "usr/share/licenses/voice-input/nlohmann-json-LICENSE": {
+      "sha256": "c0d068392ea65358b798b8c165103560f06e9e3b38c4ab4e2d8810a7b931af86",
+      "bytes": 1075,
+      "mode": "0o644"
+    },
+    "usr/share/licenses/voice-input/whisper.cpp-LICENSE": {
+      "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+      "bytes": 1078,
+      "mode": "0o644"
+    }
+  },
+  "self_hash_note": "This manifest excludes itself and makepkg-generated ALPM metadata; archive SHA-256 is recorded externally after building"
+}

@@ -1,0 +1,342 @@
+{
+  "captured_at_utc": "2026-11-05T20:56:29.527766+00:00",
+  "fixture_only": false,
+  "status": "passed",
+  "verifier_sha256": "4ecf8c37c6e317e7ff3e93156cf5c5e7fda25f38829ff9d50e5988e3bddfa084",
+  "tools": {
+    "unshare": {
+      "path": "/usr/bin/unshare",
+      "sha256": "e4e385ae4accf4af5302c4bb32859355b1c640315bef56ce73d31b8b1f97fdc0"
+    },
+    "pacman": {
+      "path": "/usr/bin/pacman",
+      "sha256": "590759eddb4c0cac6c5ad66f0f9bc093e15529675c0aa909eea396af5b07459d"
+    },
+    "bsdtar": {
+      "path": "/usr/bin/bsdtar",
+      "sha256": "36419dcf28745e09bc2624687efec451d5df75b57d0b161ba7db3dd7bf1f1cf4"
+    },
+    "strace": {
+      "path": "/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace",
+      "sha256": "af9b42502ebd9fb4ed27a702fa44ed1e369b3e4a5addae7a9799a698fda591b1"
+    }
+  },
+  "namespace_runner": {
+    "argv": [
+      "unshare",
+      "--user",
+      "--map-root-user",
+      "--net",
+      "/usr/bin/python3",
+      "/home/airowner/Projects/voice-input/docs/evidence/verify-alpm-isolated.py",
+      "--inside",
+      "--work",
+      "/tmp/voice-alpm-isolated-2n35j01n",
+      "--inner-result",
+      "/tmp/voice-alpm-isolated-2n35j01n/result.json",
+      "--outer-uid",
+      "1000",
+      "--parent-userns",
+      "user:[4026531837]",
+      "--parent-netns",
+      "net:[4026531833]",
+      "--package",
+      "/home/airowner/Projects/voice-input/dist/arch/linux-development/voice-input-0.1.0dev20261105-1-x86_64.pkg.tar.zst",
+      "--archive-manifest",
+      "/home/airowner/Projects/voice-input/dist/arch/linux-development/archive-manifest.json",
+      "--release-manifest",
+      "/home/airowner/Projects/voice-input/dist/arch/linux-development/release-manifest.json"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "scope": "Actual development archive isolated ALPM bookkeeping/files only; NOT host dependency/GUI/V1 acceptance",
+  "uid_map": "0       1000          1",
+  "user_namespace": "user:[4026532802]",
+  "network_namespace": "net:[4026532872]",
+  "package": {
+    "pkgname": "voice-input",
+    "pkgver": "0.1.0dev20261105-1",
+    "arch": "x86_64"
+  },
+  "archive_sha256": "d30c03b6f362d70f931126175ea9668de3562379473a923367a131f99bc26b31",
+  "dependency_checks": "DISABLED explicitly by --nodeps twice",
+  "scriptlets": "disabled by --noscriptlet",
+  "hooks": "empty isolated hook directories; strace confirms pacman is the only executed program",
+  "commands": [
+    {
+      "argv": [
+        "/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace",
+        "-qq",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/exec-0.strace",
+        "/usr/bin/pacman",
+        "--config",
+        "/tmp/voice-alpm-isolated-2n35j01n/pacman.conf",
+        "--root",
+        "/tmp/voice-alpm-isolated-2n35j01n/root",
+        "--dbpath",
+        "/tmp/voice-alpm-isolated-2n35j01n/db",
+        "--cachedir",
+        "/tmp/voice-alpm-isolated-2n35j01n/cache",
+        "--hookdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/hooks",
+        "--gpgdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/gpg",
+        "--logfile",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/pacman.log",
+        "--noconfirm",
+        "-Qq"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "executed_programs": [
+        "/usr/bin/pacman"
+      ]
+    },
+    {
+      "argv": [
+        "/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace",
+        "-qq",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/exec-1.strace",
+        "/usr/bin/pacman",
+        "--config",
+        "/tmp/voice-alpm-isolated-2n35j01n/pacman.conf",
+        "--root",
+        "/tmp/voice-alpm-isolated-2n35j01n/root",
+        "--dbpath",
+        "/tmp/voice-alpm-isolated-2n35j01n/db",
+        "--cachedir",
+        "/tmp/voice-alpm-isolated-2n35j01n/cache",
+        "--hookdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/hooks",
+        "--gpgdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/gpg",
+        "--logfile",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/pacman.log",
+        "--noconfirm",
+        "-U",
+        "--nodeps",
+        "--nodeps",
+        "--noscriptlet",
+        "/home/airowner/Projects/voice-input/dist/arch/linux-development/voice-input-0.1.0dev20261105-1-x86_64.pkg.tar.zst"
+      ],
+      "returncode": 0,
+      "stdout": "loading packages...\nlooking for conflicting packages...\n\nPackages (1) voice-input-0.1.0dev20261105-1\n\nTotal Installed Size:  35.20 MiB\n\n:: Proceed with installation? [Y/n] \nchecking keyring...\nchecking package integrity...\nloading package files...\nchecking for file conflicts...\n:: Processing package changes...\ninstalling voice-input...\nOptional dependencies for voice-input\n    libsecret: optional Secret Service client for persistent API credentials; otherwise session-only keys\n",
+      "stderr": "",
+      "executed_programs": [
+        "/usr/bin/pacman"
+      ]
+    },
+    {
+      "argv": [
+        "/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace",
+        "-qq",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/exec-2.strace",
+        "/usr/bin/pacman",
+        "--config",
+        "/tmp/voice-alpm-isolated-2n35j01n/pacman.conf",
+        "--root",
+        "/tmp/voice-alpm-isolated-2n35j01n/root",
+        "--dbpath",
+        "/tmp/voice-alpm-isolated-2n35j01n/db",
+        "--cachedir",
+        "/tmp/voice-alpm-isolated-2n35j01n/cache",
+        "--hookdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/hooks",
+        "--gpgdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/gpg",
+        "--logfile",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/pacman.log",
+        "--noconfirm",
+        "-Q",
+        "voice-input"
+      ],
+      "returncode": 0,
+      "stdout": "voice-input 0.1.0dev20261105-1\n",
+      "stderr": "",
+      "executed_programs": [
+        "/usr/bin/pacman"
+      ]
+    },
+    {
+      "argv": [
+        "/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace",
+        "-qq",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/exec-3.strace",
+        "/usr/bin/pacman",
+        "--config",
+        "/tmp/voice-alpm-isolated-2n35j01n/pacman.conf",
+        "--root",
+        "/tmp/voice-alpm-isolated-2n35j01n/root",
+        "--dbpath",
+        "/tmp/voice-alpm-isolated-2n35j01n/db",
+        "--cachedir",
+        "/tmp/voice-alpm-isolated-2n35j01n/cache",
+        "--hookdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/hooks",
+        "--gpgdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/gpg",
+        "--logfile",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/pacman.log",
+        "--noconfirm",
+        "-Qlq",
+        "voice-input"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/voice-alpm-isolated-2n35j01n/root/usr/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/bin/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/bin/voice-asr-worker\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/bin/voice-asr-worker-avx2\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/bin/voice-input\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/bin/voice-inputctl\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/bin/voice-llm-worker\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/bin/voice-llm-worker-avx2\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/applications/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/applications/voice-input.desktop\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/Cargo.lock\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/INSTALL.md\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/RELEASE.md\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/V1-SPECIFICATION.md\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/engines.lock.json\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/model-license-sources.json\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/models.lock.json\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/release-manifest.json\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/rust-dependency-licenses.json\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/source-snapshot.json\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/validation.json\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/doc/voice-input/voice-input-bindings.lua.example\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/icons/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/icons/hicolor/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/icons/hicolor/128x128/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/icons/hicolor/128x128/apps/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/icons/hicolor/128x128/apps/voice-input.png\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/voice-input/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/voice-input/LICENSE\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/voice-input/llama.cpp-LICENSE\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/voice-input/models/\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/voice-input/models/qwen2.5-1.5b-instruct-q4_k_m.LICENSE\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/voice-input/models/whisper-base-multilingual.LICENSE\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/voice-input/nlohmann-json-LICENSE\n/tmp/voice-alpm-isolated-2n35j01n/root/usr/share/licenses/voice-input/whisper.cpp-LICENSE\n",
+      "stderr": "",
+      "executed_programs": [
+        "/usr/bin/pacman"
+      ]
+    },
+    {
+      "argv": [
+        "/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace",
+        "-qq",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/exec-4.strace",
+        "/usr/bin/pacman",
+        "--config",
+        "/tmp/voice-alpm-isolated-2n35j01n/pacman.conf",
+        "--root",
+        "/tmp/voice-alpm-isolated-2n35j01n/root",
+        "--dbpath",
+        "/tmp/voice-alpm-isolated-2n35j01n/db",
+        "--cachedir",
+        "/tmp/voice-alpm-isolated-2n35j01n/cache",
+        "--hookdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/hooks",
+        "--gpgdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/gpg",
+        "--logfile",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/pacman.log",
+        "--noconfirm",
+        "-R",
+        "--nodeps",
+        "--nodeps",
+        "--noscriptlet",
+        "--nosave",
+        "voice-input"
+      ],
+      "returncode": 0,
+      "stdout": "\nPackages (1) voice-input-0.1.0dev20261105-1\n\nTotal Removed Size:  35.20 MiB\n\n:: Do you want to remove these packages? [Y/n] \n:: Processing package changes...\nremoving voice-input...\n",
+      "stderr": "",
+      "executed_programs": [
+        "/usr/bin/pacman"
+      ]
+    },
+    {
+      "argv": [
+        "/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace",
+        "-qq",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/exec-5.strace",
+        "/usr/bin/pacman",
+        "--config",
+        "/tmp/voice-alpm-isolated-2n35j01n/pacman.conf",
+        "--root",
+        "/tmp/voice-alpm-isolated-2n35j01n/root",
+        "--dbpath",
+        "/tmp/voice-alpm-isolated-2n35j01n/db",
+        "--cachedir",
+        "/tmp/voice-alpm-isolated-2n35j01n/cache",
+        "--hookdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/hooks",
+        "--gpgdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/gpg",
+        "--logfile",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/pacman.log",
+        "--noconfirm",
+        "-Qq",
+        "voice-input"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "error: package 'voice-input' was not found\n",
+      "executed_programs": [
+        "/usr/bin/pacman"
+      ]
+    },
+    {
+      "argv": [
+        "/home/airowner/Projects/voice-input/build/audit-tools/usr/bin/strace",
+        "-qq",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/exec-6.strace",
+        "/usr/bin/pacman",
+        "--config",
+        "/tmp/voice-alpm-isolated-2n35j01n/pacman.conf",
+        "--root",
+        "/tmp/voice-alpm-isolated-2n35j01n/root",
+        "--dbpath",
+        "/tmp/voice-alpm-isolated-2n35j01n/db",
+        "--cachedir",
+        "/tmp/voice-alpm-isolated-2n35j01n/cache",
+        "--hookdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/hooks",
+        "--gpgdir",
+        "/tmp/voice-alpm-isolated-2n35j01n/gpg",
+        "--logfile",
+        "/tmp/voice-alpm-isolated-2n35j01n/log/pacman.log",
+        "--noconfirm",
+        "-Qq"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "executed_programs": [
+        "/usr/bin/pacman"
+      ]
+    }
+  ],
+  "six_archive_file_sha256": {
+    "usr/bin/voice-input": "389095e1d51fa1cc50597aab4c1565ff09269d703507578fa3c4e52e6e004479",
+    "usr/bin/voice-inputctl": "9ae4a52378bbd200d8580126892dbcfb11e4fab2dbb0cdb006951fa4dc894c41",
+    "usr/bin/voice-asr-worker": "fbddd22705a92c7fbf09ec252c75bd36c51e7a2b6eb665f40d45b439e6a4d764",
+    "usr/bin/voice-llm-worker": "8a104122f4d2ed9fbc6983fc48d80b23ec00b8c3aca21ac29ddefaaf21c39b68",
+    "usr/bin/voice-asr-worker-avx2": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+    "usr/bin/voice-llm-worker-avx2": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d"
+  },
+  "six_installed_file_sha256": {
+    "usr/bin/voice-input": "389095e1d51fa1cc50597aab4c1565ff09269d703507578fa3c4e52e6e004479",
+    "usr/bin/voice-inputctl": "9ae4a52378bbd200d8580126892dbcfb11e4fab2dbb0cdb006951fa4dc894c41",
+    "usr/bin/voice-asr-worker": "fbddd22705a92c7fbf09ec252c75bd36c51e7a2b6eb665f40d45b439e6a4d764",
+    "usr/bin/voice-llm-worker": "8a104122f4d2ed9fbc6983fc48d80b23ec00b8c3aca21ac29ddefaaf21c39b68",
+    "usr/bin/voice-asr-worker-avx2": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+    "usr/bin/voice-llm-worker-avx2": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d"
+  },
+  "queried_owned_entries": 39,
+  "removed_programs_and_manifest": true,
+  "temporary_database_empty_after_removal": true,
+  "host_dependency_validation": false,
+  "host_gui_validation": false,
+  "temporary_tree_removed_after_run": true,
+  "host_six_named_program_paths_unchanged": true
+}

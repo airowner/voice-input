@@ -109,3 +109,8 @@ python3 scripts/package-arch.py --metadata-only --output-dir dist/license-scan-n
 `packaging/arch/tool-verification.json` 保留 23 项自有临时 fixture 的结构与拒绝门检查：仅检验四/六输入的结构、SHA/证据变化拒绝、开发/稳定模式、缺失 V09 拒绝、symlink 拒绝、payload 安装布局、本地 source checksum、模式与渲染后的 Bash 语法。fixture 使用临时复制的占位 ELF，并非应用运行证据，未执行 Cargo、makepkg 或安装。
 
 实际本机缓存的 Cargo 元数据扫描覆盖 601 个锁定包，15 项 Windows/macOS 专有缓存缺失，均明确标记；没有据此伪造许可或安装结果。Desktop 文件验证、Lua/Bash/Python 语法检查通过。实际应用包是否已构建、安装或卸载，必须另以真实 `archive-manifest.json` 与安装验收记录判断，不能引用这些结构测试替代。
+
+
+## 本轮实际开发包
+
+2026-11-06 本地执行已生成 `dist/arch/linux-development/voice-input-0.1.0dev20261105-1-x86_64.pkg.tar.zst`。归档 hash、六程序身份、隔离 ALPM 安装/卸载和归档程序启动均有证据，见 [开发包记录](evidence/linux-development-package.json)。日期版本按 UTC 生成。当前系统未安装此包，未对外分发；完整验收仍为 1/11，不是稳定 V1。

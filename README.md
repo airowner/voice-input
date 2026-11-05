@@ -43,3 +43,6 @@ npm run tauri build -- --config src-tauri/tauri.avx2.conf.json
 ```
 
 基础配置只打包 portable worker；优化配置同时打包两档，由宿主按 CPU 能力选择。开发及发布包的实际验证记录见 [验收矩阵](docs/ACCEPTANCE.md)；Arch 开发包命令、许可清单和稳定发布门槛见 [发布说明](docs/RELEASE.md)。Windows、macOS 和独立 X11 桌面尚未适配完成，不应使用本项目宣称跨平台 V1 已发布。
+
+
+本机已生成并检查 Linux/Arch 开发包，位于 `dist/arch/linux-development/`；准确文件名和 SHA-256 见 [产物验证记录](docs/evidence/linux-development-package.json)。真实归档六程序核对、隔离 ALPM 安装/查询/卸载、归档解出后的启动与 CLI 已通过。隔离测试跳过依赖检查，不代表宿主桌面验收；未向外发布或安装到当前系统。完整验收当前仅 V05 A 通过。
