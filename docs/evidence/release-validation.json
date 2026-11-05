@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "status": "development",
+  "scope": "linux_development_binary_verification",
+  "captured_at_utc": "2026-11-05T20:54:34.163970+00:00",
+  "source_revision": "0013cc9170ebc91e32e9f2d97b0afdcba8e23fd5",
+  "limitations": [
+    "Only V05 A is fully accepted; full V01–V11 release acceptance is incomplete.",
+    "Hyprland compositor is locked; real positive paste, physical release shortcuts, 20 recordings and end-to-end P95 are unverified; automatic delivery stays disabled until explicit own-window verification.",
+    "Windows, macOS and independent X11 native adapters/installers are not implemented or accepted; other Wayland manual workflow is unverified.",
+    "Real HTTPS compatible provider and system keyring tests, human V10 scoring and complete natural utterance coverage remain pending.",
+    "Of 14 local voiced fixtures, 13 passed structure/literal validation and one was correctly rejected for dropping a year; Raw was retained. Structure pass is not semantic quality.",
+    "Portable CPU inference is slow; no portable or AVX2 formal V11 performance acceptance. GPU backends are unavailable.",
+    "No host installation/uninstallation or installed-package desktop acceptance is claimed. Any isolated ALPM test skips dependency checks and cannot replace it.",
+    "15 non-Linux locked dependency license metadata entries are absent from the local cache; legal review, signing and stable release are not performed.",
+    "GTK uses software rendering on this session and appindicator emits a deprecation warning; no crash observed in startup smoke."
+  ],
+  "artifacts": {
+    "target/release/voice-input": {
+      "sha256": "389095e1d51fa1cc50597aab4c1565ff09269d703507578fa3c4e52e6e004479",
+      "verified": true,
+      "evidence": [
+        {
+          "path": "docs/evidence/production-build-verification.json",
+          "sha256": "2c7f61b62b6f21261f96536b1124f58e8bd2dd8bac2788bd7a2247405e8f474c"
+        },
+        {
+          "path": "docs/evidence/linux-release-startup.json",
+          "sha256": "e8d0432ffd52d8d11bf1196b5c46c39c48ecae24e7b27a6e340b22fd6719160b"
+        }
+      ]
+    },
+    "target/release/voice-inputctl": {
+      "sha256": "9ae4a52378bbd200d8580126892dbcfb11e4fab2dbb0cdb006951fa4dc894c41",
+      "verified": true,
+      "evidence": [
+        {
+          "path": "docs/evidence/production-build-verification.json",
+          "sha256": "2c7f61b62b6f21261f96536b1124f58e8bd2dd8bac2788bd7a2247405e8f474c"
+        },
+        {
+          "path": "docs/evidence/linux-release-startup.json",
+          "sha256": "e8d0432ffd52d8d11bf1196b5c46c39c48ecae24e7b27a6e340b22fd6719160b"
+        }
+      ]
+    },
+    "src-tauri/binaries/voice-asr-worker-x86_64-unknown-linux-gnu": {
+      "sha256": "fbddd22705a92c7fbf09ec252c75bd36c51e7a2b6eb665f40d45b439e6a4d764",
+      "verified": true,
+      "evidence": [
+        {
+          "path": "docs/evidence/workers-build-provenance-2026-11-06-final.json",
+          "sha256": "78114491b5cd281000107d89d1f467f03f04b2891a32a20334d60059ded2ebb2"
+        },
+        {
+          "path": "docs/evidence/workers-protocol-portable-final-r2.json",
+          "sha256": "f2a98d7b5feb472e9153729532c3592cf83998d747cbdfd62f7378ed16ceea6b"
+        }
+      ]
+    },
+    "src-tauri/binaries/voice-llm-worker-x86_64-unknown-linux-gnu": {
+      "sha256": "8a104122f4d2ed9fbc6983fc48d80b23ec00b8c3aca21ac29ddefaaf21c39b68",
+      "verified": true,
+      "evidence": [
+        {
+          "path": "docs/evidence/workers-build-provenance-2026-11-06-final.json",
+          "sha256": "78114491b5cd281000107d89d1f467f03f04b2891a32a20334d60059ded2ebb2"
+        },
+        {
+          "path": "docs/evidence/workers-protocol-portable-final-r2.json",
+          "sha256": "f2a98d7b5feb472e9153729532c3592cf83998d747cbdfd62f7378ed16ceea6b"
+        }
+      ]
+    },
+    "src-tauri/binaries/voice-asr-worker-avx2-x86_64-unknown-linux-gnu": {
+      "sha256": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+      "verified": true,
+      "evidence": [
+        {
+          "path": "docs/evidence/workers-build-provenance-2026-11-06-final.json",
+          "sha256": "78114491b5cd281000107d89d1f467f03f04b2891a32a20334d60059ded2ebb2"
+        },
+        {
+          "path": "docs/evidence/workers-smoke-avx2-2026-11-06-final.json",
+          "sha256": "b08887f18d1a0c220623cb62433b9d9733e20535df01c78fe41a51ca8d3f439e"
+        }
+      ]
+    },
+    "src-tauri/binaries/voice-llm-worker-avx2-x86_64-unknown-linux-gnu": {
+      "sha256": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d",
+      "verified": true,
+      "evidence": [
+        {
+          "path": "docs/evidence/workers-build-provenance-2026-11-06-final.json",
+          "sha256": "78114491b5cd281000107d89d1f467f03f04b2891a32a20334d60059ded2ebb2"
+        },
+        {
+          "path": "docs/evidence/workers-smoke-avx2-2026-11-06-final.json",
+          "sha256": "b08887f18d1a0c220623cb62433b9d9733e20535df01c78fe41a51ca8d3f439e"
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "name": "strict workspace format, Clippy, 85 Rust harness checks, JS syntax and debug build",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "docs/evidence/workspace-verification-final.json",
+          "sha256": "752bf955e317364ca7086e99034fec1215fd55e8d397f40e2ae378f5c583a2ab"
+        }
+      ]
+    },
+    {
+      "name": "final-source debug Tauri DOM and typed IPC five checks",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "docs/evidence/tauri-ui-smoke-final.json",
+          "sha256": "ee984b544af3e90497a8792d304f7fcbbcc2477da86bd17801602ed7dcdb96a4"
+        }
+      ]
+    },
+    {
+      "name": "production resource release build and actual startup/CLI",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "docs/evidence/production-build-verification.json",
+          "sha256": "2c7f61b62b6f21261f96536b1124f58e8bd2dd8bac2788bd7a2247405e8f474c"
+        }
+      ]
+    },
+    {
+      "name": "final four source-bound worker resources",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "docs/evidence/workers-build-provenance-2026-11-06-final.json",
+          "sha256": "78114491b5cd281000107d89d1f467f03f04b2891a32a20334d60059ded2ebb2"
+        }
+      ]
+    },
+    {
+      "name": "15 fixture offline developer run, including correct refusal and silence; no semantic scoring",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "docs/evidence/v10-offline-network.json",
+          "sha256": "8581b3c0276d8c04789ad88eda9f9509702461a78768f0244fdb8b0393b61d50"
+        }
+      ]
+    },
+    {
+      "name": "online public WAV local pipeline, zero IPv4/IPv6 calls in trace",
+      "status": "passed",
+      "evidence": [
+        {
+          "path": "docs/evidence/local-online-network-summary.json",
+          "sha256": "fbbb0f5db322785c27e5b9e36366d74e3458ac4ab80c52152518b7c632cf7af6"
+        }
+      ]
+    }
+  ]
+}

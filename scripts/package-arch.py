@@ -214,6 +214,10 @@ def libraries(root, artifacts):
         if "not found" in linked:
             raise ValueError(f"unresolved runtime library: {relative}")
         mapping = dict(re.findall(r"^\s*(\S+)\s+=>\s+(/\S+)\s+\(", linked, re.M))
+        # ldd prints the loader either as an absolute alias => absolute path,
+        # or as a standalone absolute path. Resolve only paths actually observed.
+        mapping.update({Path(name).name: resolved for name, resolved in list(mapping.items()) if name.startswith("/")})
+        mapping.update({Path(resolved).name: resolved for resolved in re.findall(r"^\s*(/\S+)\s+\(", linked, re.M)})
         owners = {}
         for name in required:
             if name not in mapping:
