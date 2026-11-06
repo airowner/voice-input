@@ -8,7 +8,7 @@
 
 | 阶段 | 当前状态 | 退出条件 / 下一步 |
 |---|---|---|
-| M0 实机探针 | 已执行并记录能力限制 | 引擎/模型/采集/事件有真实证据；锁屏阻止正向受控粘贴与按键释放 |
+| M0 实机探针 | 已执行并记录能力限制 | 桌面已解锁；释放事件、原生粘贴/浏览器与焦点负例有真实证据；20次真人录音仍未测 |
 | M1 核心和 ASR | Linux 已集成，核心路径通过 | 设置页实际 DOM/IPC、CPAL、公开 WAV、Raw 和真实 SIGKILL 恢复通过；最终源改动后增量复核 |
 | M2 完整处理 | 本地链路通过开发验证，未完整验收 | 真实双 worker 链路通过；HTTPS 合同自动测试通过；真实兼容服务及凭据库存取未测 |
 | M3 Omarchy 闭环 | CLI/守卫已实现，桌面验收待解锁 | 准备 Linux 开发包；20 次快捷键/真实粘贴/端到端 P95 未验收 |
@@ -163,3 +163,14 @@ Git 审查说明：源码 Cargo.toml 的多余尾部空行已清理。原样捕�
 - 生产WorkerPool独立实测通过：强杀计算中的ASR/LLM后47/187ms返回错误，后续同pool重建成功；自有holder结束后两worker退出；默认idle LLM60.216s、ASR120.233s释放。详见`WORKER-LIFECYCLE.md`。不等同完整UI V07 M验收。
 
 当前下一步：原生Ctrl+V适配编译/静态检查和协议测试，然后统一执行自有框粘贴与焦点负例。当前旧开发包仍是先前源码，不据此声明已含新修复。
+
+
+### 原生粘贴修复已通过真实回读
+
+- `tauri-own-paste-native.json`：真实Wayland Tauri专用框收到可信paste/input事件，固定中英多行文本逐字匹配；验证前automatic=false，确认后true，无残留busy，剪贴板恢复。未在脚本中赋预期文本。
+- `desktop-focus-guard.json`：自有窗口A→B→A实际epoch递增，2秒延迟结果到达后旧target为Manual；关闭A后仍Manual；两个buffer无新增输入，固定结果保留。
+- `browser-paste-wayland-r4.json` / `browser-paste-xwayland.json`：隔离profile Chromium156真实textarea，两个backend的可信事件和逐字回读均通过。前三次浏览器fixture因/proc仅暴露可执行名导致身份校验停止，未发键；改为CDP实际解析profile+精确launch PID，并由Rust再次核对exe/starttime/祖先关系后通过，未绕过进程身份守卫。
+- `browser-paste-wayland-20.json`：20次固定文本的实际生产adapter交付与可信读回均通过，delivery调用P95约194.8ms。它仅含clipboard/guards/native协议ack，不含录音/模型/控制器落盘，且同时有workspace检查负载；不能记为V11端到端达标。
+- 修改后全workspace Clippy/all-targets与93项Rust测试通过；20项platform包含协议与超时回归，源与证据绑定见`native-input-runtime.json`。libxkbcommon实际包依赖xkeyboard-config，无需额外sidecar或root。
+
+下一步：补生产adapter在GTK原生/XWayland编辑器的正向对照；重建生产资源release与新版开发包，旧包不含该兼容修复，保留历史不覆盖。完整真人录音/P95、真实远程和其他原生平台仍未验收。

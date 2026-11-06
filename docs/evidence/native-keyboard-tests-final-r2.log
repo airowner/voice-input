@@ -1,0 +1,34 @@
+   Compiling voice-platform v0.1.0 (/home/airowner/Projects/voice-input/crates/platform)
+    Finished `test` profile [unoptimized] target(s) in 2.20s
+     Running unittests src/lib.rs (target/debug/deps/voice_platform-ba2fcd69eba23256)
+
+running 20 tests
+test ipc::tests::request_rejects_unknown_action_fields_and_trailing_requests ... ok
+test linux::tests::cloned_targets_share_one_attempt_budget ... ok
+test ipc::tests::socket_refuses_nonprivate_directory_and_symlink ... ok
+test linux::tests::compositor_lock_and_unlock_invalidate_old_snapshot ... ok
+test linux::tests::all_focus_close_disconnect_and_reconnect_invalidate_epoch ... ok
+test ipc::tests::private_socket_single_instance_and_peer_roundtrip ... ok
+test linux::tests::disconnect_locked_screen_and_reused_address_fail_closed ... ok
+test linux::tests::own_probe_cannot_confirm_after_focus_change_lock_disconnect_or_sensitive_rule ... ok
+test linux::tests::own_probe_confirmation_requires_dispatch_readback_and_own_process ... ok
+test linux::tests::returning_to_same_window_after_focus_event_is_still_rejected ... ok
+test linux::tests::terminal_sensitive_and_closed_target_are_manual ... ok
+test linux::tests::window_title_is_ignored_and_debug_is_redacted ... ok
+test virtual_keyboard::tests::cleanup_after_no_input_or_partial_frame_never_injects ... ok
+test virtual_keyboard::tests::expired_budget_does_not_call_guard_or_send_input ... ok
+test virtual_keyboard::tests::changed_focus_after_setup_sends_no_input ... ok
+test virtual_keyboard::tests::standard_map_fd_and_single_ordered_paste_are_valid ... ok
+test virtual_keyboard::tests::unsupported_or_malformed_protocol_is_manual_without_input ... ok
+test linux::tests::command_diagnostics_and_clipboard_keep_separate_output_limits ... ok
+test virtual_keyboard::tests::disconnect_or_missing_ack_after_input_is_unknown_and_never_repeats_press ... ok
+test linux::tests::shared_deadline_kills_pipe_holder_after_direct_child_exit ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.31s
+
+   Doc-tests voice_platform
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

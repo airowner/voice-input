@@ -1,0 +1,28 @@
+{
+  "scope": "Actual debug Tauri own-window native paste with trusted DOM events and production typed commands; no microphone or other-window injection",
+  "binary_sha256": "5970ec7b353ce8cdb9bd99566faa7c9a3612eb636e1a4c8a1f090b9553e55b09",
+  "clipboard_snapshot_mime_count": 0,
+  "passed": true,
+  "owned_window_xwayland": false,
+  "returncode": 0,
+  "stderr": "\n** (voice-input:1901663): WARNING **: 10:19:21.539: Disabled hardware acceleration because GTK failed to initialize GL: No available configurations for the given pixel format.\n\n(voice-input:1901663): libayatana-appindicator-WARNING **: 10:19:21.555: libayatana-appindicator is deprecated. Please use libayatana-appindicator-glib in newly written code.\n",
+  "ui_report": {
+    "checks": {
+      "disabled_before_probe": true,
+      "enabled_after_probe": true,
+      "native_input_readback": true,
+      "operation_finished": true
+    },
+    "diagnostics": {
+      "document_focused": true,
+      "dom_input_focused": true,
+      "trusted_input_seen": true,
+      "trusted_paste_seen": true,
+      "ui_dispatch_failed": false,
+      "ui_mismatch": false
+    },
+    "passed": true,
+    "scope": "actual own-window synthetic native paste/readback through production typed UI flow; no microphone or other-window delivery"
+  },
+  "clipboard_restored": true
+}

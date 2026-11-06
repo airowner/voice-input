@@ -5,6 +5,8 @@ pub mod ipc;
 #[cfg(target_os = "linux")]
 mod linux;
 #[cfg(target_os = "linux")]
+mod virtual_keyboard;
+#[cfg(target_os = "linux")]
 pub use linux::*;
 use serde::{Deserialize, Serialize};
 

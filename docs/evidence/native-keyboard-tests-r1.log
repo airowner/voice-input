@@ -1,0 +1,23 @@
+   Compiling voice-platform v0.1.0 (/home/airowner/Projects/voice-input/crates/platform)
+error[E0277]: the trait bound `[u8; 4]: TryFrom<&[u8; 4]>` is not satisfied
+   --> crates/platform/src/virtual_keyboard.rs:607:51
+    |
+607 |                     .map(|b| u32::from_ne_bytes(b.try_into().unwrap()))
+    |                                                   ^^^^^^^^ the trait `From<&[u8; 4]>` is not implemented for `[u8; 4]`
+    |
+    = help: the following other types implement trait `From<T>`:
+              `[T; 1]` implements `From<(T,)>`
+              `[T; 2]` implements `From<(T, T)>`
+              `[T; 3]` implements `From<(T, T, T)>`
+              `[T; 4]` implements `From<(T, T, T, T)>`
+              `[T; 5]` implements `From<(T, T, T, T, T)>`
+              `[T; 6]` implements `From<(T, T, T, T, T, T)>`
+              `[T; 7]` implements `From<(T, T, T, T, T, T, T)>`
+              `[T; 8]` implements `From<(T, T, T, T, T, T, T, T)>`
+            and 7 others
+    = note: required for `&[u8; 4]` to implement `Into<[u8; 4]>`
+    = note: required for `[u8; 4]` to implement `TryFrom<&[u8; 4]>`
+    = note: required for `&[u8; 4]` to implement `TryInto<[u8; 4]>`
+
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `voice-platform` (lib test) due to 1 previous error

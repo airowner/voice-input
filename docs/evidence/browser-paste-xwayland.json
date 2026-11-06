@@ -1,0 +1,27 @@
+{
+  "scope": "Owned isolated Chromium textarea, fixed synthetic text through production Hyprland adapter; no microphone/provider/full V01 acceptance",
+  "backend": "x11",
+  "clipboard_snapshot_mime_count": 0,
+  "passed": true,
+  "profile_identity": {
+    "matches": true,
+    "pid_matches_launcher": true,
+    "equals_flag": false,
+    "split_flag": false,
+    "proc_argument_count": 2,
+    "parsed_argument_count": 21,
+    "parsed_profile_matches": true
+  },
+  "browser_product": "Chrome/156.0.8078.79",
+  "driver": {
+    "outcome": "sent_unconfirmed",
+    "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes"
+  },
+  "readback": {
+    "nativeInput": true,
+    "nativePaste": true,
+    "matches": true
+  },
+  "driver_sha256": "1567f24651ba2803266eb470a355a2e766fd01d3bd1d8881527e4e100dd5aca6",
+  "clipboard_restored": true
+}

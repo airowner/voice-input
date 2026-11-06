@@ -1,0 +1,313 @@
+{
+  "scope": "Owned isolated Chromium textarea, fixed synthetic text through production Hyprland adapter; no microphone/provider/full V01/V11 acceptance",
+  "backend": "wayland",
+  "iterations": 20,
+  "clipboard_snapshot_mime_count": 0,
+  "passed": true,
+  "profile_identity": {
+    "matches": true,
+    "pid_matches_launcher": true,
+    "equals_flag": false,
+    "split_flag": false,
+    "proc_argument_count": 2,
+    "parsed_argument_count": 22,
+    "parsed_profile_matches": true
+  },
+  "browser_product": "Chrome/156.0.8078.79",
+  "samples": [
+    {
+      "index": 0,
+      "driver": {
+        "delivery_call_ms": 213.685678,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 1,
+      "driver": {
+        "delivery_call_ms": 173.915398,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 2,
+      "driver": {
+        "delivery_call_ms": 184.072756,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 3,
+      "driver": {
+        "delivery_call_ms": 194.80372200000002,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 4,
+      "driver": {
+        "delivery_call_ms": 175.159467,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 5,
+      "driver": {
+        "delivery_call_ms": 157.524523,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 6,
+      "driver": {
+        "delivery_call_ms": 169.042475,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 7,
+      "driver": {
+        "delivery_call_ms": 163.416739,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 8,
+      "driver": {
+        "delivery_call_ms": 184.35325999999998,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 9,
+      "driver": {
+        "delivery_call_ms": 165.31178999999997,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 10,
+      "driver": {
+        "delivery_call_ms": 173.580328,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 11,
+      "driver": {
+        "delivery_call_ms": 170.62232699999998,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 12,
+      "driver": {
+        "delivery_call_ms": 167.984594,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 13,
+      "driver": {
+        "delivery_call_ms": 162.785729,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 14,
+      "driver": {
+        "delivery_call_ms": 146.98782699999998,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 15,
+      "driver": {
+        "delivery_call_ms": 166.04701599999999,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 16,
+      "driver": {
+        "delivery_call_ms": 180.133887,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 17,
+      "driver": {
+        "delivery_call_ms": 167.654133,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 18,
+      "driver": {
+        "delivery_call_ms": 162.74686499999999,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    },
+    {
+      "index": 19,
+      "driver": {
+        "delivery_call_ms": 171.239656,
+        "outcome": "sent_unconfirmed",
+        "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+      },
+      "readback": {
+        "nativeInput": true,
+        "nativePaste": true,
+        "matches": true
+      },
+      "passed": true
+    }
+  ],
+  "driver": {
+    "delivery_call_ms": 171.239656,
+    "outcome": "sent_unconfirmed",
+    "scope": "fixed synthetic fixture through production Hyprland adapter; capability precondition from separately verified native probes; timing excludes controller persistence, recording and model inference"
+  },
+  "readback": {
+    "nativeInput": true,
+    "nativePaste": true,
+    "matches": true
+  },
+  "delivery_call_p95_ms": 194.80372200000002,
+  "timing_scope": "Actual production adapter copy+guards+native protocol acknowledgement, keymap already prepared; excludes controller persistence/UI/recording/ASR/LLM; not V11 end-to-end",
+  "driver_sha256": "10824714f88f8c7d02811e997ca019f171df1a931a7c5edc4862b58b16d51603",
+  "clipboard_restored": true
+}

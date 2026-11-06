@@ -1,0 +1,8 @@
+{
+  "scope": "Owned isolated Chromium textarea, fixed synthetic text through production Hyprland adapter; no microphone/provider/full V01 acceptance",
+  "backend": "wayland",
+  "clipboard_snapshot_mime_count": 0,
+  "passed": false,
+  "failure": "Browser profile identity mismatch",
+  "clipboard_restored": true
+}

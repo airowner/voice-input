@@ -1,0 +1,19 @@
+{
+  "capability_premise": "Hyprland::new(true) is explicit component-test setup based on this host's M0 capability evidence, not product own-window verification",
+  "closed_target_outcome": "manual",
+  "focus_epochs": [
+    4,
+    6,
+    8,
+    13
+  ],
+  "native_focus_sequence": "A -> B -> A; then close A and focus B",
+  "observed_result_delay_ms": 2042,
+  "original_focus_restored": true,
+  "owned_buffers_unchanged": true,
+  "passed": true,
+  "scope": "Real owned Wayland focus/close component probe with synthetic retained result; no microphone/provider/clipboard or native paste; not full V02 M",
+  "switch_and_return_outcome": "manual",
+  "synthetic_result_delay_floor_ms": 2000,
+  "synthetic_result_retained": true
+}

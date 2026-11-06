@@ -1,0 +1,40 @@
+{
+  "captured_at_utc": "2026-11-06T02:18:44.598801+00:00",
+  "scope": "Static and local socket-pair/native-subprocess verification only; no real desktop input, microphone, clipboard or user-window activation",
+  "status": "passed",
+  "platform_tests_passed": 20,
+  "strict_clippy_all_targets_passed": true,
+  "rustfmt_passed": true,
+  "git_diff_check_passed": true,
+  "source_sha256": {
+    "crates/platform/src/lib.rs": "1e8c4cffd1eaac3f422409a0b314e383ccb71e384319af1f9aa395efd9f57c9b",
+    "crates/platform/src/linux.rs": "643c1e659f7f261dea6045f5dfc4944ae5c876569e8da445cd63363a11da726e",
+    "crates/platform/src/virtual_keyboard.rs": "fbde70be9f2712e3ff9c634f28a50894c06b527b7ec3614c1761eaf2aa1b1ed9"
+  },
+  "evidence_sha256": {
+    "docs/evidence/native-keyboard-tests-final-r3.log": "7c64ee5d453dfd24bdbb34e9f4be68d718a5810e95be3a299eaa6d7cdc92e6b7",
+    "docs/evidence/native-keyboard-clippy-final-r3.log": "480b49bc99f85d747e609aec9bcdcb1b13227432be225bf716597d5a3f063447"
+  },
+  "native_dependency": {
+    "xkbcommon_pkg_config_version": "1.13.2",
+    "data": "fixed pc/us map from installed xkeyboard-config; validated V=47+8 and Control index2"
+  },
+  "protocol_checks": [
+    "SCM_RIGHTS memfd readback and fixed keymap",
+    "exactly one Ctrl+V press/release sequence",
+    "last focus check after protocol setup, before any input",
+    "unsupported/malformed/expired/focus-changed paths send no input",
+    "possible input plus disconnect/missing final ACK produces Unknown without repeat press",
+    "partial frame cleanup closes rather than appending protocol frames",
+    "no-input cleanup never sends modifier/key input"
+  ],
+  "deadline_checks": [
+    "keymap preparation is background-only cached startup work; unavailable preparation returns Manual without waiting",
+    "input protocol and last focus queries share one 500ms deadline",
+    "nonblocking bounded helper output uses original deadline and no reader/writer joins",
+    "a real direct child exits while its descendant holds stdout; deadline kills the retained process group",
+    "diagnostics 128KiB and clipboard 4MiB output limits remain distinct"
+  ],
+  "desktop_acceptance": "pending parent controlled own-window trusted-event/readback test",
+  "production_adapter": "internal Wayland virtual-keyboard Ctrl+V; wtype remains M0 diagnostic only"
+}

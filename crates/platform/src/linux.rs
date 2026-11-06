@@ -26,82 +26,15 @@ pub const DELIVERY_PROBE_TEXT: &str =
     "语音输入粘贴验证 2026\nVoice input paste probe: /tmp/example.txt";
 
 /// No native output is embedded in errors or diagnostics.
-fn run(program: &str, args: &[&str], input: Option<&[u8]>) -> Result<Vec<u8>> {
-    run_for(program, args, input, STEP)
-}
-
-fn run_for(
-    program: &str,
-    args: &[&str],
-    input: Option<&[u8]>,
-    timeout: Duration,
-) -> Result<Vec<u8>> {
-    run_for_limit(program, args, input, timeout, OUTPUT_LIMIT)
-}
-fn run_for_limit(
-    program: &str,
-    args: &[&str],
-    input: Option<&[u8]>,
-    timeout: Duration,
-    output_limit: u64,
-) -> Result<Vec<u8>> {
-    let mut child = Command::new(program)
-        .args(args)
-        .process_group(0)
-        .stdin(if input.is_some() {
-            Stdio::piped()
-        } else {
-            Stdio::null()
-        })
-        .stdout(Stdio::piped())
-        .stderr(Stdio::null())
-        .spawn()
-        .map_err(|_| PlatformError::Command)?;
-    let stdout = child.stdout.take().ok_or(PlatformError::Command)?;
-    let reader = thread::spawn(move || {
-        let mut bytes = Vec::new();
-        let result = stdout.take(output_limit + 1).read_to_end(&mut bytes);
-        (result, bytes)
-    });
-    let writer = input.map(|bytes| {
-        let bytes = bytes.to_vec();
-        let mut stdin = child.stdin.take().expect("piped stdin");
-        thread::spawn(move || stdin.write_all(&bytes))
-    });
-    let deadline = Instant::now() + timeout;
-    let status = loop {
-        match child.try_wait() {
-            Ok(Some(status)) => break Ok(status),
-            Ok(None) if Instant::now() < deadline => thread::sleep(Duration::from_millis(5)),
-            Ok(None) => {
-                terminate_group(&mut child);
-                break Err(PlatformError::Timeout);
-            }
-            Err(_) => {
-                terminate_group(&mut child);
-                break Err(PlatformError::Command);
-            }
-        }
-    };
-    if let Some(writer) = writer {
-        let _ = writer.join();
-    }
-    let (read_result, bytes) = reader.join().map_err(|_| PlatformError::Command)?;
-    if bytes.len() as u64 > output_limit {
-        return Err(PlatformError::OutputLimit);
-    }
-    read_result.map_err(|_| PlatformError::Command)?;
-    if !status?.success() {
-        return Err(PlatformError::Command);
-    }
-    Ok(bytes)
+fn run(program: &str, args: &[&str]) -> Result<Vec<u8>> {
+    run_until(program, args, Instant::now() + STEP)
 }
 
 fn terminate_group(child: &mut Child) {
-    if matches!(child.try_wait(), Ok(Some(_))) {
-        return;
-    }
-    // The child was created in a dedicated process group above.
+    // Call only while the direct child is still unreaped. Newly spawned copy
+    // owners satisfy this; maintenance removes an owner immediately when it
+    // successfully reaps it. Do not try_wait before killing: the zombie leader
+    // may be keeping a live pipe-holding descendant's group identity reserved.
     unsafe {
         libc::kill(-(child.id() as i32), libc::SIGKILL);
     }
@@ -322,7 +255,7 @@ fn guard(
 }
 
 fn compositor_unlocked() -> bool {
-    let Ok(bytes) = run("hyprctl", &["-j", "locked"], None) else {
+    let Ok(bytes) = run("hyprctl", &["-j", "locked"]) else {
         return false;
     };
     let Ok(value) = serde_json::from_slice::<serde_json::Value>(&bytes) else {
@@ -331,16 +264,103 @@ fn compositor_unlocked() -> bool {
     value.get("locked").and_then(|v| v.as_bool()) == Some(false)
 }
 
+fn run_until(program: &str, args: &[&str], deadline: Instant) -> Result<Vec<u8>> {
+    run_until_limit(program, args, deadline, OUTPUT_LIMIT)
+}
+
+fn run_until_limit(
+    program: &str,
+    args: &[&str],
+    deadline: Instant,
+    output_limit: u64,
+) -> Result<Vec<u8>> {
+    if Instant::now() >= deadline {
+        return Err(PlatformError::Timeout);
+    }
+    let mut child = Command::new(program)
+        .args(args)
+        .process_group(0)
+        .stdin(Stdio::null())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::null())
+        .spawn()
+        .map_err(|_| PlatformError::Command)?;
+    let mut reaped = false;
+    let result = (|| {
+        let mut stdout = child.stdout.take().ok_or(PlatformError::Command)?;
+        let fd = stdout.as_raw_fd();
+        let flags = unsafe { libc::fcntl(fd, libc::F_GETFL) };
+        if flags < 0 || unsafe { libc::fcntl(fd, libc::F_SETFL, flags | libc::O_NONBLOCK) } < 0 {
+            return Err(PlatformError::Command);
+        }
+        let mut output = Vec::new();
+        let mut eof = false;
+        loop {
+            if Instant::now() >= deadline {
+                return Err(PlatformError::Timeout);
+            }
+            let mut block = [0u8; 4096];
+            match stdout.read(&mut block) {
+                Ok(0) => eof = true,
+                Ok(count) => {
+                    output.extend_from_slice(&block[..count]);
+                    if output.len() as u64 > output_limit {
+                        return Err(PlatformError::OutputLimit);
+                    }
+                    continue;
+                }
+                Err(error) if error.kind() == std::io::ErrorKind::Interrupted => continue,
+                Err(error) if error.kind() == std::io::ErrorKind::WouldBlock => {}
+                Err(_) => return Err(PlatformError::Command),
+            }
+            // Keep the direct child unreaped until all pipe owners close. Its
+            // retained PID also keeps the process-group identity safe to kill
+            // if a descendant holds stdout open beyond the shared deadline.
+            if eof && let Some(status) = child.try_wait().map_err(|_| PlatformError::Command)? {
+                reaped = true;
+                return if status.success() {
+                    Ok(output)
+                } else {
+                    Err(PlatformError::Command)
+                };
+            }
+            let budget = deadline
+                .checked_duration_since(Instant::now())
+                .ok_or(PlatformError::Timeout)?;
+            thread::sleep(budget.min(Duration::from_millis(2)));
+        }
+    })();
+    if result.is_err() && !reaped {
+        // Do not try_wait here: the leader may already be a zombie while an
+        // owned descendant still holds the pipe. Keeping it unreaped above
+        // prevents this process-group ID from being reused before this kill.
+        unsafe { libc::kill(-(child.id() as i32), libc::SIGKILL) };
+        let _ = child.kill();
+        let _ = child.wait();
+    }
+    result
+}
+
 fn session_safe() -> bool {
+    session_safe_until(Instant::now() + STEP * 3)
+}
+
+fn session_safe_until(deadline: Instant) -> bool {
     // logind LockedHint alone can be stale: compositor is authoritative.
-    if !compositor_unlocked() {
+    let Ok(bytes) = run_until("hyprctl", &["-j", "locked"], deadline) else {
+        return false;
+    };
+    let Ok(value) = serde_json::from_slice::<serde_json::Value>(&bytes) else {
+        return false;
+    };
+    if value.get("locked").and_then(|v| v.as_bool()) != Some(false) {
         return false;
     }
     let session = std::env::var("XDG_SESSION_ID").unwrap_or_else(|_| "self".into());
-    let Ok(status) = run(
+    let Ok(status) = run_until(
         "loginctl",
         &["show-session", &session, "-p", "LockedHint", "-p", "Active"],
-        None,
+        deadline,
     ) else {
         return false;
     };
@@ -348,7 +368,7 @@ fn session_safe() -> bool {
     if !status.lines().any(|s| s == "LockedHint=no") || !status.lines().any(|s| s == "Active=yes") {
         return false;
     }
-    let Ok(monitors) = run("hyprctl", &["-j", "monitors"], None) else {
+    let Ok(monitors) = run_until("hyprctl", &["-j", "monitors"], deadline) else {
         return false;
     };
     let Ok(monitors) = serde_json::from_slice::<Vec<serde_json::Value>>(&monitors) else {
@@ -383,6 +403,7 @@ impl Hyprland {
     /// `automatic_verified` must be false on this host until a real controlled
     /// paste probe succeeds; binary presence is not protocol capability evidence.
     pub fn new(automatic_verified: bool, sensitive_classes: Vec<String>) -> Self {
+        crate::virtual_keyboard::prepare();
         Self {
             monitor: FocusMonitor::start(event_path()),
             automatic_verified,
@@ -446,7 +467,7 @@ impl Hyprland {
             focus_events_connected: self.monitor.state.connected.load(Ordering::SeqCst),
             automatic_delivery_verified: self.automatic_verified,
             clipboard_tools_present: tool_present("wl-copy") && tool_present("wl-paste"),
-            virtual_keyboard_tool_present: tool_present("wtype"),
+            virtual_keyboard_tool_present: crate::virtual_keyboard::prepared(),
         }
     }
     pub fn capture_target(&self) -> Result<TargetSnapshot> {
@@ -475,15 +496,21 @@ impl Hyprland {
         })
     }
     fn active_window(&self) -> Result<ActiveWindow> {
-        serde_json::from_slice(&run("hyprctl", &["-j", "activewindow"], None)?)
+        serde_json::from_slice(&run("hyprctl", &["-j", "activewindow"])?)
             .map_err(|_| PlatformError::Target)
     }
     fn target_valid(&self, target: &TargetSnapshot) -> bool {
+        self.target_valid_until(target, Instant::now() + STEP * 4)
+    }
+    fn target_valid_until(&self, target: &TargetSnapshot, deadline: Instant) -> bool {
         let state = &self.monitor.state;
-        if !session_safe() {
+        if !session_safe_until(deadline) {
             return false;
         }
-        let Ok(current) = self.active_window() else {
+        let Ok(bytes) = run_until("hyprctl", &["-j", "activewindow"], deadline) else {
+            return false;
+        };
+        let Ok(current) = serde_json::from_slice::<ActiveWindow>(&bytes) else {
             return false;
         };
         guard(
@@ -508,6 +535,7 @@ impl Hyprland {
             return Err(PlatformError::OutputLimit);
         }
         self.reap_owner();
+        let deadline = Instant::now() + STEP;
         let mut child = Command::new("wl-copy")
             .args(["--foreground", "--type", "text/plain;charset=utf-8"])
             .process_group(0)
@@ -517,7 +545,6 @@ impl Hyprland {
             .spawn()
             .map_err(|_| PlatformError::Command)?;
         let mut stdin = child.stdin.take().ok_or(PlatformError::Command)?;
-        let deadline = Instant::now() + STEP;
         let fd = stdin.as_raw_fd();
         let flags = unsafe { libc::fcntl(fd, libc::F_GETFL) };
         if flags < 0 || unsafe { libc::fcntl(fd, libc::F_SETFL, flags | libc::O_NONBLOCK) } < 0 {
@@ -526,6 +553,10 @@ impl Hyprland {
         }
         let mut remaining = text.as_bytes();
         while !remaining.is_empty() {
+            if Instant::now() >= deadline {
+                terminate_group(&mut child);
+                return Err(PlatformError::Timeout);
+            }
             match stdin.write(remaining) {
                 Ok(0) => {
                     terminate_group(&mut child);
@@ -547,11 +578,11 @@ impl Hyprland {
         }
         drop(stdin);
         let verified = loop {
-            let Some(budget) = deadline.checked_duration_since(Instant::now()) else {
+            let Some(_) = deadline.checked_duration_since(Instant::now()) else {
                 break false;
             };
             if let Ok(readback) =
-                run_for_limit("wl-paste", &["--no-newline"], None, budget, COPY_LIMIT)
+                run_until_limit("wl-paste", &["--no-newline"], deadline, COPY_LIMIT)
                 && readback == text.as_bytes()
             {
                 break true;
@@ -571,7 +602,7 @@ impl Hyprland {
         }
         Ok(())
     }
-    /// Caller must durably mark the attempt before calling. Never retries wtype.
+    /// Caller must durably mark the attempt before calling. Never retries an injection.
     pub fn deliver(&mut self, target: &TargetSnapshot, text: &str) -> DeliveryOutcome {
         if text.len() > 12 * 1024
             || !self.automatic_verified
@@ -583,9 +614,10 @@ impl Hyprland {
         if self.copy(text).is_err() || !self.target_valid(target) {
             return DeliveryOutcome::Manual;
         }
-        match run("wtype", &["-M", "ctrl", "-k", "v", "-m", "ctrl"], None) {
-            Ok(_) => DeliveryOutcome::SentUnconfirmed,
-            Err(_) => DeliveryOutcome::Unknown,
+        match crate::virtual_keyboard::paste(|deadline| self.target_valid_until(target, deadline)) {
+            Ok(()) => DeliveryOutcome::SentUnconfirmed,
+            Err(crate::virtual_keyboard::PasteError::NotSent) => DeliveryOutcome::Manual,
+            Err(crate::virtual_keyboard::PasteError::Unknown) => DeliveryOutcome::Unknown,
         }
     }
     /// Call from the application's regular timer to reap an owner which lost
@@ -614,6 +646,75 @@ impl Drop for Hyprland {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn command_diagnostics_and_clipboard_keep_separate_output_limits() {
+        let source = "import sys; sys.stdout.buffer.write(b'x' * 200000)";
+        assert!(matches!(
+            run_until("python3", &["-c", source], Instant::now() + STEP),
+            Err(PlatformError::OutputLimit)
+        ));
+        let clipboard = run_until_limit(
+            "python3",
+            &["-c", source],
+            Instant::now() + STEP,
+            COPY_LIMIT,
+        )
+        .unwrap();
+        assert_eq!(clipboard.len(), 200000);
+        assert!(clipboard.iter().all(|byte| *byte == b'x'));
+    }
+
+    #[test]
+    fn shared_deadline_kills_pipe_holder_after_direct_child_exit() {
+        let directory = tempfile::tempdir().unwrap();
+        let identity_path = directory.path().join("owned-child.json");
+        // A real owned descendant inherits stdout, while its direct parent
+        // exits immediately. No desktop, input, user process or model is used.
+        let source = r#"
+import json, os, pathlib, sys, time
+pid = os.fork()
+if pid == 0:
+    time.sleep(30)
+else:
+    stat = pathlib.Path('/proc', str(pid), 'stat').read_text().rsplit(')', 1)[1].split()
+    pathlib.Path(sys.argv[1]).write_text(json.dumps([pid, stat[19]]))
+"#;
+        let started = Instant::now();
+        let result = run_until(
+            "python3",
+            &["-c", source, identity_path.to_str().unwrap()],
+            started + Duration::from_millis(300),
+        );
+        let identity: (u32, String) =
+            serde_json::from_slice(&std::fs::read(identity_path).unwrap()).unwrap();
+        let is_running = || {
+            let Ok(stat) = std::fs::read_to_string(format!("/proc/{}/stat", identity.0)) else {
+                return false;
+            };
+            let Some((_, rest)) = stat.rsplit_once(')') else {
+                return false;
+            };
+            let fields: Vec<_> = rest.split_whitespace().collect();
+            fields.get(19) == Some(&identity.1.as_str())
+                && fields
+                    .first()
+                    .is_some_and(|state| !matches!(*state, "Z" | "X"))
+        };
+        let stopped_by = Instant::now() + Duration::from_secs(1);
+        while is_running() && Instant::now() < stopped_by {
+            thread::sleep(Duration::from_millis(5));
+        }
+        let leaked = is_running();
+        if leaked {
+            // Test-failure cleanup uses the recorded start identity above,
+            // never an arbitrary or possibly reused process ID.
+            unsafe { libc::kill(identity.0 as i32, libc::SIGKILL) };
+        }
+        assert!(matches!(result, Err(PlatformError::Timeout)));
+        assert!(started.elapsed() < Duration::from_secs(2));
+        assert!(!leaked, "owned pipe-holding descendant survived deadline");
+    }
     fn pair() -> (TargetSnapshot, ActiveWindow) {
         (
             TargetSnapshot {
