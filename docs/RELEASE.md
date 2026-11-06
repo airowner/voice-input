@@ -114,3 +114,8 @@ python3 scripts/package-arch.py --metadata-only --output-dir dist/license-scan-n
 ## 本轮实际开发包
 
 2026-11-06 本地执行已生成 `dist/arch/linux-development/voice-input-0.1.0dev20261105-1-x86_64.pkg.tar.zst`。归档 hash、六程序身份、隔离 ALPM 安装/卸载和归档程序启动均有证据，见 [开发包记录](evidence/linux-development-package.json)。日期版本按 UTC 生成。当前系统未安装此包，未对外分发；完整验收仍为 1/11，不是稳定 V1。
+
+
+## 原生输入修复后的新产物
+
+当前最新开发包为 `dist/arch/linux-development-native/voice-input-0.1.0dev20261106-1-x86_64.pkg.tar.zst`，14,463,224字节，SHA-256 `7b6e9cfbac01e83deafbd4b5a0255a4124e10f86f32f6bc8f666bf36669d3dfb`。使用 `release-validation-native.json`，新源码/产物绑定、真实归档、隔离ALPM和解出启动均通过，见 [完整记录](evidence/linux-development-native-package.json)。旧输出目录保留，不覆盖原证据。本机没有安装包，也没有对外发布；完整V1仍只V05 A通过。

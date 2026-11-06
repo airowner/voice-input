@@ -1,0 +1,59 @@
+{
+  "captured_at_utc": "2026-11-06T02:44:09.547144+00:00",
+  "scope": "Actual updated Linux native-input development archive, isolated ALPM install/remove and extracted release startup; not full V1 acceptance",
+  "artifact": "dist/arch/linux-development-native/voice-input-0.1.0dev20261106-1-x86_64.pkg.tar.zst",
+  "archive_manifest": {
+    "scope": "Actual archive build and contents verification; not installation/uninstallation or V1 acceptance",
+    "archive": "voice-input-0.1.0dev20261106-1-x86_64.pkg.tar.zst",
+    "sha256": "7b6e9cfbac01e83deafbd4b5a0255a4124e10f86f32f6bc8f666bf36669d3dfb",
+    "bytes": 14463224,
+    "development": true,
+    "package_version": "0.1.0dev20261106",
+    "binary_payload_hashes_match": true,
+    "installed": false,
+    "uninstall_tested": false
+  },
+  "release_manifest_sha256": "881c0e21db2755019a4176ed045d2c70453c068ad1791c0bcb5f734c4d23217d",
+  "source_snapshot_revision": "938b554916a061a6365b18c676586123e2932dca",
+  "selected_source_files_checked": 66,
+  "all_recorded_payload_files_checked": 25,
+  "six_binary_sha256": {
+    "usr/bin/voice-asr-worker": "fbddd22705a92c7fbf09ec252c75bd36c51e7a2b6eb665f40d45b439e6a4d764",
+    "usr/bin/voice-asr-worker-avx2": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+    "usr/bin/voice-input": "45c900209673736689a7c86601bf9eacf90dd40f00cb31ac2b2b347de465002b",
+    "usr/bin/voice-inputctl": "4a128e25828463f79df33f99c29c981d879b2dff43ce3360cca5af18aa4bee9c",
+    "usr/bin/voice-llm-worker": "8a104122f4d2ed9fbc6983fc48d80b23ec00b8c3aca21ac29ddefaaf21c39b68",
+    "usr/bin/voice-llm-worker-avx2": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d"
+  },
+  "checks": {
+    "verified_artifact_and_evidence_hashes_match": true,
+    "all_selected_source_hashes_match": true,
+    "all_payload_hashes_sizes_modes_match": true,
+    "isolated_alpm_install_query_remove": true,
+    "isolated_alpm_host_paths_unchanged": true,
+    "extracted_release_startup_and_cli": true
+  },
+  "evidence": {
+    "docs/evidence/release-validation-native.json": "863e5db2bfe01c202510d2c6f6e91848309190de0e727dffc4321247d0a74d22",
+    "docs/evidence/native-input-runtime-final.json": "86da7e0c3373f6dbb853c51311c5fe7881ae6265b3f4fc0cfd9616355326d2e3",
+    "docs/evidence/native-production-build.log": "c93b3205e5126977e977d56b7f899d0993fe39421e481ac5f816700b06b2f44d",
+    "docs/evidence/native-release-startup.json": "3ef9d19ea3eed5e8c6000b94ea9359d8dd72e44568191a84e88d969b983da80a",
+    "docs/evidence/alpm-native-product-install.json": "c624a3963e8fe1f2eb8bbbb6a174042dc1cf1254c3cfa5814d3137a016f4d3c3",
+    "docs/evidence/native-package-runtime-startup.json": "8350eef83bede6a141d42e474e5202f8dbd2fbfd93790d1c46af33dba3928d63"
+  },
+  "limitations": [
+    "Only V05 A is fully accepted; complete V01–V11 stable release remains incomplete.",
+    "Native paste/readback is verified on this unlocked Hyprland host in Tauri, GTK native/XWayland and Chromium native/XWayland; this does not establish 20 microphone recordings, physical human keypress behavior or full end-to-end P95.",
+    "Automatic delivery remains disabled at startup until the explicit own-window readback succeeds for this application session; sensitive apps and terminals remain manual.",
+    "Native fixed pc/us virtual keyboard layout is verified only on the documented reference system; other layouts/compositors/controls are not guaranteed.",
+    "Windows, macOS and independent X11 native adapters/installers are not implemented or accepted; other Wayland manual workflow is unverified.",
+    "Real HTTPS compatible provider/system keyring tests, human V10 scoring and complete natural utterance coverage remain pending.",
+    "14 voiced local fixtures yielded 13 structure/literal passes and one correct rejection retaining Raw; structure pass is not semantic quality. Portable inference is slow; no formal V11 performance acceptance, no GPU backend.",
+    "Only isolated ALPM installation/uninstallation is tested, with dependency checks disabled; no host installation or installed desktop workflow is claimed.",
+    "15 non-Linux locked dependency license metadata entries are absent from cache; legal review, signing and stable release are not performed.",
+    "GTK uses software rendering on this session and appindicator emits a deprecation warning; no crash observed in startup checks."
+  ],
+  "full_v1_acceptance": "1/11; V05 A only",
+  "host_installed": false,
+  "externally_published": false
+}

@@ -1,0 +1,21 @@
+{
+  "scope": "actual Linux release startup and private CLI developer verification; isolated user data, no audio/model/injection; not desktop V01/V07/V09 acceptance",
+  "binary": "build/package-runtime-native/usr/bin/voice-input",
+  "sha256": "45c900209673736689a7c86601bf9eacf90dd40f00cb31ac2b2b347de465002b",
+  "checks": {
+    "real_cli_status": true,
+    "idle_stop_0": true,
+    "idle_stop_1": true,
+    "idle_cancel_2": true,
+    "unconfigured_start_rejected": true,
+    "still_ready": true,
+    "single_instance_rejected": true,
+    "window_process_alive": true,
+    "release_process_reaped": true,
+    "cli_reports_not_running_after_exit": true
+  },
+  "passed": true,
+  "stdout": "",
+  "stderr": "\n** (voice-input:1929821): WARNING **: 10:41:25.868: Disabled hardware acceleration because GTK failed to initialize GL: No available configurations for the given pixel format.\n\n(voice-input:1929821): libayatana-appindicator-WARNING **: 10:41:25.878: libayatana-appindicator is deprecated. Please use libayatana-appindicator-glib in newly written code.\n",
+  "shutdown_method": "SIGTERM to owned idle application only; no active capture or worker"
+}

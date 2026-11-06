@@ -1,6 +1,6 @@
 # AI 语音输入桌面工具
 
-按照 [V1 技术规格](specs/v1.md) 从 M0 开始实施。两引擎 CPU 构建、模型冻结、Linux Tauri 设置页和本地处理链路已实现并验证核心路径，尚未达到 V1 发布标准。桌面已解锁；源码已修复实际发现的 WebKit/XWayland 粘贴兼容问题，并通过专用框、浏览器和焦点守卫验证。新版开发包正在生成，详见阶段记录。
+按照 [V1 技术规格](specs/v1.md) 从 M0 开始实施。两引擎 CPU 构建、模型冻结、Linux Tauri 设置页和本地处理链路已实现并验证核心路径，尚未达到 V1 发布标准。桌面已解锁；源码已修复实际发现的 WebKit/XWayland 粘贴兼容问题，并通过专用框、浏览器和焦点守卫验证。修复版开发包已生成并验证，详见阶段记录。
 
 - [阶段记录与下一步](docs/PROGRESS.md)
 - [M0 实测记录](docs/M0.md)
@@ -46,3 +46,6 @@ npm run tauri build -- --config src-tauri/tauri.avx2.conf.json
 
 
 本机已生成并检查 Linux/Arch 开发包，位于 `dist/arch/linux-development/`；准确文件名和 SHA-256 见 [产物验证记录](docs/evidence/linux-development-package.json)。真实归档六程序核对、隔离 ALPM 安装/查询/卸载、归档解出后的启动与 CLI 已通过。隔离测试跳过依赖检查，不代表宿主桌面验收；未向外发布或安装到当前系统。完整验收当前仅 V05 A 通过。
+
+
+当前修复版见 [新开发包验证记录](docs/evidence/linux-development-native-package.json)，实际文件位于 `dist/arch/linux-development-native/`。它包含已实测的原生 Ctrl+V 修复；旧 `linux-development/` 包仅保留历史验证，不包含此修复。运行与限制见 [安装说明](docs/INSTALL.md) 和 [原生输入决策](docs/NATIVE-INPUT.md)。

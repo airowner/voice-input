@@ -2,7 +2,7 @@
 
 依据 [规格第 10 节](../specs/v1.md)。更新日期：2026-11-06（Asia/Shanghai）。**当前整项完成 1/11（V05 A），尚不能作为 V1 发布通过。** 已有 Linux 开发实现、真实模型/采集/界面组件证据和自动测试；不能继续沿用最初“桌面 socket 全部拒绝、应用未实现”的状态描述。
 
-本记录按已完整结束的证据快照评估：解锁后 workspace **93 项测试及 Clippy**、优化 worker smoke **final（66 项）**、[原生输入汇总][native]及其逐项桌面证据。桌面已解锁，已取得生产适配的真实输入与回读；此前锁屏、wtype 不兼容和测试驱动失败记录继续保留。旧日志不自动证明变化后的源码或新 release/安装包已通过；本轮新生产构建及release启动已通过，安装包仍按独立记录验证。
+本记录按已完整结束的证据快照评估：解锁后 workspace **93 项测试及 Clippy**、优化 worker smoke **final（66 项）**、[原生输入汇总][native]及其逐项桌面证据。桌面已解锁，已取得生产适配的真实输入与回读；此前锁屏、wtype 不兼容和测试驱动失败记录继续保留。旧日志不自动证明变化后的源码或新 release/安装包已通过；本轮新生产构建及release启动已通过，[新版开发包](evidence/linux-development-native-package.json)的真实归档、隔离安装/卸载和解出启动亦已通过。
 
 ## 参考机、模型与证据口径
 
@@ -35,6 +35,12 @@
 [实际开发包记录](evidence/linux-development-package.json)：Arch `0.1.0dev20261105-1`（包版本日期按 UTC）已由 makepkg 生成，约 14 MiB，六程序归档字节核对通过。[真实包隔离 ALPM 验证](evidence/alpm-product-install-2026-11-06.json)确认安装 SHA/大小/模式、查询和卸载清理，宿主程序路径未变；两次 nodeps、无 scriptlet/外网，不能替代宿主依赖或桌面测试。[归档解出后的 release 启动](evidence/linux-package-runtime-startup.json)十项 CLI/单实例检查通过；[最终源码 debug DOM/IPC](evidence/tauri-ui-smoke-final.json)五项通过。当前系统未安装此包，未对外发布；这些补充证据不增加完整 V 项数量，仍为 1/11。
 
 首次打包因 ldd 直接显示的动态加载器路径未被解析而停止。已最小修复并用六个真实程序重新审计所有直接依赖和包归属，通过后再打包；原失败与修复见 [依赖审计](evidence/package-library-audit.json)。未跳过缺失依赖门槛。
+
+## 原生输入修复版开发包
+
+`0.1.0dev20261106-1` 已生成并通过六程序归档哈希、全部记录payload文件、隔离ALPM安装/查询/卸载及解出后release启动/CLI验证。见[新版包记录](evidence/linux-development-native-package.json)。含libxkbcommon直接运行依赖，其系统包依赖xkeyboard-config；无root/uinput/额外daemon。旧20261105包保留历史，不含修复。
+
+这不是宿主安装、真人录音或稳定发布；当前完整仍1/11。默认扬声器音量0未更改，真人20次录音尚未执行，也不将文件、虚拟音频或组件粘贴次数算作该验收。
 
 ## 接续验收记录规则
 

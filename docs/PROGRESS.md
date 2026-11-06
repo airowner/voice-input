@@ -183,3 +183,15 @@ GTK原生与XWayland两后端的冻结fixture已重编实跑，正向一次交�
 生产资源release构建通过；同源码优化版adapter也在Chromium两个后端实测可信paste/input与逐字回读通过。新release主程序十项启动/CLI验证通过，见`native-release-startup.json`。本轮完整证据及fixture源码身份汇总为`native-input-runtime-final.json`，原始失败与中间报告保留。
 
 当前构建尚未写入旧包；接下来用全新validation和输出目录制作新包，并重复真实归档/隔离安装/解出启动验证。真人录音配合尚未收到回复，默认扬声器音量0保持不变，不以虚拟音频或文件推理代替真人/物理录音验收。
+
+
+## 2026-11-06：原生输入修复版交付检查点
+
+- 当前原生Ctrl+V源码通过93项Rust测试/严格Clippy；Tauri专用框、GTK原生/XWayland、Chromium原生/XWayland均有真实事件/逐字回读，焦点返回与关闭负例均Manual且无输入。release优化adapter双浏览器后端也通过。未改个人快捷键、桌面键图、默认音频或系统软件。
+- 修复版生产资源构建与启动通过，Arch包 `dist/arch/linux-development-native/voice-input-0.1.0dev20261106-1-x86_64.pkg.tar.zst` 已生成：14,463,224字节，SHA-256 `7b6e9cfbac01e83deafbd4b5a0255a4124e10f86f32f6bc8f666bf36669d3dfb`。
+- 六个程序及全部记录payload的hash/大小/模式一致，选定源码snapshot与当前文件一致；实际隔离ALPM安装、查询和卸载通过，宿主路径未变；解出的release十项CLI/单实例启动再次通过。数据与程序仅在自有临时/项目目录，未安装到宿主、未发布。见 `linux-development-native-package.json`。
+- 源码/兼容性检查点：`585e061`保留实测失败，`e09e7ca`修复原生输入，`938b554`补全两编辑器与优化版浏览器验证；最终交付文档另提交。旧包和失败记录保留，新包不覆盖旧路径。
+
+本轮阶段退出：解锁后可自动执行的原生交付兼容修复、真实组件正负例、优化构建和开发包验证完成。完整V01/V02/V03/V07/V11仍有全应用/真人项，V04/V08缺真实服务和用户配置，V09缺原生平台适配/系统实机，V10缺远程轮次及人工评分；完整总数仍1/11。
+
+下一入口：先读此记录与Git状态、`native-input-runtime-final.json`、`linux-development-native-package.json`和验收矩阵，不重跑已通过的源码/包/模型检查。需要用户配合真人20次录音/物理快捷键和人工判分，真实服务凭据应在应用设置页填写，不发送到聊天；需要各原生系统环境才能继续对应验收。默认扬声器当前0，未擅自更改，也未用虚拟输入冒充真实麦克风录音。没有需要放宽门槛或改变业务目标的决策。
