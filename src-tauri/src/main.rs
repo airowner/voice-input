@@ -3,7 +3,10 @@ use tauri::{Emitter, Manager};
 
 #[cfg(target_os = "linux")]
 use voice_runtime::service::{Runtime, Snapshot, UiCommand};
-struct UiSmokeState(bool);
+struct UiSmokeState {
+    enabled: bool,
+    delivery: bool,
+}
 
 #[tauri::command]
 fn ui_smoke_report(
@@ -12,16 +15,25 @@ fn ui_smoke_report(
     smoke: tauri::State<'_, UiSmokeState>,
     report: serde_json::Value,
 ) -> Result<(), String> {
-    if !cfg!(debug_assertions) || !smoke.0 || window.label() != "main" {
+    if !cfg!(debug_assertions) || !smoke.enabled || window.label() != "main" {
         return Err("此检查仅用于显式开发验证".into());
     }
-    let fields = [
-        "ipc_snapshot",
-        "three_checks",
-        "record_disabled_before_setup",
-        "settings_navigation",
-        "default_values",
-    ];
+    let fields: &[&str] = if smoke.delivery {
+        &[
+            "disabled_before_probe",
+            "native_input_readback",
+            "enabled_after_probe",
+            "operation_finished",
+        ]
+    } else {
+        &[
+            "ipc_snapshot",
+            "three_checks",
+            "record_disabled_before_setup",
+            "settings_navigation",
+            "default_values",
+        ]
+    };
     let passed = fields
         .iter()
         .all(|key| report.get(key).and_then(|v| v.as_bool()) == Some(true));
@@ -34,9 +46,34 @@ fn ui_smoke_report(
             )
         })
         .collect();
+    let diagnostics: serde_json::Map<String, serde_json::Value> = if smoke.delivery {
+        [
+            "trusted_input_seen",
+            "trusted_paste_seen",
+            "dom_input_focused",
+            "document_focused",
+            "ui_dispatch_failed",
+            "ui_mismatch",
+        ]
+        .into_iter()
+        .map(|key| {
+            (
+                key.to_owned(),
+                serde_json::json!(
+                    report
+                        .get(key)
+                        .and_then(|value| value.as_bool())
+                        .unwrap_or(false)
+                ),
+            )
+        })
+        .collect()
+    } else {
+        serde_json::Map::new()
+    };
     println!(
         "{}",
-        serde_json::json!({"scope":"actual Tauri WebKit DOM/IPC developer smoke; no recording or injection","checks":checks,"passed":passed})
+        serde_json::json!({"scope":if smoke.delivery {"actual own-window synthetic native paste/readback through production typed UI flow; no microphone or other-window delivery"}else{"actual Tauri WebKit DOM/IPC developer smoke; no recording or injection"},"checks":checks,"diagnostics":diagnostics,"passed":passed})
     );
     app.exit(if passed { 0 } else { 1 });
     Ok(())
@@ -79,6 +116,8 @@ fn download_info(model_id: String) -> Result<serde_json::Value, String> {
 #[cfg(target_os = "linux")]
 fn main() {
     let ui_smoke = cfg!(debug_assertions) && std::env::args().any(|arg| arg == "--ui-smoke");
+    let delivery_smoke =
+        cfg!(debug_assertions) && std::env::args().any(|arg| arg == "--delivery-smoke");
     let socket = match voice_platform::ipc::SessionSocket::bind() {
         Ok(socket) => socket,
         Err(_) => {
@@ -87,7 +126,7 @@ fn main() {
         }
     };
     let app = tauri::Builder::default()
-        .manage(UiSmokeState(ui_smoke))
+        .manage(UiSmokeState { enabled: ui_smoke || delivery_smoke, delivery: delivery_smoke })
         .setup(move |app| {
             let handle = app.handle().clone();
             let menu = tauri::menu::Menu::with_items(
@@ -173,6 +212,17 @@ fn main() {
                 window.eval(r#"(()=>{const timer=setInterval(()=>{const status=document.getElementById('phase');if(!status||status.textContent==='正在连接')return;clearInterval(timer);const report={ipc_snapshot:true,three_checks:document.querySelectorAll('.check-item').length===3,record_disabled_before_setup:document.getElementById('start').disabled,default_values:document.getElementById('max-seconds').value==='60'&&document.getElementById('llm-mode').value==='local'};document.querySelector('[data-panel="settings"]').click();report.settings_navigation=!document.getElementById('settings').hidden;window.__TAURI__.core.invoke('ui_smoke_report',{report});},100);})()"#)?;
                 let handle=app.handle().clone();
                 std::thread::spawn(move||{std::thread::sleep(std::time::Duration::from_secs(15));eprintln!("ui_smoke_timeout");handle.exit(1);});
+            }
+            if delivery_smoke && let Some(window) = app.get_webview_window("main") {
+                window.show()?;
+                window.set_focus()?;
+                window.eval(include_str!("../../scripts/ui-delivery-smoke.js"))?;
+                let handle = app.handle().clone();
+                std::thread::spawn(move || {
+                    std::thread::sleep(std::time::Duration::from_secs(20));
+                    eprintln!("delivery_smoke_timeout");
+                    handle.exit(1);
+                });
             }
             if tray_available && let Some(window) = app.get_webview_window("main") {
                 let owned = window.clone();

@@ -59,7 +59,160 @@ def read_bounded(args, limit=LIMIT, timeout=0.5):
         p.stdout.close()
 
 
-def gtk_target():
+def release_keymap(key):
+    # F-keys use the evdev codes in the installed XKB pc/us layout. Unlike
+    # wtype's dynamically assigned code1, these also match Hyprland's default
+    # resolve_binds_by_sym=false translation. No compositor config is changed.
+    import ctypes as c
+    lib = c.CDLL('libxkbcommon.so.0')
+    lib.xkb_context_new.argtypes, lib.xkb_context_new.restype = [c.c_int], c.c_void_p
+    lib.xkb_context_unref.argtypes = [c.c_void_p]
+    lib.xkb_keymap_new_from_string.argtypes = [c.c_void_p, c.c_char_p, c.c_int, c.c_int]
+    lib.xkb_keymap_new_from_string.restype = c.c_void_p
+    lib.xkb_keymap_unref.argtypes = [c.c_void_p]
+    lib.xkb_keymap_get_as_string.argtypes = [c.c_void_p, c.c_int]
+    lib.xkb_keymap_get_as_string.restype = c.c_void_p
+    lib.xkb_keymap_mod_get_index.argtypes = [c.c_void_p, c.c_char_p]
+    lib.xkb_keymap_mod_get_index.restype = c.c_uint
+    lib.xkb_keymap_key_get_syms_by_level.argtypes = [c.c_void_p, c.c_uint, c.c_uint, c.c_uint, c.POINTER(c.POINTER(c.c_uint))]
+    lib.xkb_keymap_key_get_syms_by_level.restype = c.c_int
+    source = b'xkb_keymap { xkb_keycodes { include "evdev+aliases(qwerty)" }; xkb_types { include "complete" }; xkb_compatibility { include "complete" }; xkb_symbols { include "pc+us+inet(evdev)" }; };'
+    context = lib.xkb_context_new(0)
+    keymap = None
+    allocation = None
+    try:
+        if not context:
+            raise RuntimeError('test_xkb_context_failed')
+        keymap = lib.xkb_keymap_new_from_string(context, source, 1, 0)
+        if not keymap:
+            raise RuntimeError('test_xkb_keymap_failed')
+        code = {'F12': 88, 'F11': 87, 'F10': 68, 'F8': 66, 'V': 47}[key]
+        symbols = c.POINTER(c.c_uint)()
+        count = lib.xkb_keymap_key_get_syms_by_level(keymap, code+8, 0, 0, c.byref(symbols))
+        if count != 1 or symbols[0] != (0x76 if key == 'V' else 0xffbd + int(key[1:])):
+            raise RuntimeError('test_xkb_function_key_mismatch')
+        mask = 0
+        for name in ((b'Control',) if key == 'V' else (b'Shift', b'Control', b'Mod4')):
+            index = lib.xkb_keymap_mod_get_index(keymap, name)
+            if index >= 32:
+                raise RuntimeError('test_xkb_modifier_missing')
+            mask |= 1 << index
+        if mask != (4 if key == 'V' else 69):
+            raise RuntimeError('test_xkb_modifier_mask_unexpected')
+        allocation = lib.xkb_keymap_get_as_string(keymap, 1)
+        if not allocation:
+            raise RuntimeError('test_xkb_serialization_failed')
+        return c.string_at(allocation) + b'\0', code, mask
+    finally:
+        if allocation:
+            libc = c.CDLL(None)
+            libc.free.argtypes = [c.c_void_p]
+            libc.free(allocation)
+        if keymap:
+            lib.xkb_keymap_unref(keymap)
+        if context:
+            lib.xkb_context_unref(context)
+
+
+def release_keyboard(key, target_pid, target_address):
+    # Minimal client for the installed virtual-keyboard-v1 protocol. A separate
+    # socket owns all objects; disconnect is the final cleanup even on errors.
+    import array
+    import struct
+    keymap, code, mask = release_keymap(key)
+    display = os.environ['WAYLAND_DISPLAY']
+    path = display if os.path.isabs(display) else str(Path(os.environ['XDG_RUNTIME_DIR']) / display)
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as connection:
+        connection.settimeout(2)
+        connection.connect(path)
+        pending = bytearray()
+        globals_found = {}
+        next_id = 3
+        def message(object_id, opcode, payload=b'', fd=None):
+            data = struct.pack('=II', object_id, (len(payload)+8) << 16 | opcode) + payload
+            if fd is None:
+                connection.sendall(data)
+            else:
+                sent = connection.sendmsg([data], [(socket.SOL_SOCKET, socket.SCM_RIGHTS, array.array('i', [fd]))])
+                if sent < len(data):
+                    connection.sendall(data[sent:])
+        def string(value):
+            data = value.encode() + b'\0'
+            return struct.pack('=I', len(data)) + data + b'\0' * (-len(data) % 4)
+        def roundtrip():
+            nonlocal next_id
+            callback = next_id
+            next_id += 1
+            message(1, 0, struct.pack('=I', callback))
+            deadline = time.monotonic()+2
+            while True:
+                if len(pending) < 8:
+                    size = None
+                else:
+                    object_id, word = struct.unpack_from('=II', pending)
+                    size, opcode = word >> 16, word & 0xffff
+                    if size < 8 or size > 65535:
+                        raise RuntimeError('test_wayland_invalid_frame')
+                if size is None or len(pending) < size:
+                    if time.monotonic() >= deadline:
+                        raise TimeoutError('test_wayland_roundtrip_timeout')
+                    connection.settimeout(max(0.01, deadline-time.monotonic()))
+                    data = connection.recv(65536)
+                    if not data:
+                        raise RuntimeError('test_wayland_eof')
+                    pending.extend(data)
+                    if len(pending) > LIMIT:
+                        raise RuntimeError('test_wayland_buffer_limit')
+                    continue
+                payload = bytes(pending[8:size])
+                del pending[:size]
+                if object_id == 1 and opcode == 0:
+                    raise RuntimeError('test_wayland_protocol_error')
+                if object_id == 2 and opcode == 0:
+                    name, length = struct.unpack_from('=II', payload)
+                    interface = payload[8:8+length-1].decode()
+                    version = struct.unpack_from('=I', payload, 8+((length+3)//4)*4)[0]
+                    globals_found.setdefault(interface, []).append((name, version))
+                if object_id == callback and opcode == 0:
+                    return
+        message(1, 1, struct.pack('=I', 2))  # wl_display.get_registry
+        roundtrip()
+        next_id = 7  # IDs 4/5/6 below, after registry2 and initial sync3.
+        for interface, object_id in (('zwp_virtual_keyboard_manager_v1', 4), ('wl_seat', 5)):
+            options = globals_found.get(interface, [])
+            if len(options) != 1:
+                raise RuntimeError('test_wayland_missing_or_ambiguous_' + interface)
+            message(2, 0, struct.pack('=I', options[0][0]) + string(interface) + struct.pack('=II', 1, object_id))
+        message(4, 0, struct.pack('=II', 5, 6))
+        fd = os.memfd_create('voice-input-m0-keymap', os.MFD_CLOEXEC)
+        try:
+            os.write(fd, keymap)
+            message(6, 0, struct.pack('=II', 1, len(keymap)), fd=fd)
+            roundtrip()
+        finally:
+            os.close(fd)
+        target_focus(target_pid, target_address)
+        pressed = False
+        try:
+            message(6, 2, struct.pack('=IIII', mask, 0, 0, 0))
+            message(6, 1, struct.pack('=III', int(time.monotonic()*1000) & 0xffffffff, code, 1))
+            pressed = True
+            roundtrip()
+            if key != 'V':
+                print(json.dumps({'event': 'held', 'evdev_code': code, 'modifier_mask': mask}), flush=True)
+                time.sleep(1)
+        finally:
+            if pressed:
+                message(6, 1, struct.pack('=III', int(time.monotonic()*1000) & 0xffffffff, code, 0))
+            message(6, 2, struct.pack('=IIII', 0, 0, 0, 0))
+            message(6, 3)
+            roundtrip()
+        if key == 'V':
+            print(json.dumps({'event': 'injected', 'evdev_code': code, 'modifier_mask': mask}), flush=True)
+    return 0
+
+
+def gtk_target(control=False):
     import gi
     gi.require_version('Gtk', '4.0')
     from gi.repository import Gtk, GLib
@@ -81,6 +234,16 @@ def gtk_target():
             print(json.dumps({'event': 'buffer', 'matches': hashlib.sha256(value).hexdigest() == expected,
                               'bytes': len(value)}), flush=True)
         buffer.connect('changed', changed)
+        if control:
+            def reset_input(source, condition):
+                if condition & (GLib.IO_HUP | GLib.IO_ERR):
+                    return False
+                if source.readline() != '{"op":"reset"}\n':
+                    return False
+                buffer.set_text('')
+                print('{"event":"buffer_reset"}', flush=True)
+                return True
+            GLib.io_add_watch(sys.stdin, GLib.PRIORITY_DEFAULT, GLib.IO_IN | GLib.IO_HUP | GLib.IO_ERR, reset_input)
         win.present()
         view.grab_focus()
         GLib.timeout_add(150, lambda: (print('{"event":"ready"}', flush=True), False)[1])
@@ -189,6 +352,29 @@ def wait_json(proc, predicate, timeout=5):
     raise TimeoutError('owned_target_reply_timeout')
 
 
+def x11_physical_diagnostic(proc, address):
+    # Separate diagnostic: never changes the result of the original wtype path.
+    # Reset our own editor over a private control pipe, so even an incorrect
+    # character from the first injector cannot contaminate the second check.
+    try:
+        target_focus(proc.pid, address)
+        proc.stdin.write('{"op":"reset"}\n')
+        proc.stdin.flush()
+        wait_json(proc, lambda item: item.get('event') == 'buffer_reset', 1)
+        target_focus(proc.pid, address)
+        injected = json.loads(command([sys.executable, str(Path(__file__).resolve()),
+            '--paste-physical', '--owned-pid', str(proc.pid), '--owned-address', address], 3))
+        if injected != {'event': 'injected', 'evdev_code': 47, 'modifier_mask': 4}:
+            raise RuntimeError('physical_paste_injector_reply_invalid')
+        wait_json(proc, lambda item: item.get('event') == 'buffer' and item.get('matches'), 3)
+        return {'status': 'pass', 'matches': True, 'xwayland': True, 'evdev_code': 47,
+                'modifier_mask': 4, 'injection': 'separate synthetic physical-layout Ctrl+V diagnostic',
+                'scope': 'owned target only; not original wtype compatibility or product/V1 acceptance'}
+    except Exception as error:
+        return {'status': 'blocked', 'reason': str(error),
+                'scope': 'separate physical-keycode diagnostic; original wtype result unchanged'}
+
+
 def owner(text):
     p = subprocess.Popen(['wl-copy', '--foreground', '--type', 'text/plain;charset=utf-8'],
                          stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -281,18 +467,22 @@ def run_probe():
                     clipboard_saved = None
                     checks['clipboard_snapshot'] = {'status': 'blocked', 'reason': str(error)}
             for backend in ('wayland', 'x11'):
+                phase = 'preconditions'
                 name = 'controlled_paste_' + backend
                 try:
                     if compositor_locked is not False:
                         raise RuntimeError('compositor_locked' if compositor_locked else 'compositor_lock_unknown')
                     if clipboard_saved is None:
                         raise RuntimeError('clipboard_backup_unavailable_no_write')
+                    phase = 'target_startup'
                     env = dict(os.environ, GDK_BACKEND=backend)
-                    proc = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), '--target'],
-                                            env=env, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                    target_errors = tempfile.TemporaryFile()
+                    proc = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), '--target', '--target-control'],
+                                            env=env, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=target_errors,
                                             text=True, bufsize=1)
                     targets.append(proc)
                     wait_json(proc, lambda item: item.get('event') == 'ready')
+                    phase = 'target_focus'
                     matching = [w for w in hypr_json('clients') if w.get('pid') == proc.pid]
                     if len(matching) != 1:
                         raise RuntimeError('owned_target_not_unique')
@@ -303,6 +493,7 @@ def run_probe():
                         raise RuntimeError('unexpected_backend')
                     focus_address(address)
                     target_focus(proc.pid, address)
+                    phase = 'clipboard_roundtrip'
                     first = owner(TEXT.encode())
                     owners.append(first)
                     clipboard_touched = True
@@ -318,10 +509,15 @@ def run_probe():
                         raise RuntimeError('clipboard_roundtrip_mismatch')
                     owner_alive = first.poll() is None
                     target_focus(proc.pid, address)
+                    phase = 'paste_and_buffer_reply'
                     started = time.monotonic()
                     command(['wtype', '-M', 'ctrl', '-k', 'v', '-m', 'ctrl'])
                     inject_ms = round((time.monotonic() - started)*1000, 2)
-                    wait_json(proc, lambda item: item.get('event') == 'buffer' and item.get('matches'), 3)
+                    try:
+                        wait_json(proc, lambda item: item.get('event') == 'buffer' and item.get('matches'), 3)
+                    finally:
+                        if backend == 'x11':
+                            checks['controlled_paste_x11_physical_keycode'] = x11_physical_diagnostic(proc, address)
                     second = owner(b'voice-input-m0-owner-replacement')
                     owners.append(second)
                     try:
@@ -346,19 +542,28 @@ def run_probe():
                                 raise RuntimeError('release_binding_not_registered')
                             target_focus(proc.pid, address)
                             key = temporary_binding.rsplit(' ', 1)[1]
-                            keyproc = subprocess.Popen(['wtype', '-M', 'logo', '-M', 'ctrl', '-M', 'shift',
-                                '-P', key, '-s', '1000', '-p', key, '-m', 'shift', '-m', 'ctrl', '-m', 'logo'],
-                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                            time.sleep(0.4)
-                            early = marker.exists()
-                            keyproc.wait(timeout=3)
+                            keyproc = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), '--release-key', key,
+                                '--owned-pid', str(proc.pid), '--owned-address', address],
+                                stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+                            try:
+                                held = wait_json(keyproc, lambda item: item.get('event') == 'held', 3)
+                                time.sleep(0.4)
+                                early = marker.exists()
+                                if keyproc.wait(timeout=3):
+                                    raise RuntimeError('release_injector_failed')
+                            finally:
+                                if keyproc.poll() is None:
+                                    keyproc.kill()
+                                    keyproc.wait()
+                                keyproc.stdout.close()
                             deadline = time.monotonic() + 2
                             while not marker.exists() and time.monotonic() < deadline:
                                 time.sleep(0.03)
                             count = len(marker.read_text().splitlines()) if marker.exists() else 0
                             checks['release_binding'] = {'status': 'pass' if not early and count == 1 else 'fail',
                                 'registered_release': True, 'fired_while_held': early, 'release_callback_count': count,
-                                'key': temporary_binding, 'injection': 'real compositor with virtual keyboard'}
+                                'key': temporary_binding, 'evdev_code': held['evdev_code'],
+                                'modifier_mask': held['modifier_mask'], 'injection': 'real compositor with synthetic physical-layout virtual keyboard; not a human keypress'}
                         except Exception as error:
                             checks['release_binding'] = {'status': 'blocked', 'reason': str(error)}
                         finally:
@@ -368,7 +573,13 @@ def run_probe():
                             temporary_binding = None
                             binding_installed = False
                 except Exception as error:
-                    checks[name] = {'status': 'blocked', 'reason': str(error)}
+                    target_errors.seek(0) if 'target_errors' in locals() else None
+                    diagnostic = target_errors.read(2048).decode(errors='replace') if 'target_errors' in locals() else ''
+                    checks[name] = {'status': 'blocked', 'reason': str(error), 'phase': locals().get('phase', 'preconditions'), 'owned_target_diagnostic': diagnostic}
+                finally:
+                    if 'target_errors' in locals():
+                        target_errors.close()
+                        del target_errors
             # Observe controlled target close events as well as focus/open events.
             for proc in targets:
                 if proc.poll() is None:
@@ -445,13 +656,22 @@ def run_probe():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--owned-pid', type=int, help=argparse.SUPPRESS)
+    parser.add_argument('--owned-address', help=argparse.SUPPRESS)
+    parser.add_argument('--release-key', choices=('F12', 'F11', 'F10', 'F8'), help=argparse.SUPPRESS)
+    parser.add_argument('--paste-physical', action='store_true', help=argparse.SUPPRESS)
+    parser.add_argument('--target-control', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('--target', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('--restore', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('--mark', type=Path, help=argparse.SUPPRESS)
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()
+    if args.release_key or args.paste_physical:
+        if not args.owned_pid or not args.owned_address:
+            parser.error('release helper requires an owned target PID and address')
+        return release_keyboard('V' if args.paste_physical else args.release_key, args.owned_pid, args.owned_address)
     if args.target:
-        return gtk_target()
+        return gtk_target(args.target_control)
     if args.restore:
         return clipboard_restore()
     if args.mark:

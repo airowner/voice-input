@@ -1,0 +1,113 @@
+{
+  "compute_kill_and_rebuild": [
+    {
+      "compute_cpu_tick_delta": 6,
+      "failure_code": "worker_closed",
+      "failure_return_after_kill_ms": 47,
+      "host_thread_heartbeats": 4,
+      "killed_identity": {
+        "exe": "/home/airowner/Projects/voice-input/build/workers-avx2/voice-asr-worker-avx2",
+        "parent": 1872244,
+        "pid": 1873853,
+        "start_ticks": 29544198
+      },
+      "kind": "asr",
+      "next_run_success": true,
+      "rebuild_and_run_ms": 6021,
+      "rebuilt_identity": {
+        "exe": "/home/airowner/Projects/voice-input/build/workers-avx2/voice-asr-worker-avx2",
+        "parent": 1872244,
+        "pid": 1873870,
+        "start_ticks": 29544280
+      },
+      "scope": "Host thread responsiveness only; not UI responsiveness"
+    },
+    {
+      "compute_cpu_tick_delta": 2,
+      "failure_code": "worker_closed",
+      "failure_return_after_kill_ms": 187,
+      "host_thread_heartbeats": 1,
+      "killed_identity": {
+        "exe": "/home/airowner/Projects/voice-input/build/workers-avx2/voice-llm-worker-avx2",
+        "parent": 1872244,
+        "pid": 1873966,
+        "start_ticks": 29544887
+      },
+      "kind": "llm",
+      "next_run_success": true,
+      "rebuild_and_run_ms": 10539,
+      "rebuilt_identity": {
+        "exe": "/home/airowner/Projects/voice-input/build/workers-avx2/voice-llm-worker-avx2",
+        "parent": 1872244,
+        "pid": 1874046,
+        "start_ticks": 29545176
+      },
+      "scope": "Host thread responsiveness only; not UI responsiveness"
+    }
+  ],
+  "idle": {
+    "configured_idle_seconds": {
+      "asr": 120,
+      "llm": 60
+    },
+    "identities": [
+      {
+        "exe": "/home/airowner/Projects/voice-input/build/workers-avx2/voice-asr-worker-avx2",
+        "parent": 1872244,
+        "pid": 1874662,
+        "start_ticks": 29548944
+      },
+      {
+        "exe": "/home/airowner/Projects/voice-input/build/workers-avx2/voice-llm-worker-avx2",
+        "parent": 1872244,
+        "pid": 1874669,
+        "start_ticks": 29548981
+      }
+    ],
+    "observed_release_seconds": {
+      "asr": 120.232961876,
+      "llm": 60.215801576
+    },
+    "poll_ms": 250,
+    "scope": "Actual production reap_idle with default durations; example supplies polling, not GUI service scheduler",
+    "workers_exited": true
+  },
+  "model_sha256": {
+    "qwen2.5-1.5b-instruct-q4_k_m": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+    "whisper-base-multilingual": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe"
+  },
+  "parent_sigkill": {
+    "deadline_seconds": 5,
+    "holder": {
+      "exe": "/home/airowner/Projects/voice-input/target/debug/examples/worker_lifecycle",
+      "parent": 1872244,
+      "pid": 1874275,
+      "start_ticks": 29546249
+    },
+    "parent_signal": "SIGKILL",
+    "scope": "Workers resident at parent death; EOF exit, not a GUI crash or during-compute parent death",
+    "worker_exit_after_parent_kill_ms": 1,
+    "workers": [
+      {
+        "exe": "/home/airowner/Projects/voice-input/build/workers-avx2/voice-asr-worker-avx2",
+        "parent": 1874275,
+        "pid": 1874605,
+        "start_ticks": 29548732
+      },
+      {
+        "exe": "/home/airowner/Projects/voice-input/build/workers-avx2/voice-llm-worker-avx2",
+        "parent": 1874275,
+        "pid": 1874636,
+        "start_ticks": 29548769
+      }
+    ]
+  },
+  "passed": true,
+  "scope": "Real Linux production WorkerPool development integration; no microphone, desktop injection, remote provider or UI V07 acceptance",
+  "threads": 4,
+  "ui_v07_acceptance": "pending",
+  "worker_sha256": {
+    "asr": "0e51cfdc0ca29f77f18fe508d93cfaf90e64a2d86f0c0021d4509beb0f0adac0",
+    "llm": "1b8e2187667cdb31ff0fa2e03420e60489509eeacf563d6b4e88319930a7ad6d"
+  }
+}

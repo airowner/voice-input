@@ -1,0 +1,5 @@
+    Checking voice-core v0.1.0 (/home/airowner/Projects/voice-input/crates/core)
+    Checking voice-platform v0.1.0 (/home/airowner/Projects/voice-input/crates/platform)
+    Checking voice-audio v0.1.0 (/home/airowner/Projects/voice-input/crates/audio)
+    Checking voice-runtime v0.1.0 (/home/airowner/Projects/voice-input/crates/runtime)
+    Finished `dev` profile [unoptimized] target(s) in 8.53s

@@ -1,0 +1,12 @@
+{
+  "captured_at_utc": "2026-11-06T02:00:10.935726+00:00",
+  "scope": "Artifact identities captured immediately after successful owned lifecycle run; source hash covers example only, not whole workspace revision",
+  "platform": "Linux-7.2.15-1-omarchy-x86_64-with-glibc2.44",
+  "sha256": {
+    "crates/runtime/examples/worker_lifecycle.rs": "5669c8a51ef9044c7695aa3edf0b40f82fbf6b58881856c7da635a010e963fed",
+    "target/debug/examples/worker_lifecycle": "b18a9a4f464ef7d4f98f658f677f15bdfd30ae03ebf7625c9863c70bc51f2913",
+    "docs/evidence/worker-pool-lifecycle.json": "5e4f400e301f2691ae5246cdbb6e40a10bbe0967ffe5d8b83370e9f80b0db187",
+    "docs/evidence/worker-pool-lifecycle.log": "b15e44879a05614ffe509f852bbc557a1902777582eee8a1f79cc735178ac916",
+    "docs/evidence/worker-pool-lifecycle-clippy.log": "92531bf8fccf4926d51927902354f2d4231b7f809703466f64889609cb20d87e"
+  }
+}

@@ -1,0 +1,12 @@
+   Compiling voice-core v0.1.0 (/home/airowner/Projects/voice-input/crates/core)
+   Compiling voice-platform v0.1.0 (/home/airowner/Projects/voice-input/crates/platform)
+   Compiling voice-audio v0.1.0 (/home/airowner/Projects/voice-input/crates/audio)
+   Compiling voice-runtime v0.1.0 (/home/airowner/Projects/voice-input/crates/runtime)
+    Finished `dev` profile [unoptimized] target(s) in 11.18s
+     Running `target/debug/examples/worker_lifecycle`
+checking ASR kill and rebuild
+checking LLM kill and rebuild
+checking owned holder SIGKILL and worker EOF
+checking default idle durations (up to 125 seconds)
+idle released index=1 after 60.216s
+idle released index=0 after 120.233s
