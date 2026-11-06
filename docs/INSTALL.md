@@ -11,7 +11,7 @@ sha256sum /实际路径/voice-input-版本-1-x86_64.pkg.tar.zst
 sudo pacman -U /实际路径/voice-input-版本-1-x86_64.pkg.tar.zst
 ```
 
-文件名及压缩格式以清单中的 `archive` 为准，不要把示意文件名直接当作实际产物。打包工具不安装软件、不自动安装依赖、不执行 sudo；上面的安装操作由用户在自己的终端执行。依赖由本机实际 ELF/ldd 与 pkg-config 结果生成，并包括桌面、音频、剪贴板和通知工具。`wtype` 已安装不代表 compositor 一定允许注入。
+文件名及压缩格式以清单中的 `archive` 为准，不要把示意文件名直接当作实际产物。打包工具不安装软件、不自动安装依赖、不执行 sudo；上面的安装操作由用户在自己的终端执行。依赖由本机实际 ELF/ldd 与 pkg-config 结果生成，并包括桌面、音频、剪贴板和通知工具。当前 Hyprland 参考机的 `wtype` 动态键码在 WebKit/XWayland 上未产生有效粘贴，应用已改用同一 Wayland virtual-keyboard 协议的内置 Ctrl+V 适配。它只发送固定 Ctrl+V，使用 libxkbcommon 和系统 xkeyboard-config 数据，不需要 root、uinput 或额外守护进程。仅准备好键图不证明 compositor 能力，仍须专用框真实回读；wtype 保留为诊断工具。
 
 升级前先停止录音并在托盘中退出旧版应用，避免仍驻留的旧进程与新文件混用。
 
@@ -36,7 +36,7 @@ sudo pacman -U /实际路径/voice-input-版本-1-x86_64.pkg.tar.zst
 
 先完成麦克风、ASR 模型、LLM 模式三项检查。包不包含模型权重，也不会安装或启动时自动下载模型。按设置页明确选择导入或下载、选择本地/远程模式；远程端点和凭据需要用户确认。缺少 Secret Service 时仅使用本次会话密钥，不写入明文配置。
 
-开发包的录音、处理和交付能力必须结合实际诊断使用。自动粘贴未通过实机验证时使用预览和主动复制。锁屏期间不进行录音/按键验收，不通过命令绕过锁屏；正常解锁后再测试。
+开发包的录音、处理和交付能力必须结合实际诊断使用。自动粘贴未通过实机验证时使用预览和主动复制。锁屏期间不进行录音/按键验收，不通过命令绕过锁屏；正常解锁后再测试。本轮已在解锁状态验证可信粘贴/逐字回读和焦点/关闭守卫；首次运行仍需点击设置页“验证本次会话的粘贴能力”，验证前只保留预览/手动交付。
 
 CLI 仅连接当前登录会话的私有接口，不会在应用未运行时偷偷启动应用：
 
@@ -65,7 +65,7 @@ o.bind("SUPER + CTRL + SHIFT + F12", "Voice input",
   "/usr/bin/voice-inputctl toggle", { release = true })
 ```
 
-这段 Lua 的 release 选项已与本机 Omarchy helper/API 核对；锁屏限制下尚不能把物理按键释放和应用完整链路声称为通过。用户确认组合空闲后，自行加入个人 `~/.config/hypr/bindings.lua`，然后验证：
+这段 Lua 的 release 选项已与本机 Omarchy helper/API 核对，实际 compositor 的虚拟物理布局事件已验证“按住不触发、释放恰好一次”。这不是用户物理按键或 20 次录音的验收；那些仍须独立执行。用户确认组合空闲后，自行加入个人 `~/.config/hypr/bindings.lua`，然后验证：
 
 ```bash
 hyprctl reload

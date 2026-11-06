@@ -12,6 +12,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const [backend, outputArgument] = process.argv.slice(2);
 const iterations=Number(process.argv[4]||1);
 if(![1,20].includes(iterations))throw Error('Only 1 or 20 explicit iterations supported');
+const driverProfile=process.argv[5]==='--release'?'release':'debug';
+if(process.argv[5]&&process.argv[5]!=='--release')throw Error('Unknown driver profile');
+const driverBinary=path.join(root,'target',driverProfile,'examples/browser_paste');
 if (!['wayland', 'x11'].includes(backend) || !outputArgument) throw Error('browser-paste-probe.mjs wayland|x11 NEW.json');
 const output = path.resolve(outputArgument);
 if (fs.existsSync(output)) throw Error('Evidence exists');
@@ -55,7 +58,7 @@ const temporary=fs.mkdtempSync(path.join(root,'build/owned-browser-'));
 const profile=path.join(temporary,'profile');fs.mkdirSync(profile);
 const html=path.join(temporary,'fixture.html');
 fs.writeFileSync(html,'<!doctype html><meta charset="utf-8"><title>Voice Input Owned Browser Probe</title><h1>合成粘贴验证</h1><textarea id="probe" rows="8" autofocus></textarea><script>window.probe={input:false,paste:false};const field=document.getElementById("probe");field.addEventListener("input",event=>{window.probe.input ||= event.isTrusted;});field.addEventListener("paste",event=>{window.probe.paste ||= event.isTrusted;});</script>');
-const report={scope:'Owned isolated Chromium textarea, fixed synthetic text through production Hyprland adapter; no microphone/provider/full V01/V11 acceptance',backend,iterations,clipboard_snapshot_mime_count:types.length,passed:false};
+const report={scope:'Owned isolated Chromium textarea, fixed synthetic text through production Hyprland adapter; no microphone/provider/full V01/V11 acceptance',backend,iterations,driver_profile:driverProfile,clipboard_snapshot_mime_count:types.length,passed:false};
 let browser,driver,browserCdp,pageCdp;
 try {
   browser=spawn('chromium',[`--user-data-dir=${profile}`,`--ozone-platform=${backend}`,'--remote-debugging-port=0','--enable-automation','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-sync','--disable-extensions','--disable-component-update','--disable-breakpad',`--app=file://${html}`],{stdio:'ignore'});
@@ -98,7 +101,7 @@ try {
   report.samples=[];
   for(let index=0;index<iterations;index++){
   await pageCdp.call('Runtime.evaluate',{expression:'document.getElementById("probe").value="";window.probe={input:false,paste:false};document.getElementById("probe").focus()'});
-  driver=spawn(path.join(root,'target/debug/examples/browser_paste'),[String(pid),ticks,exe],{stdio:['pipe','pipe','ignore']});
+  driver=spawn(driverBinary,[String(pid),ticks,exe],{stdio:['pipe','pipe','ignore']});
   const lines=readline.createInterface({input:driver.stdout});
   const [line]=await Promise.race([once(lines,'line'),delay(4000).then(()=>{throw Error('Paste driver timeout');})]);
   report.driver=JSON.parse(line);
@@ -118,7 +121,7 @@ try {
   const durations=report.samples.map(sample=>sample.driver.delivery_call_ms).sort((a,b)=>a-b);
   report.delivery_call_p95_ms=durations[Math.ceil(durations.length*.95)-1];
   report.timing_scope='Actual production adapter copy+guards+native protocol acknowledgement, keymap already prepared; excludes controller persistence/UI/recording/ASR/LLM; not V11 end-to-end';
-  report.driver_sha256=crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'target/debug/examples/browser_paste'))).digest('hex');
+  report.driver_sha256=crypto.createHash('sha256').update(fs.readFileSync(driverBinary)).digest('hex');
 } catch(error) {report.failure=error.message;}
 finally {
   if(driver?.exitCode===null)driver.kill();

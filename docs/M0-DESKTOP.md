@@ -2,6 +2,22 @@
 
 本记录仅用于第十一节 M0 的真实桌面能力验证，不代表第十节 V01–V11 整体验收。源规格为 `specs/v1.md`。
 
+## 当前状态：解锁后已有真实输入证据
+
+桌面锁定限制已解除。当前 [M0 r3](evidence/m0-desktop-unlocked-2026-11-06-r3.json)的配置、socket2、剪贴板 owner、短时采集和虚拟键释放均通过；原 wtype 的 XWayland 粘贴仍失败，因此该诊断脚本仍返回部分未通过，不能删掉失败或把它改成通过。随后生产适配的 [Tauri 专用框](evidence/tauri-own-paste-native.json)、[Chromium Wayland](evidence/browser-paste-wayland-r4.json)与[XWayland](evidence/browser-paste-xwayland.json)均取得可信 paste/input 与逐字一致回读。GTK 生产适配补测尚未在本快照登记；这些证据不含完整录音链路。
+
+| 当前输入路径 | 实测结果与范围 |
+|---|---|
+| 原 wtype → GTK4 Wayland | M0 合成文本与 owner 生命周期通过 |
+| 原 wtype → GTK4 XWayland | 窗口启动/聚焦/clipboard 回读通过，粘贴 buffer 回读超时；原失败保留 |
+| 原 wtype → Tauri/WebKit Wayland | 没有可信 paste/input，typed 确认为 mismatch，自动交付保持禁用 |
+| 标准物理键码独立诊断 → 同一 GTK XWayland | 重置 buffer 后逐字通过；属于诊断，不是原工具或生产适配通过 |
+| 内部原生 Ctrl+V → Tauri 专用框 | 可信事件、逐字回读、本会话能力确认通过 |
+| 内部生产适配 → Chromium Wayland/XWayland | 两后端逐字通过；Wayland 20 次合成粘贴全部通过，非 20 次录音 |
+| 生产目标守卫 → 两个自有 Wayland 窗口 | 固定结果至少 2 秒延迟内切走/切回及关闭目标均 Manual，buffer 不变；非完整 V02 |
+
+完整汇总与运行库版本见 [native-input-runtime.json](evidence/native-input-runtime.json)。本轮局部 adapter 调用 P95 194.804ms 仅含 copy、guard、协议 ACK，未含控制器/UI/音频/模型；正式 V11 仍待验。
+
 ## 执行入口
 
 在已解锁的 Omarchy / Hyprland 用户会话运行：
@@ -18,9 +34,9 @@ python3 scripts/m0_desktop_probe.py --output docs/evidence/m0-desktop-YYYY-MM-DD
 |---|---|---|---|
 | 配置格式 | 读取 `hyprctl version/configerrors` | 精确版本及无配置错误 | 安装包中的配置部署 |
 | 快捷键冲突 | 解析真实 `hyprctl -j binds` | Super+Shift+D 冲突数、候选键空闲 | 用户最终快捷键选择 |
-| release Lua | runtime `hl.bind`，wtype 按住 1 秒后释放 | 按住中无回调、释放后恰好一次，绑定移除 | 真实物理键长按、应用 toggle 防抖 |
+| release Lua | runtime `hl.bind`，标准物理布局一致的 virtual-keyboard 合成按住/释放 | 按住中无回调、释放后恰好一次，绑定移除 | 真人物理键长按、应用 toggle 防抖 |
 | 剪贴板 | `wl-copy --foreground` owner 保活，wl-paste 回读，替换 owner | 合成 UTF-8 字节一致、旧 owner 回收 | 应用退出时 clipboard manager 的缓存策略 |
-| Wayland / XWayland | 为每种 GDK backend 新建 GTK4 TextView | Hyprland xwayland 标记匹配，wtype Ctrl+V 后 TextBuffer 与合成文本 hash 一致 | 浏览器控件、应用完整处理链和 20 次录音 |
+| Wayland / XWayland | 每种 GDK backend 的自有 GTK4 TextView 分别测试原 wtype；X11 另做标准 KEY_V 独立诊断 | 后端标记及完整 buffer hash，原路径与诊断各自报告；只有相应路径实际匹配才通过 | 生产 GTK 适配、应用完整处理链和 20 次录音；浏览器另有独立证据 |
 | socket2 | 订阅当前 compositor socket2 | 记录接收到的事件名称，activewindowv2 可见 | 控制器在事件断线时的失效策略 |
 | 音频 | `pw-record` 默认来源，16 kHz mono s16，读满 8000 样本后主动结束 | 字节仅驻留内存、无音频文件 | cpal 实现、设备拔出、中英文 ASR 和声音质量 |
 
@@ -63,10 +79,23 @@ hyprctl dispatch 'hl.dsp.focus({ window = "address:0x..." })'
 
 新版官方文档入口：[Dispatchers](https://wiki.hypr.land/configuring/core/dispatchers/)、[hyprctl](https://wiki.hypr.land/configuring/core/advanced-configuration/using-hyprctl/)、[Binds](https://wiki.hypr.land/configuring/core/binds/)。实现的已安装版本语法证据仍以本机 Omarchy 脚本为准。
 
-### 焦点失败的已确认原因
+### 早期焦点失败的已确认原因（锁屏历史）
 
 主代理进一步确认 compositor 的 `hyprctl locked` 为 `true`，`hyprctl -j locked` 为 `{"locked":true}`，即使 logind 的 `LockedHint=no`。因此不得仅以 logind 判断桌面已解锁，也不得把 DPMS on 当成解锁。此前 DPMS 恢复后的焦点探针仍失败，不能将 DPMS 单独归为根因。
 
 探针现于开始时读取并记录 compositor_locked。若为 true 或查询无法确认，两种后端明确跳过创建窗口与按键测试，原因分别为 compositor_locked/compositor_lock_unknown；程序不会唤醒、解锁或修改用户配置。须由用户正常解锁后重新执行，才能获得粘贴及 release 的真实证据。
 
 `voice-platform` 的自动交付守卫同样同时要求 compositor unlocked、logind Active/LockedHint 正常、monitor DPMS on、同一目标、epoch 未变及事件流持续连接。后台监控观察到锁定、解锁、查询失败或连接断开会使旧目标失效。锁屏状态查询与系统注入之间仍存在 OS 竞态，不能承诺原子交付。
+
+
+### 解锁后的键码兼容性定位与生产修复
+
+初次解锁探针里，release 注册正确但 wtype 释放回调为 0；标准物理布局一致的 F12 虚拟事件重测后，按住无回调、释放恰好 1 次。此机绑定按物理布局解析，而 wtype 动态键码与该解析不一致；未为测试更改 `resolve_binds_by_sym` 或个人配置。所有释放结论仍明确是合成虚拟事件，不能当真人按键。
+
+XWayland 初报 `owned_target_reply_timeout` 时未区分阶段，后续仅增加阶段/受控 GTK 诊断，成功门槛未放宽。r3 将失败定位到 `paste_and_buffer_reply`；同一自有目标重置后，标准 pc/us KEY_V=47+Ctrl=4 独立诊断逐字通过。Tauri/WebKit 专用框随后也证明原 wtype 没有可信输入，不能只因工具返回 0 就启用自动交付。
+
+生产适配据此改为内部标准 Wayland virtual-keyboard-v1 Ctrl+V，实现保留剪贴板回读、最后目标/焦点检查、一次 attempt 和无自动重发。键图后台准备，键入流程不等待编译；本次协议和最后守卫共用 500ms deadline，未发输入失败手动，可能发过输入失败 Unknown。只读命令使用有界非阻塞读，超时清理未 reap 的自有进程组，保留诊断 128KiB / 剪贴板 4MiB 上限。详见 [实现验证](evidence/native-keyboard-verification.json)。未增加 root/uinput、守护进程或 sidecar，也未修改原 V1 规格。
+
+[专用框成功证据](evidence/tauri-own-paste-native.json)沿真实 typed UI 路径，脚本不把预期文字赋给输入框，必须观察可信 paste/input、实际逐字回读和确认后的能力状态。浏览器测试使用隔离 profile 与自有 textarea；生产 adapter 返回 SentUnconfirmed，随后该固定控件的实际回读通过，不扩大为所有应用都有消费回执。
+
+[真实焦点负例](evidence/desktop-focus-guard.json)记录 A→B→A 的 epoch 改变、至少 2 秒固定合成结果延迟，以及关闭目标；均无粘贴且合成结果可访问，原窗口焦点已恢复。它不涵盖完整应用中的真实 provider、锁屏/IPC 断线或全部 V02 条件。新生产构建/包另行验收，本文不沿用旧包检查来证明已包含本次修复。

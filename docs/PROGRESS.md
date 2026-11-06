@@ -174,3 +174,12 @@ Git 审查说明：源码 Cargo.toml 的多余尾部空行已清理。原样捕�
 - 修改后全workspace Clippy/all-targets与93项Rust测试通过；20项platform包含协议与超时回归，源与证据绑定见`native-input-runtime.json`。libxkbcommon实际包依赖xkeyboard-config，无需额外sidecar或root。
 
 下一步：补生产adapter在GTK原生/XWayland编辑器的正向对照；重建生产资源release与新版开发包，旧包不含该兼容修复，保留历史不覆盖。完整真人录音/P95、真实远程和其他原生平台仍未验收。
+
+
+### 冻结源的编辑器与优化构建复核
+
+GTK原生与XWayland两后端的冻结fixture已重编实跑，正向一次交付后71字节文本逐字一致，负例保持零输入、旧target为Manual，clipboard与原focus恢复。见`desktop-guard-native-*-r2.json`；到读回耗时含fixture IPC/轮询，不能混同派发P95。
+
+生产资源release构建通过；同源码优化版adapter也在Chromium两个后端实测可信paste/input与逐字回读通过。新release主程序十项启动/CLI验证通过，见`native-release-startup.json`。本轮完整证据及fixture源码身份汇总为`native-input-runtime-final.json`，原始失败与中间报告保留。
+
+当前构建尚未写入旧包；接下来用全新validation和输出目录制作新包，并重复真实归档/隔离安装/解出启动验证。真人录音配合尚未收到回复，默认扬声器音量0保持不变，不以虚拟音频或文件推理代替真人/物理录音验收。

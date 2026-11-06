@@ -1,0 +1,43 @@
+{
+  "captured_at_utc": "2026-11-06T02:39:31.380249+00:00",
+  "scope": "Unlocked Hyprland native Ctrl+V compatibility fix; component desktop evidence, not full V01/V02/V07/V11",
+  "runtime_packages": "libxkbcommon 1.13.2-1\nxkeyboard-config 2.49-1\ngtk3 1:3.24.52-2\nwebkit2gtk-4.1 2.54.2-1\n",
+  "libxkbcommon_package_dependencies": "Name            : libxkbcommon\nVersion         : 1.13.2-1\nDescription     : Keymap handling library for toolkits and window systems\nArchitecture    : x86_64\nURL             : https://xkbcommon.org/\nLicenses        : MIT\nGroups          : None\nProvides        : libxkbcommon.so=0-64  libxkbregistry.so=0-64\nDepends On      : glibc  libxml2  xkeyboard-config\n",
+  "source_sha256": {
+    "crates/platform/src/lib.rs": "1e8c4cffd1eaac3f422409a0b314e383ccb71e384319af1f9aa395efd9f57c9b",
+    "crates/platform/src/linux.rs": "643c1e659f7f261dea6045f5dfc4944ae5c876569e8da445cd63363a11da726e",
+    "crates/platform/src/virtual_keyboard.rs": "fbde70be9f2712e3ff9c634f28a50894c06b527b7ec3614c1761eaf2aa1b1ed9"
+  },
+  "native_owned_tauri_passed": true,
+  "native_browser_wayland_passed": true,
+  "native_browser_xwayland_passed": true,
+  "workspace_harness_passed": 93,
+  "input_protocol": "Wayland virtual-keyboard-v1; fixed pc/us keymap, only Ctrl+V; no root/uinput/additional daemon or sidecar; no automatic repeat",
+  "delivery_component_20_samples_p95_ms": 194.803722,
+  "delivery_timing_scope": "copy + focus guards + native protocol acknowledgement only; excludes controller persistence, UI, capture, ASR, LLM; workspace verification ran concurrently; not full V11",
+  "evidence": {
+    "docs/evidence/tauri-own-paste-native.json": "19da864b95b8d48dd631d9a5490320797a733a660875b78e1bf9128a1257adea",
+    "docs/evidence/desktop-focus-guard.json": "6c0187ed4634030e3bee00ee3417e681a89019b5941513fad65e7e57fdbe3467",
+    "docs/evidence/browser-paste-wayland-r4.json": "e829c2cf07877cfdfa6debe436909610131832cb65c2c4bc443e49298cc3b9af",
+    "docs/evidence/browser-paste-xwayland.json": "2b1ee8c1c16d19d14242e78b1a5e15cf1a8ee4ee5e6fd60c8148e88338021f7d",
+    "docs/evidence/browser-paste-wayland-20.json": "e17f76b99efdb1956fd4598d5716e492351b17b31fa720689cc7a38287e576aa",
+    "docs/evidence/unlocked-workspace-clippy.log": "78d0a4d97b98a5279818989095b26a95978003c6d4aae42c0bfddbeaf980d5bb",
+    "docs/evidence/unlocked-workspace-tests.log": "43e31402ced81789e1200b85fe537f5e8ad36d001c70707b62c9bb3e0ba685e6",
+    "docs/evidence/desktop-guard-native-wayland-r2.json": "bac150e96a9fd92442afa51a701ea83384c68d02b6bef19188c3bbd36d0ed7bc",
+    "docs/evidence/desktop-guard-native-xwayland-r2.json": "9c4c865ec1a67d5dc4beb9d6c19837bbd490566483ad630b7a020c3ff62b115c",
+    "docs/evidence/browser-paste-release-wayland.json": "778e7196422c8e954911ae1143f1fc88752157e0079ce3dfdf7b182f8196d291",
+    "docs/evidence/browser-paste-release-xwayland.json": "f9c7e03388fb8725a6daa102328050db333ffd42309d9faf0b0a12910c8cd002",
+    "docs/evidence/native-release-startup.json": "3ef9d19ea3eed5e8c6000b94ea9359d8dd72e44568191a84e88d969b983da80a"
+  },
+  "gtk_native_and_xwayland_positive_and_negative_passed": true,
+  "release_profile_browser_native_and_xwayland_passed": true,
+  "release_application_startup_and_cli_passed": true,
+  "fixture_source_sha256": {
+    "crates/platform/examples/browser_paste.rs": "f74237dd11ff47a65049dbf7058415edb45152187ca3601843fb5b68a068926a",
+    "crates/platform/examples/desktop_guard.rs": "726aa1e8de43a218b665cbcb2a587c62dbc336ac8f774b34a007c890970d6174",
+    "scripts/browser-paste-probe.mjs": "f91d4265e4019aea39c991a5494e3057fc945bdce1b31bb3f4390d2626f65bac",
+    "scripts/desktop_guard_target.py": "65f3537fcffce16052a3efde61f52be9372dc64702d5ee2553bbe61963a78c49",
+    "scripts/ui-delivery-smoke.js": "9ca1b9cc5e66d28f23fc9c9c9074fd68b1a3a972c5ad9922b74edd41bbb8da76",
+    "scripts/run-delivery-smoke.py": "179e7470578a6187d14f888028666c3524e19821ec47c78347be77ab7e1fa278"
+  }
+}

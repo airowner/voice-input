@@ -1,0 +1,28 @@
+{
+  "capability_premise": "Hyprland::new(true) is explicit component-test setup based on this host's M0 capability evidence, not product own-window verification",
+  "clipboard_restored": true,
+  "clipboard_snapshot_mime_count": 0,
+  "closed_target_outcome": "manual",
+  "focus_epochs": [
+    4,
+    6,
+    8,
+    13
+  ],
+  "native_focus_sequence": "A -> B -> A; then close A and focus B",
+  "native_xwayland": true,
+  "negative_owned_buffers_unchanged": true,
+  "observed_result_delay_ms": 2029,
+  "original_focus_restored": true,
+  "passed": true,
+  "positive_actual_buffer_matches": true,
+  "positive_buffer_bytes": 71,
+  "positive_buffer_changes": 1,
+  "positive_dispatch_to_readback_ms": 217,
+  "positive_outcome": "sent_unconfirmed",
+  "requested_backend": "x11",
+  "scope": "Real owned GTK focus/close guard negatives followed by one positive native paste/readback; no microphone/provider; not full V01/V02 M",
+  "switch_and_return_outcome": "manual",
+  "synthetic_result_delay_floor_ms": 2000,
+  "synthetic_result_retained": true
+}
